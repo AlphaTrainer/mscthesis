@@ -1,0 +1,298 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Software &mdash; AlphaTrainer</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="AlphaTrainer" href="index.html" />
+    <link rel="next" title="User evaluation" href="appendix_evaluation.html" />
+    <link rel="prev" title="Design - storyboards" href="appendix_design_storyboards.html" />
+
+<link rel="stylesheet" type="text/css" href="_static/custom.css" />
+<link rel="stylesheet" type="text/css" href="_static/colorbox/colorbox.css" />
+
+<script type="text/javascript" src="_static/colorbox/jquery.colorbox-min.js"></script>
+
+<script type="text/javascript">
+	function endsWith(str, suffix) {
+	    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+	}
+
+    $(document).ready(function() {
+    	var im, imsrc;
+    	$('img').each(function() {
+    		im = $(this);
+    		imsrc = im.attr('src');
+    		imalt = im.attr('alt');
+    		if (endsWith(imsrc, 'svg')) {
+    			im.wrap($('<a>').attr({'href': imsrc, 'title': imalt}).addClass('svglink'));
+    		}
+    	});
+
+    	$('a.svglink').colorbox({
+    		'width': '95%',
+    		'height': '95%',
+    		'photo': true});
+    });
+</script>
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="appendix_evaluation.html" title="User evaluation"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="appendix_design_storyboards.html" title="Design - storyboards"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">AlphaTrainer</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Software</a><ul>
+<li><a class="reference internal" href="#alphatrainer-signal-processing-library">AlphaTrainer signal processing library</a><ul>
+<li><a class="reference internal" href="#prerequests">Prerequests</a></li>
+<li><a class="reference internal" href="#load-and-run">Load and run</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#alphatrainer-android-app">AlphaTrainer Android App</a><ul>
+<li><a class="reference internal" href="#quick">Quick</a></li>
+<li><a class="reference internal" href="#build-from-scratch">Build from scratch</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#alphatrainerservice">AlphaTrainerService</a><ul>
+<li><a class="reference internal" href="#mongolab-cloud-storage">Mongolab cloud storage</a></li>
+<li><a class="reference internal" href="#alphatrainerservice-client">AlphaTrainerService client</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="appendix_design_storyboards.html"
+                        title="previous chapter">Design - storyboards</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="appendix_evaluation.html"
+                        title="next chapter">User evaluation</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/appendix_software.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="software">
+<span id="appendix-software"></span><h1>Software<a class="headerlink" href="#software" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="alphatrainer-signal-processing-library">
+<span id="appendix-alphatrainer-signal-processing-library"></span><h2>AlphaTrainer signal processing library<a class="headerlink" href="#alphatrainer-signal-processing-library" title="Permalink to this headline">¶</a></h2>
+<p>Download code from (clone or zip): <a class="reference external" href="https://github.com/AlphaTrainer/opencvbrain/tree/finalhandin">https://github.com/AlphaTrainer/opencvbrain/tree/finalhandin</a></p>
+<div class="section" id="prerequests">
+<h3>Prerequests<a class="headerlink" href="#prerequests" title="Permalink to this headline">¶</a></h3>
+<p>CMake <a class="footnote-reference" href="#foot-appendix-cmake" id="id1"><sup>2</sup></a> and OpenCV <a class="footnote-reference" href="#foot-appendix-open-cv" id="id2"><sup>1</sup></a>.</p>
+</div>
+<div class="section" id="load-and-run">
+<h3>Load and run<a class="headerlink" href="#load-and-run" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>$ cd opencvbrain/opencvbrain/build
+$ cmake ..
+$ make
+# run the main_brain.cpp of library
+$./opencvbrain
+-- The C compiler identification is Clang 4.2.0
+...
+[100%] Built target opencvbrain
+---------------------------------
+getBrainProcessed(...): 6.22933e-17
+expected: 6.22933e-17
+---------------------------------
+getAlphaPeak(): 10
+expected: 10
+---------------------------------
+getMinMax(): 0 - 1.03917e+13
+expected: 0 - 1.03917e+13
+---------------------------------</pre>
+</div>
+</div>
+</div>
+<div class="section" id="alphatrainer-android-app">
+<span id="appendix-alphatrainer-android-app"></span><h2>AlphaTrainer Android App<a class="headerlink" href="#alphatrainer-android-app" title="Permalink to this headline">¶</a></h2>
+<p>Download code from (clone or zip):</p>
+<p><a class="reference external" href="https://github.com/AlphaTrainer/AlphaTrainerAndroid/tree/finalhandin">https://github.com/AlphaTrainer/AlphaTrainerAndroid/tree/finalhandin</a></p>
+<div class="section" id="quick">
+<h3>Quick<a class="headerlink" href="#quick" title="Permalink to this headline">¶</a></h3>
+<p>Simply install the AlphaTrainerApp-debug.apk</p>
+<div class="highlight-python"><pre>$ wget https://github.com/AlphaTrainer/AlphaTrainerAndroid/raw/finalhandin/AlphaTrainerApp-debug.apk
+$ adb install &lt;path-to-apk&gt;/AlphaTrainerApp-debug.apk</pre>
+</div>
+</div>
+<div class="section" id="build-from-scratch">
+<h3>Build from scratch<a class="headerlink" href="#build-from-scratch" title="Permalink to this headline">¶</a></h3>
+<p>** Prerequests **</p>
+<p>We assume all Android tools (ADT) like adb, NDK <a class="footnote-reference" href="#foot-appendix-android-ndk" id="id3"><sup>3</sup></a>, etc are setup.</p>
+<p>OpenCV Android SDK 2.4.6 <a class="footnote-reference" href="#foot-appendix-open-cv-android-sdk" id="id4"><sup>4</sup></a> and have it set
+in the build path:</p>
+<div class="highlight-python"><pre>$ ls $OPENCV_ANDROID_SDK
+etc java    native</pre>
+</div>
+<p>** Use the shell scripts **</p>
+<div class="highlight-python"><pre>$ cd &lt;some dir that have a check out of opencvbrain&gt;
+$ ls
+AlphaTrainerAndroid opencvbrain
+...
+$ cd AlphaTrainerAndroid
+# step 0: build native lib stand alone
+$ build_0_opencvbrain.sh
+...
+# step 1: build native lib into app with ndk
+$ build_1_ndk_brainapp.sh
+# step 2 build and install android app:
+$ build_2_android_brainapp.sh</pre>
+</div>
+</div>
+</div>
+<div class="section" id="alphatrainerservice">
+<span id="appendix-alphatrainer-service"></span><h2>AlphaTrainerService<a class="headerlink" href="#alphatrainerservice" title="Permalink to this headline">¶</a></h2>
+<p>Runs at MongoLab <a class="footnote-reference" href="#foot-appendix-mongolab" id="id5"><sup>6</sup></a> and Heroku <a class="footnote-reference" href="#foot-appendix-heroku" id="id6"><sup>7</sup></a>: <a class="reference external" href="http://alpha-trainer.herokuapp.com/">http://alpha-trainer.herokuapp.com/</a>.</p>
+<div class="section" id="mongolab-cloud-storage">
+<span id="appendix-alphatrainer-mongolab-cloud-storage"></span><h3>Mongolab cloud storage<a class="headerlink" href="#mongolab-cloud-storage" title="Permalink to this headline">¶</a></h3>
+<p>Using the the version 2 beta we can for example query all feedback trainings and ignore the <em>alpha_levels</em>:</p>
+<div class="highlight-python"><pre>GET https://data-api.mongolab.com/v2/apis/dk5jpmcf2g1bg/collections/trainings
+/documents?fields=%7B%22alpha_levels%22%3A0%7D&amp;query=%7B%22type%22%3A%22Feedback%22%7D&lt;/code&gt;</pre>
+</div>
+<p>Last part not url encoded:</p>
+<div class="highlight-python"><pre>/documents?q={"type":"Feedback"}&amp;fields={"alpha_levels":0}&lt;/code&gt;</pre>
+</div>
+<p>Reference the full API at <a class="reference external" href="http://alpha-trainer.herokuapp.com/">http://alpha-trainer.herokuapp.com/</a>.</p>
+</div>
+<div class="section" id="alphatrainerservice-client">
+<span id="appendix-alphatrainerservice-client"></span><h3>AlphaTrainerService client<a class="headerlink" href="#alphatrainerservice-client" title="Permalink to this headline">¶</a></h3>
+<p>Download code from (clone or zip):</p>
+<p><a class="reference external" href="https://github.com/AlphaTrainer/AlphaTrainerService/tree/finalhandin">https://github.com/AlphaTrainer/AlphaTrainerService/tree/finalhandin</a></p>
+<p>Download the <em>Typesafe Activator</em> a tool on top of the <em>Play Framework</em>
+<a class="footnote-reference" href="#foot-appendix-playframework-activator" id="id8"><sup>5</sup></a>. Ensure to have <em>Activator</em> in your
+build path:</p>
+<div class="highlight-python"><pre>$ which activator
+&lt;path to&gt;/activator-1.0.0/activator</pre>
+</div>
+<p>OK then start it:</p>
+<div class="highlight-python"><pre>$ cd &lt;path to&gt;/AlphaTrainerService
+$ ./activator run
+# listen to file changes use
+$ ./activator ~run</pre>
+</div>
+<p>And then open the client in a browser.</p>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="foot-appendix-open-cv" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td><a class="reference external" href="http://opencv.org">http://opencv.org</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-appendix-cmake" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[2]</a></td><td><a class="reference external" href="http://www.cmake.org">http://www.cmake.org</a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-appendix-android-ndk" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td><a class="reference external" href="http://developer.android.com/tools/sdk/ndk/index.html">http://developer.android.com/tools/sdk/ndk/index.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-appendix-open-cv-android-sdk" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td><a class="reference external" href="http://opencv.org/downloads.html">http://opencv.org/downloads.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-appendix-playframework-activator" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id8">[5]</a></td><td><a class="reference external" href="http://www.playframework.com/download">http://www.playframework.com/download</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-appendix-mongolab" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[6]</a></td><td><a class="reference external" href="https://mongolab.com">https://mongolab.com</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-appendix-heroku" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[7]</a></td><td><a class="reference external" href="https://www.heroku.com">https://www.heroku.com</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="appendix_evaluation.html" title="User evaluation"
+             >next</a></li>
+        <li class="right" >
+          <a href="appendix_design_storyboards.html" title="Design - storyboards"
+             >previous</a> |</li>
+        <li><a href="index.html">AlphaTrainer</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright by Martin Poulsen and Pelle Krøgholt, 2013..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+    </div>
+  </body>
+</html>

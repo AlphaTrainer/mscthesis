@@ -1,0 +1,533 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4 Design &mdash; AlphaTrainer</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="AlphaTrainer" href="../index.html" />
+    <link rel="next" title="5 Implementation" href="../ch-implementation/index.html" />
+    <link rel="prev" title="3 Evaluation of 3 consumer BCIs" href="../ch-experiment/index.html" />
+
+<link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+<link rel="stylesheet" type="text/css" href="../_static/colorbox/colorbox.css" />
+
+<script type="text/javascript" src="../_static/colorbox/jquery.colorbox-min.js"></script>
+
+<script type="text/javascript">
+	function endsWith(str, suffix) {
+	    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+	}
+
+    $(document).ready(function() {
+    	var im, imsrc;
+    	$('img').each(function() {
+    		im = $(this);
+    		imsrc = im.attr('src');
+    		imalt = im.attr('alt');
+    		if (endsWith(imsrc, 'svg')) {
+    			im.wrap($('<a>').attr({'href': imsrc, 'title': imalt}).addClass('svglink'));
+    		}
+    	});
+
+    	$('a.svglink').colorbox({
+    		'width': '95%',
+    		'height': '95%',
+    		'photo': true});
+    });
+</script>
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../ch-implementation/index.html" title="5 Implementation"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="../ch-experiment/index.html" title="3 Evaluation of 3 consumer BCIs"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">AlphaTrainer</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">4 Design</a><ul>
+<li><a class="reference internal" href="#design-model-and-method">4.1 Design model and method</a></li>
+<li><a class="reference internal" href="#design-process">4.2 Design process</a><ul>
+<li><a class="reference internal" href="#initial-experimental-prototype">4.2.1 Initial experimental prototype</a></li>
+<li><a class="reference internal" href="#early-functioning-android-prototype">4.2.2 Early functioning Android prototype</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#alphatrainer">4.3 AlphaTrainer</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../ch-experiment/index.html"
+                        title="previous chapter">3 Evaluation of 3 consumer BCIs</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../ch-implementation/index.html"
+                        title="next chapter">5 Implementation</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/ch-design/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="design">
+<span id="ch-design"></span><h1>4 Design<a class="headerlink" href="#design" title="Permalink to this headline">¶</a></h1>
+<p>So far, this thesis has established some important notions that we use as input
+to the design of AlphaTrainer: (<em>i</em>) from the Background Chapter&nbsp;<a class="reference internal" href="../ch-background/index.html#ch-background">2</a> we learned that alpha feedback training can benefit to
+reduce stress; (<em>ii</em>) from the BCI Evaluation Chapter&nbsp;<a class="reference internal" href="../ch-experiment/index.html#ch-experiment">3</a> we learned that the MindWave Mobile BCI is feasible for
+building an alpha feedback training system; and (<em>iii</em>) in the Introduction
+Chapter&nbsp;<a class="reference internal" href="../ch-intro/index.html#ch-intro">1</a> we presented our overall method which includes
+the need for a robust system deployable for real world use.</p>
+<p>These three notions span the design space for building AlphaTrainer. This
+chapter first describes the design model and method used and then moves on to
+explain some of the important design activities and choices made during the
+design process and finally present the design of AlphaTrainer.</p>
+<div class="section" id="design-model-and-method">
+<span id="ch-design-model-and-method"></span><h2>4.1 Design model and method<a class="headerlink" href="#design-model-and-method" title="Permalink to this headline">¶</a></h2>
+<p>This section presents the model used throughout the design of AlphaTrainer and
+the set of methods used during the design process. We start out by placing the
+design problem at hand within a Human-Computer Interaction (HCI) context which
+motivates the choice of design model.</p>
+<p>The ISO 9241-210:2010 standard for &quot;Human-centred design for interactive
+systems&quot; states the following about HCI design:</p>
+<p>&quot;<em>The complexity of human-computer interaction means that it is impossible to
+specify completely and accurately every detail of every aspect of the
+interaction at the beginning of development. Many of the needs and expectations
+of users and other stakeholders only emerge [...] as the designers refine their
+understanding of users and their tasks, and as users are better able to express
+their needs in response to potential solutions</em>&quot;&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-iso-iso-2010">31</a><span class="citation">]</span></span>
+Section 4.5 p. 6.</p>
+<p>Since we are designing a system which aims to enable a currently non-existing
+practice - namely to perform alpha feedback training on a mobile device in an
+everyday context - we are certainly struck by the complexity in regard to
+specifying user needs up-front.</p>
+<p>When designing for ubicomp, additional aspects has to be taken in consideration
+which further increase complexity: (<em>i</em>) different devices; (<em>ii</em>) mobile users;
+and (<em>iii</em>) changing environment and context&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-bardram-ubiquitous-2010">8</a><span class="citation">]</span></span>. We recognize that we are not only designing
+interfaces but also designing interactions between people and the system through
+some artifacts embedded in an environment&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-beaudouin-lafon-designing-2004">10</a><span class="citation">]</span></span>. In a neurofeedback training system we
+have: (<em>i</em>) a user; (<em>ii</em>) using artifacts in form of the mobile device and the
+headset; and (<em>iii</em>) in an environment with a lot of parameters such as noise,
+changing lights, other people etc. This requires us to think of the interaction
+in context - <em>in-situ</em> - at home, at work or somewhere in between (e.g. when
+commuting)&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-benyon-designing-2005">12</a><span class="citation">]</span></span>&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-abowd-human-2002">3</a><span class="citation">]</span></span>.</p>
+<p>To deal with the complexity and difficulty of specifying user needs and system
+requirements up front, we take a user centered approach to our design
+process. This approach enables specifications to emerge during the design
+process through experiments and prototypes from which we will learn and design
+new experiments and prototypes&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-benyon-designing-2005">12</a><span class="citation">]</span></span>&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-klemmer-how-2006">34</a><span class="citation">]</span></span>. We have drawn the model in Figure&nbsp;<a href="#fig-iterative-model">4.1</a>.</p>
+<div class="figure align-center" id="fig-iterative-model">
+<a class="reference internal image-reference" href="../_images/theiterativemodel.png"><img alt="The iterative model." src="../_images/theiterativemodel.png" style="width: 60%;" /></a>
+<p class="caption"><strong>Figure 4.1:</strong> The iterative model.</p>
+</div>
+<p>To envision the needs and goals of the users of our system we have been using
+personas and scenarios&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-kollmann-importance-2009">35</a><span class="citation">]</span></span><span class="citation">[<a class="reference internal" href="../bibliography.html#citation-benyon-designing-2010">13</a><span class="citation">]</span></span>. A persona simply model a certain user in order
+to delimit the target group for whom we are designing AlphaTrainer. We have
+created four personas named Morten, Niels, Olivia and Peter (Appendix&nbsp;<a class="reference internal" href="../appendix_design_personas.html#appendix-design-personas"><em>Design - personas</em></a>). We are using scenarios to frame the context
+and situation when and where the system is used. As a subset of scenarios we
+have worked with some simple storyboards to capture the setting, sequence and
+satisfaction of the actual alpha training (Appendix&nbsp;
+<a class="reference internal" href="../appendix_design_storyboards.html#appendix-design-storyboards"><em>Design - storyboards</em></a>).</p>
+<p>One of the storyboards cover a work scenario and the person could be <em>Peter</em>
+(Figure&nbsp;<a href="#fig-design-scenario-work">4.2</a>). <em>Peter</em> has had a busy day with
+a lot of meetings and deadlines waiting around the corner. It is 11.30 and he
+realizes that he can squeeze in alpha feedback training just before lunch to get
+his mind clear. Peter finds a silent spot in the office space which mostly
+consists of big open spaces but luckily there has been arranged some quiet
+spots around. He chooses one of the feedbacks with sound because it is
+convenient to use when training with earphones in an office environment.
+First he does the calibration, then the reference recording as the app
+asks for and finally he performs three 5 minutes training sessions in a row. He
+improves his alpha during training and finds himself in a relaxed mental state
+after the training. Back to work.</p>
+<div class="figure align-center" id="fig-design-scenario-work">
+<a class="reference internal image-reference" href="../_images/design-scenario-work1.png"><img alt="Alpha training at work" src="../_images/design-scenario-work1.png" style="width: 100%;" /></a>
+<p class="caption"><strong>Figure 4.2:</strong> Peter performing alpha training at work. Frame 1: Peter has a busy day with a lot of deadlines waiting around the corner. Frame 2: Before lunch, he finds a quiet spot. Frame 3: He performs 15 minutes of alpha training. Frame 4: He finds himself relaxed and gets back to work.</p>
+</div>
+</div>
+<div class="section" id="design-process">
+<span id="ch-design-process"></span><h2>4.2 Design process<a class="headerlink" href="#design-process" title="Permalink to this headline">¶</a></h2>
+<p>Since we have deployed an iterative approach to the design process, we have
+decided to present important design activities and decisions
+chronologically. This clarifies how we continuously have fed the output of one
+design activity as input to another.</p>
+<div class="section" id="initial-experimental-prototype">
+<h3>4.2.1 Initial experimental prototype<a class="headerlink" href="#initial-experimental-prototype" title="Permalink to this headline">¶</a></h3>
+<p>We started out by making a very simple prototype in the form of an Android app
+as proof of concept on getting data from the NeuroSky MindWave Mobile BCI and to
+tryout of their SDK signal processing. In a bottom up approach to investigate
+what we could control by means of alpha levels, we tried assigning different
+audio parameters (volume, pitch, placement in 3D perspective) to the SDK power
+band values for low and high alpha. The power band values are listed in Section&nbsp;<a class="reference internal" href="../ch-background/index.html#ch-background-mindwave">2.2.2</a>.</p>
+<p>We tried out the prototype informally on our selves and on fellow students and
+learned that the SDK alpha values contained giant outliers as already mentioned
+in the BCI Evaluation Chapter&nbsp;<a class="reference internal" href="../ch-experiment/index.html#ch-experiment">3</a>. Besides, we were
+unsure whether to use the low alpha or high alpha frequency band from the SDK
+since the literature states - as explained in Section&nbsp;<a class="reference internal" href="../ch-background/index.html#sec-background-stress-alpha-feedback-training">2.3.2</a> - that the alpha band
+varies between individuals and that neurofeedback is significantly more
+effective when the feedback is given on individually adapted frequency bands.</p>
+<p>In researching how neurofeedback is practiced, we contacted Ann-Helen
+Pettersen - one of the few Danish psychiatrists specializing in neurofeedback
+therapy&nbsp;<a class="footnote-reference" href="#foot-background-hjernetraening" id="id1"><sup>1</sup></a>.  She also stressed the
+importance of accounting for individually determined frequency bands.  When
+practicing neurofeedback therapy, she starts out by recording a map of EEG
+frequency intensities. This &quot;brain map&quot;, as she calls it, serves as input to the
+choice of an appropriate feedback frequency band.</p>
+<p>Based on the notions from the literature on alpha feedback training backed up by a
+clinician's neurofeedback practice, we decided that our alpha training system
+would need the ability to give feedback on an alpha band adapted to the
+individual alpha peak frequency. This led us to experiment with doing the
+frequency analysis our selves. This
+also enabled us to test whether we could reproduce the outliers experienced from
+the SDK alpha values which would inform about whether they originated from the
+raw data or from the SDK processing.</p>
+<p>We did the signal processing offline (see Section&nbsp;<a class="reference internal" href="../ch-experiment/index.html#ch-experiment-pre-study">3.1</a>) and interestingly we were not able to reproduce
+the outliers we got from the SDK. Another interesting find during the data
+analysis was that the alpha wave intensity comes in chunks of a few seconds
+length as can be seen, for example, in Figure&nbsp;<a href="../ch-experiment/index.html#fig-experiment-final-7-mindwave-alpha-progress">3.7c</a>.  The chunks of high alpha
+activity can even be observed directly from a raw EEG signal such as the one
+shown in Figure&nbsp;<a href="../ch-background/index.html#fig-eeg-with-alpha-waves">2.1</a>.</p>
+</div>
+<div class="section" id="early-functioning-android-prototype">
+<h3>4.2.2 Early functioning Android prototype<a class="headerlink" href="#early-functioning-android-prototype" title="Permalink to this headline">¶</a></h3>
+<p>As the next step we implemented a working Android alpha feedback training
+prototype. We focused on the needs for custom signal processing revealed in our
+previous prototype experiments and from the literature. Our approach to signal
+processing is covered in the Implementation Chapter&nbsp;<a class="reference internal" href="../ch-implementation/index.html#ch-implementation">5</a>. We also created a set of 5 different feedback views
+inspired by other neurofeedback systems.</p>
+<p>The views were variations over a bar changing height and a box changing
+color. We read about the bar feedback in&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-larsen-classification-2011">37</a><span class="citation">]</span></span> describing its clinical usage in ADHD
+treatment. The goal for the trainee is to raise the bar which in our case
+represents the magnitude of alpha waves. The basic bar feedback is shown in
+Figure&nbsp;<a href="#fig-early-prototype-feedback-bar">4.3e</a>. The feedback consisting
+of a box changing colors was used in the Smartphone Brain Scanner alpha feedback
+training application as mentioned in the Background Chapter&nbsp;<a class="reference internal" href="../ch-background/index.html#ch-background">2</a>. In our case, the
+box gradually change from red over yellow to green. The trainees goal is to make
+and keep the box green which represents high alpha magnitude. The basic bar
+feedback is shown in Figure&nbsp;<a href="#fig-early-prototype-feedback-box">4.3c</a>. Inspired by the Smartphone Brain
+Scanner alpha feedback training app (Section&nbsp;<a class="reference internal" href="../ch-background/index.html#ch-background-smartphone-brain-scanner-2">2.4.3</a>) - which included another
+feedback in which performance history was visible - we implemented a version of
+each interface showing recent performance history of a sliding time frame of 30
+seconds.</p>
+<p>In the case of the box feedback, history was visible in the frame color - see
+Figure&nbsp;<a href="#fig-early-prototype-feedback-box-w-history">4.3d</a>. In the case of
+the bar, we implemented performance history in the form of a horizontal line
+showing performance history of a 30 seconds sliding time frame. Additionally, we
+visualized performance history of the entire training session in the form of
+background color changes - see Figure&nbsp;<a href="#fig-early-prototype-feedback-bar-w-history">4.3f</a>. From our initial experience
+with the feedback bar, we thought the rather violent movements from low to high
+due to the intrinsic variance in alpha magnitude might introduce EOG
+noise. Therefor we made another variation of the bar interface in which the bar
+only grows. High alpha magnitudes makes it grow fast while low alpha magnitudes
+slows the growing down or stops it completely (Figure&nbsp;<a href="#fig-early-prototype-feedback-bar-growing">4.3g</a>).</p>
+<p>In sum, the prototype featured: (<em>i</em>) alpha feedback training through 5
+different feedback views; (<em>ii</em>) individual alpha peak detection; (<em>iii</em>) alpha
+feedback training based on flexible alpha band definition; and (<em>ii-ii</em>) a view
+showing performance history in a plot (Figure&nbsp;<a href="#fig-early-prototype-screen-history">4.3h</a>).</p>
+<p>Using the app relied on the following sequence of actions:</p>
+<ol class="arabic simple">
+<li>The user should turn on and mount the MindWave BCI and launch the Android
+application prototype.</li>
+<li>The user should calibrate according to the individual alpha peak which is
+done by pushing the &quot;Calibrate&quot; button. The alpha peak frequency is used to
+delimit the alpha band for which to give feedback on.</li>
+<li>The user should record a baseline while under influence of random feedback
+which is done by pushing the &quot;Baseline&quot; button. The baseline is used in
+mapping the current alpha level to a feedback state. Furthermore, the
+baseline recordings are used to track alpha activity gains over time, the
+<em>training effect</em> of using AlphaTrainer.</li>
+<li>The app is now ready for training which is started by pushing the &quot;Feedback&quot;
+button.</li>
+</ol>
+<p>The prototype app uses standard Android UI components (see Figure&nbsp;<a href="#fig-early-prototype-app-screen-start">4.3a</a>) and the interaction form is manual
+as it is clear from the training procedure listed above. In designing and
+building the prototype we thought in terms of <em>availability</em> regarding app
+functionality and the information dimensions present in the feedbacks (for
+example feedbacks showing current alpha state + performance history).</p>
+<div class="figure compound align-center" id="fig-early-prototype">
+<div style="width: 30%" class="subfigure align-center" id="fig-early-prototype-app-screen-start">
+<a class="reference internal image-reference" href="../_images/early-prototype-app-screen-start.png"><img alt="Start screen" src="../_images/early-prototype-app-screen-start.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(a)</strong> Early prototype app screen start.</p>
+</div>
+<div style="width: 30%" class="subfigure align-center" id="fig-early-prototype-screen-calibrate">
+<a class="reference internal image-reference" href="../_images/early-prototype-screen-calibrate.png"><img alt="Calibration screen" src="../_images/early-prototype-screen-calibrate.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(b)</strong> Calibration screen.</p>
+</div>
+<div style="width: 30%" class="subfigure align-center" id="fig-early-prototype-feedback-box">
+<a class="reference internal image-reference" href="../_images/early-prototype-feedback-box.png"><img alt="Feedback box" src="../_images/early-prototype-feedback-box.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(c)</strong> Feedback box.</p>
+</div>
+<div style="width: 30%" class="subfigure align-center" id="fig-early-prototype-feedback-box-w-history">
+<a class="reference internal image-reference" href="../_images/early-prototype-feedback-box-w-history.png"><img alt="Feedback box with history" src="../_images/early-prototype-feedback-box-w-history.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(d)</strong> Feedback box with history. Green is current feedback and border is history.</p>
+</div>
+<div style="width: 30%" class="subfigure align-center" id="fig-early-prototype-feedback-bar">
+<a class="reference internal image-reference" href="../_images/early-prototype-feedback-bar.png"><img alt="Feedback bar" src="../_images/early-prototype-feedback-bar.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(e)</strong> Feedback bar goes up and down based on alpha level.</p>
+</div>
+<div style="width: 30%" class="subfigure align-center" id="fig-early-prototype-feedback-bar-w-history">
+<a class="reference internal image-reference" href="../_images/early-prototype-feedback-bar-w-history.png"><img alt="Feedback bar with history" src="../_images/early-prototype-feedback-bar-w-history.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(f)</strong> Feedback bar with history.</p>
+</div>
+<div style="width: 30%" class="subfigure align-center" id="fig-early-prototype-feedback-bar-growing">
+<a class="reference internal image-reference" href="../_images/early-prototype-feedback-bar-growing.png"><img alt="Feedback bar growing" src="../_images/early-prototype-feedback-bar-growing.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(g)</strong> Feedback bar growing gradually based on the summed alpha.</p>
+</div>
+<div style="width: 30%" class="subfigure align-center" id="fig-early-prototype-screen-history">
+<a class="reference internal image-reference" href="../_images/early-prototype-screen-history.png"><img alt="History screen" src="../_images/early-prototype-screen-history.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(h)</strong> History screen: Baselines (black dots) and feedbacks (red dots).</p>
+</div>
+<p class="caption"><strong>Figure 4.3:</strong> Screenshots from the early prototype Android application using default Android UI components and manual interaction.</p>
+</div><p id="fig-early-prototype">We tested the prototype informally on ourselves, fellow students, friends and a
+domain expert within BCI and HCI. From our testing three notions became clear.</p>
+<p>First, we had to revisit our manual interaction and focus on <em>accessibility</em>
+regarding app functionality. It is not enough that the individual alpha peak can
+be determined, baseline can be recorded, etc. when relying on the user to
+calibrate (twice a day) and record baseline (once a day) - the user should not
+even have to know about these concepts. We shifted our focus from <em>availability</em>
+to <em>accessibility</em> in delegating the responsibility of taking appropriate
+actions to the app by means of a proactive interaction described below in the
+design of AlphaTrainer (Section&nbsp;<a class="reference internal" href="#ch-design-alphatrainer">4.3</a>).</p>
+<p>Second, we gained several important insights about the 5
+feedbacks. Interestingly, the bar height was perceived inversely proportional to
+how it was designed. By design, a high bar represents high alpha from an alpha
+performance metaphor &quot;more alpha is good&quot;. However, some subjects experienced
+the interface expressing state of mind from a &quot;low mind activity is good&quot; where
+the obvious goal state of the feedback would be a low bar. We adopted the latter
+metaphor when designing a new set of feedbacks for the next generation of
+interfaces. However, the bar was generally experienced to be unpleasant for
+other reasons - namely due to its radical shifts - why we excluded it from this
+point. During the testing of the prototype, the idea of supporting other
+modalities than sight was generated. This expanded the design space of the
+feedbacks and led to the development of audio and tactile feedbacks. We ended
+out with a set of 5 feedbacks: 2 visual (1 with history), 2 auditive (1 with
+history) and 1 tactile. They are described below in the design of AlphaTrainer
+(Section&nbsp;<a class="reference internal" href="#ch-design-alphatrainer">4.3</a>).</p>
+<p>Third, we learned that the immediate impression of the app through the UI design
+was an important part of the general experience of using the app. When
+non-developers tried the prototype, they responded negatively to the standard
+Android layout (see Figure&nbsp;<a href="#fig-early-prototype-app-screen-start">4.3a</a>)
+which looks a lot more rough than they are used to from other apps.  We noted
+that the general user is not able to abstract away from the graphical
+layout. Since we wanted to deploy the app for real world usage, we wanted to
+remove this obstacle of users distancing from the app due to its
+layout. Assisted by a digital designer, we updated the graphical design.  The
+result can be seen below in the final design of AlphaTrainer (Figure&nbsp;<a href="#fig-final-prototype-app-flow">4.4</a>).</p>
+<p>Finally the last iteration of our prototype consisted of a test and analysis by
+an interaction design expert and a pilot evaluation performed by our
+selves. This had a set of concrete outcomes:</p>
+<ul class="simple">
+<li>The app should yield training performance immediately after a training has
+been performed.</li>
+<li>When headset connection fails, try to reconnect and/or show the user as
+precise as possibly where the problem is.</li>
+<li>History of training performance should be kept in the simple app design with a <em>high
+ink-to-information ratio</em>&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-tufte-envisioning-1990">62</a><span class="citation">]</span></span>.</li>
+</ul>
+<p>This ends our chronological journey through the design process. We now move
+on to describe the AlphaTrainer system in its current state
+- the version used in the user evaluation (Chapter&nbsp;<a class="reference internal" href="../ch-evaluation/index.html#ch-evaluation">6</a>).</p>
+</div>
+</div>
+<div class="section" id="alphatrainer">
+<span id="ch-design-alphatrainer"></span><h2>4.3 AlphaTrainer<a class="headerlink" href="#alphatrainer" title="Permalink to this headline">¶</a></h2>
+<p>This chapter concludes with a description of the resulting AlphaTrainer
+prototype design. When the app is launched, the user is met by the home screen
+(Figure&nbsp;<a href="#fig-final-prototype-app-flow-app-screen-start">4.4a</a>). The home
+screen contains a logo and the 3 buttons: &quot;Training&quot;, &quot;History&quot; and
+&quot;Settings&quot;. The logo is the Greek letter alpha, which we imagine the user of
+AlphaTrainer (our personas) might recognize. The colors form a toned down blue
+palette and in conjunction with the logo we aim at conveying that AlphaTrainer
+is a serious tool.</p>
+<div class="figure compound align-center" id="fig-final-prototype-app-flow">
+<div style="width: 30%" class="subfigure align-center" id="fig-final-prototype-app-flow-app-screen-start">
+<a class="reference internal image-reference" href="../_images/final-prototype-start.png"><img alt="Start screen" src="../_images/final-prototype-start.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(a)</strong> Start screen.</p>
+</div>
+<div style="width: 30%" class="subfigure align-center" id="fig-final-prototype-app-flow-calibrate-step-1">
+<a class="reference internal image-reference" href="../_images/final-prototype-calibrate-step-1.png"><img alt="Calibrate step 1" src="../_images/final-prototype-calibrate-step-1.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(b)</strong> Calibrate step 1.</p>
+</div>
+<div style="width: 30%" class="subfigure align-center" id="fig-final-prototype-app-flow-calibrate-step-2">
+<a class="reference internal image-reference" href="../_images/final-prototype-calibrate-step-2.png"><img alt="Calibrate step 2" src="../_images/final-prototype-calibrate-step-2.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(c)</strong> Calibrate step 2.</p>
+</div>
+<div style="width: 30%" class="subfigure align-center" id="fig-final-prototype-app-flow-calibrate-no-connect">
+<a class="reference internal image-reference" href="../_images/final-prototype-calibrate-no-connect.png"><img alt="Not connected" src="../_images/final-prototype-calibrate-no-connect.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(d)</strong> Not connected (headset).</p>
+</div>
+<div style="width: 30%" class="subfigure align-center" id="fig-final-prototype-app-flow-no-headset-found">
+<a class="reference internal image-reference" href="../_images/final-prototype-no-headset-found.png"><img alt="No headset found" src="../_images/final-prototype-no-headset-found.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(e)</strong> No headset found.</p>
+</div>
+<div style="width: 30%" class="subfigure align-center" id="fig-final-prototype-app-flow-prototype-reference">
+<a class="reference internal image-reference" href="../_images/final-prototype-reference.png"><img alt="Start reference recording" src="../_images/final-prototype-reference.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(f)</strong> Start ref. recording.</p>
+</div>
+<div style="width: 30%" class="subfigure align-center" id="fig-final-prototype-app-flow-training-start">
+<a class="reference internal image-reference" href="../_images/final-prototype-training-start.png"><img alt="Training feedback instructions" src="../_images/final-prototype-training-start.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(g)</strong> Training feedback instructions.</p>
+</div>
+<div style="width: 30%" class="subfigure align-center" id="fig-final-prototype-app-flow-training-completed">
+<a class="reference internal image-reference" href="../_images/final-prototype-training-completed.png"><img alt="Training completed" src="../_images/final-prototype-training-completed.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(h)</strong> Training completed.</p>
+</div>
+<div style="width: 30%" class="subfigure align-center" id="fig-final-prototype-app-flow-training-history">
+<a class="reference internal image-reference" href="../_images/final-prototype-history-overview.png"><img alt="Training history" src="../_images/final-prototype-history-overview.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(i)</strong> Training history (per day, week and month). Plots the last 10 feedback
+recordings and the last 5 reference recordings.</p>
+</div>
+<p class="caption"><strong>Figure 4.4:</strong> Screen shoots from the app flow of the final AlphaTrainer Android
+prototype.</p>
+</div><p id="fig-final-prototype-app-flow">When the user clicks &quot;Training&quot;, the app takes on a proactive interaction. It
+decides whether it needs to calibrate or to record a baseline before training
+can be performed. The appropriate action is decided from these rules: (<em>i</em>) if
+calibration has not been performed within 8 hours, calibrate now; (<em>ii</em>) if a
+baseline has not been recorded today, record one now; finally (<em>iii</em>) if the first two
+criteria are met, the user is set to perform alpha feedback training.  The
+headset connection status is shown in top of the screen both as a number (0 -
+100%) and by a color varying between red (0%) over yellow (between 0% and 100%)
+to green (100%) (Figure&nbsp;<a href="#fig-final-prototype-app-flow-calibrate-step-1">4.4b</a>). While connection is not
+yet established, the button for starting the appropriate action is grayed
+out. Should connection to the headset fail, the app will try its best to tell
+the user what the problem is - for example in case the headset is turned off
+(Figure&nbsp;<a href="#fig-final-prototype-app-flow-calibrate-no-connect">4.4d</a>). The
+app continuously tries to establish connection while being inside the &quot;Training&quot;
+area.</p>
+<p>When ready to perform alpha feedback training, the app looks up which feedback
+has been selected in the settings. The trainees objective is presented,
+e.g. &quot;Relax and turn the box green&quot; in case of the box changing colors feedback
+mentioned earlier. We ended up with 5 different feedbacks:</p>
+<ol class="arabic simple">
+<li>Box changing colors. This feedback contains no performance history (Figure&nbsp;<a href="#fig-final-prototype-feedback-1-box-colors">4.5a</a>).</li>
+<li>Circles that move according to alpha level from the logic that high alpha
+amplitude (quiet state of mind) makes circle movement less. The circles are
+affected by gravity which conveys the recent performance history - when alpha
+level increases, it takes some time for the circles through the gravity to
+reach a state in which they are still (Figure&nbsp;<a href="#fig-final-prototype-feedback-2-circles">4.5b</a>).</li>
+<li>Vibration feedback in which high alpha amplitude makes the phone vibrate
+less. This feedback contains no performance history (Figure&nbsp;<a href="#fig-final-prototype-feedback-3-4-5">4.5c</a>).</li>
+<li>Tone generator in which the pitch of the tone represents the current alpha
+level from the logic that high alpha amplitude (quiet state of mind) lowers
+the pitch. This feedback contains no performance history (Figure&nbsp;<a href="#fig-final-prototype-feedback-3-4-5">4.5c</a>).</li>
+<li>Bell sounds appearing in which the number of bells represent the alpha level
+from the logic that high alpha amplitude (quiet state of mind) makes a quiet
+sound scape by having fewer bell sounds appear. When alpha level increase, it
+takes some time for the bell sounds to disappear. Thereby the duration of the
+bell sounds convey performance history (Figure&nbsp;<a href="#fig-final-prototype-feedback-3-4-5">4.5c</a>).</li>
+</ol>
+<div class="figure compound align-center" id="fig-final-prototype-app-feedbacks">
+<div style="width: 30%" class="subfigure align-center" id="fig-final-prototype-feedback-1-box-colors">
+<a class="reference internal image-reference" href="../_images/final-prototype-feedback-1-box-colors.png"><img alt="Feedback 1 with changing colors." src="../_images/final-prototype-feedback-1-box-colors.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(a)</strong> Feedback 1 with changing colors objective is to turn the color
+green (from red).</p>
+</div>
+<div style="width: 30%" class="subfigure align-center" id="fig-final-prototype-feedback-2-circles">
+<a class="reference internal image-reference" href="../_images/final-prototype-feedback-2-circles.png"><img alt="Moving circles." src="../_images/final-prototype-feedback-2-circles.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(b)</strong> Feedback 2 with moving circles - objective less movements.</p>
+</div>
+<div style="width: 30%" class="subfigure align-center" id="fig-final-prototype-feedback-3-4-5">
+<a class="reference internal image-reference" href="../_images/final-prototype-feedback-3-4-5.png"><img alt="Vibration, tone generator and bell sounds." src="../_images/final-prototype-feedback-3-4-5.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(c)</strong> Vibration, tone generator and bell sounds - they all share the
+same screen instruction. Objectives make less vibration, lower
+pitch of tone and less bells.</p>
+</div>
+<p class="caption"><strong>Figure 4.5:</strong> Screen shoots from the 5 feedbacks of the final AlphaTrainer Android prototype.</p>
+</div><p id="fig-final-prototype-app-feedbacks">After a training has been performed, the user is immediately presented with a
+number representing performance in percent. This number is calculated by comparing the
+currently ended training session to the most recent training before that (Figure&nbsp;<a href="#fig-final-prototype-app-flow-training-completed">4.4h</a>). The user can
+then choose to train again by pushing the &quot;Try again&quot; button. This concludes the
+&quot;Training&quot; area of the app.</p>
+<p>When the user selects &quot;History&quot; from the home screen, she is presented with a
+simple history dashboard (Figure&nbsp;<a href="#fig-final-prototype-app-flow-training-history">4.4i</a>). The training performance
+of current day, current week and current month is presented in the top and
+conveys the set of trainings compared to all training sessions performed. The
+dashboard also has two simple graphs showing the recent training sessions and
+the recent baseline recordings.</p>
+<p>When the user selects &quot;Settings&quot; from the home screen, she is presented with a
+conventional Android settings screen which enables her to choose among the 5
+feedbacks described above.</p>
+<p>We have now presented the AlphaTrainer and are now ready to cover the actual
+implementations in detail in Chapter&nbsp;<a class="reference internal" href="../ch-implementation/index.html#ch-implementation">5</a>.</p>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="foot-background-hjernetraening" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference external" href="http://www.hjernetraening.dk">http://www.hjernetraening.dk</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../ch-implementation/index.html" title="5 Implementation"
+             >next</a></li>
+        <li class="right" >
+          <a href="../ch-experiment/index.html" title="3 Evaluation of 3 consumer BCIs"
+             >previous</a> |</li>
+        <li><a href="../index.html">AlphaTrainer</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright by Martin Poulsen and Pelle Krøgholt, 2013..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+    </div>
+  </body>
+</html>

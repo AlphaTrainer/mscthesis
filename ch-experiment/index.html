@@ -1,0 +1,653 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3 Evaluation of 3 consumer BCIs &mdash; AlphaTrainer</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="AlphaTrainer" href="../index.html" />
+    <link rel="next" title="4 Design" href="../ch-design/index.html" />
+    <link rel="prev" title="2 Background" href="../ch-background/index.html" />
+
+<link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+<link rel="stylesheet" type="text/css" href="../_static/colorbox/colorbox.css" />
+
+<script type="text/javascript" src="../_static/colorbox/jquery.colorbox-min.js"></script>
+
+<script type="text/javascript">
+	function endsWith(str, suffix) {
+	    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+	}
+
+    $(document).ready(function() {
+    	var im, imsrc;
+    	$('img').each(function() {
+    		im = $(this);
+    		imsrc = im.attr('src');
+    		imalt = im.attr('alt');
+    		if (endsWith(imsrc, 'svg')) {
+    			im.wrap($('<a>').attr({'href': imsrc, 'title': imalt}).addClass('svglink'));
+    		}
+    	});
+
+    	$('a.svglink').colorbox({
+    		'width': '95%',
+    		'height': '95%',
+    		'photo': true});
+    });
+</script>
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../ch-design/index.html" title="4 Design"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="../ch-background/index.html" title="2 Background"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">AlphaTrainer</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">3 Evaluation of 3 consumer BCIs</a><ul>
+<li><a class="reference internal" href="#pre-study">3.1 Pre-study</a></li>
+<li><a class="reference internal" href="#experiment-design">3.2 Experiment design</a><ul>
+<li><a class="reference internal" href="#execution">3.2.1 Execution</a></li>
+<li><a class="reference internal" href="#data-processing-cleaning-and-analysis">3.2.2 Data processing, cleaning and analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#choice-of-bci">3.3 Choice of BCI</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../ch-background/index.html"
+                        title="previous chapter">2 Background</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../ch-design/index.html"
+                        title="next chapter">4 Design</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/ch-experiment/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="evaluation-of-3-consumer-bcis">
+<span id="ch-experiment"></span><h1>3 Evaluation of 3 consumer BCIs<a class="headerlink" href="#evaluation-of-3-consumer-bcis" title="Permalink to this headline">¶</a></h1>
+<p>This chapter addresses <strong>G1</strong> (Section&nbsp;<a class="reference internal" href="../ch-intro/index.html#ch-intro-hypothesis-goals">1.2</a>)
+by evaluating 3 of the consumer BCIs presented in the Background Chapter&nbsp;<a class="reference internal" href="../ch-background/index.html#ch-background">2</a>: EPOC (Section&nbsp;<a class="reference internal" href="../ch-background/index.html#ch-background-epoc">2.2.1</a>), MindWave (Section&nbsp;<a class="reference internal" href="../ch-background/index.html#ch-background-mindwave">2.2.2</a>) and TrueSense Kit (Section&nbsp;<a class="reference internal" href="../ch-background/index.html#ch-background-truesense-kit">2.2.3</a>).  The BCIs are evaluated based on their
+feasibility for alpha feedback training and finally in the conclusion of this
+chapter we will select a BCI to use in the further development of
+AlphaTrainer. This conclusion will be based on several aspects such as comfort
+and connectivity. However, the main effort of this chapter is put into answering
+the least accessible - and arguably the most important - factor: &quot;<em>are the
+BCIs able to measure alpha waves</em>&quot;?</p>
+<p>In designing an experiment to answer this, we did a
+pre-study which is explained in the next section. After that we move on to
+explain the setup, execution and data analysis of the actual experiment.</p>
+<p><strong>Method</strong></p>
+<p>To answer whether a BCI can measure alpha, we exploit the property of alpha
+activity, that it is generally higher when eyes are closed compared to when eyes
+are open&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-bazanova-comments-2012">9</a><span class="citation">]</span></span>.  By comparing alpha levels
+recorded under a closed-eyes condition to alpha levels recorded under an
+open-eyes condition, we get a measure of how able a BCI is to detect alpha
+activity.</p>
+<div class="section" id="pre-study">
+<span id="ch-experiment-pre-study"></span><h2>3.1 Pre-study<a class="headerlink" href="#pre-study" title="Permalink to this headline">¶</a></h2>
+<p>The first BCI we got our hands on was the MindWave. Eager to find out
+whether it could measure alpha levels, we implemented a simple proof-of-concept
+prototype (explained in more detail in Chapter&nbsp;<a class="reference internal" href="../ch-design/index.html#ch-design">4</a>) able
+to store SDK alpha values (high and low alpha bands) as well as the
+raw EEG signal. To get an initial idea whether the headset could measure
+alpha, we used this prototype to record and compare SDK alpha values under
+closed and open-eyes condition. Concretely, we performed some recordings
+in which a test subject would have open eyes the first half and closed
+eyes the last half of the recording. Figure&nbsp;<a href="#fig-mindwave-sdk-values">3.1</a>
+shows two plots of SDK values recorded in this way - the plot on the right
+has a y-axis limit while the plot on the left
+shows the actual values.</p>
+<div class="figure compound align-center" id="fig-mindwave-sdk-values">
+<div style="width: 48%" class="subfigure align-center" id="fig-mindwave-sdk-low-alpha-power">
+<a class="reference internal image-reference" href="../_images/mindwave_sdk_low_alpha_power.pdf"><img alt="No y-axis zoom" src="../_images/mindwave_sdk_low_alpha_power.pdf" style="width: 100%;" /></a>
+<p class="caption"><strong>(a)</strong> No y-axis zoom.</p>
+</div>
+<div style="width: 48%" class="subfigure align-center" id="fig-mindwave-sdk-y-lim-30000">
+<a class="reference internal image-reference" href="../_images/mindwave_sdk_low_alpha_power_y_lim_30000.pdf"><img alt="With y-axis zoom (0 - 30,000)" src="../_images/mindwave_sdk_low_alpha_power_y_lim_30000.pdf" style="width: 100%;" /></a>
+<p class="caption"><strong>(b)</strong> With y-axis zoom (0 - 30,000).</p>
+</div>
+<p class="caption"><strong>Figure 3.1:</strong> Two plots of the same MindWave SDK alpha powers with/without zoom.</p>
+</div><p id="fig-mindwave-sdk-values">The plot is representative for many similar recordings we performed and show some giant
+outliers in the SDK values. Similar outliers were present in the other power
+bands as well. To find out whether the outliers originated from the raw data or
+the SDK data processing, we applied offline frequency analysis to the raw data
+in Octave&nbsp;<a class="footnote-reference" href="#foot-experiment-octave" id="id1"><sup>2</sup></a> - an open-source equivalent to
+MATLAB.  We were not able to reproduce the outliers which means they were not
+present in the raw data. We initiated a correspondence with NeuroSky technicians
+(see Appendix&nbsp;<a class="reference internal" href="../appendix_experiment_mindwave_fora_posts.html#appendix-experiment-mindwave-fora-posts"><em>MindWave forum posts</em></a>) but they
+were unable to pinpoint the origin of the outliers in spite of receiving both
+SDK values and the originating raw data. They were also unable to disclose how
+the SDK values are calculated due to the closed source nature of their SDK.</p>
+<p>In the process of investigating the origin of the outliers, we also suspected
+EMG and EOG noise. This led us to compare recordings in which we induced such
+noise to recordings where we minimized it as much as possible by relaxing facial
+muscles and avoiding eye movement.  While this did not prevent the outliers, it
+showed a significant impact of the noise in the form of a general increase in band power
+across all frequency bands. This led us to the insight that we would need to
+minimize facial muscles and eye movement in the actual experiment as much as
+possible.</p>
+<p>From this point, we cleaned the MindWave SDK data by replacing the outliers with
+the mean value of the non-outliers. We carried on the recordings to compare the
+alpha levels when eyes are open to when they are closed. A representative plot
+of the resulting data can be seen in Figure&nbsp;<a href="#fig-early-open-closed-experiments">3.2</a>.  In this case we recorded for 4
+minutes and summed the alpha levels in bins of 2 seconds. As exemplified in the
+plot, we measured a clear tendency of an increase in alpha when the test subject
+closed the eyes at the midpoint of the recording.</p>
+<div class="figure compound align-center" id="fig-early-open-closed-experiments">
+<div style="width: 48%" class="subfigure align-center" id="fig-experiment-alpha-bin-2s-raw-eeg">
+<a class="reference internal image-reference" href="../_images/alpha-bin-2s-raw-eeg.png"><img alt="Alpha powers (from raw data)" src="../_images/alpha-bin-2s-raw-eeg.png" style="width: 100%;" /></a>
+<p class="caption"><strong>(a)</strong> Alpha powers (from raw data).</p>
+</div>
+<div style="width: 48%" class="subfigure align-center" id="fig-experiment-alpha-bin-2s-sdk">
+<a class="reference internal image-reference" href="../_images/alpha-bin-2s-sdk.png"><img alt="Alpha powers (from MindWave SDK)" src="../_images/alpha-bin-2s-sdk.png" style="width: 100%;" /></a>
+<p class="caption"><strong>(b)</strong> Alpha powers (from MindWave SDK, outliers removed).</p>
+</div>
+<p class="caption"><strong>Figure 3.2:</strong> Alpha levels recorded with open eyes (first half) and closed eyes (second half).</p>
+</div><p id="fig-early-open-closed-experiments">To avoid dependencies on black box SDK calculations and to get comparable
+results across different BCIs, we chose to rely only on our own signal
+processing from this point.  Both the TrueSense Kit and the EPOC (research
+edition) BCIs support raw EEG out of the box through their bundled software OPI
+Console and TestBench (Appendix&nbsp;<a class="reference internal" href="../appendix_background_truesense_console.html#appendix-background-truesense-console"><em>TrueSense Kit console</em></a> and Appendix&nbsp;<a class="reference internal" href="../appendix_background_testbench.html#appendix-background-testbench"><em>Emotiv EPOC TestBench</em></a>).</p>
+<p>Next step was to select which of the 16 electrode(s) to use from the EPOC
+headset. We chose to use one of the electrodes placed at location O1 or O2 (back
+of the head) - the electrodes used in the Smartphone Brain Scanner alpha
+feedback training application&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-stopczynski-smartphones-2013">59</a><span class="citation">]</span></span>. This placement has the advantage of
+little EOG and EMG noise (which we tested by comparing recordings from different
+electrodes while introducing eye movement and facial muscle activation). We did
+not experience significant difference between the two channels and we decided to
+use only the O1 electrode in order to make sure results could be directly
+compared to the results of the other single channel BCIs.</p>
+<p>Furthermore we had to decide the placement of the TrueSense Kit BCI. It features
+flexible mounting by its small size and elastic band mount, so placement is not
+obvious. To obtain the advantages of recording from the back of the head, we
+tried mounting the sensor on top of the neck hair at O1. This gave us very noisy
+data both in the dry and the gel-pad electrode configuration probably due to low
+scalp conductivity. The same was the case when trying to place the sensor on the
+temple. We ended up placing the sensor at the side of the forehead as
+recommended by TrueSense Kit for measuring alpha&nbsp;<a class="footnote-reference" href="#foot-experiment-opi-wearsensor" id="id2"><sup>1</sup></a>. Finally, we decided to record the TrueSense
+Kit over radio (ZigBee) rather than to the memory module attachable to the
+sensor. The latter would presumably give better
+recording quality. However, in a neurofeedback context offline
+recording is not relevant since the data must be fed into the feedback
+mechanism instantly.</p>
+<p>This concludes the pre-study which incrementally has led to all the building
+blocks necessary for designing an experiment which will answer whether the BCIs
+of interest can measure alpha.</p>
+</div>
+<div class="section" id="experiment-design">
+<h2>3.2 Experiment design<a class="headerlink" href="#experiment-design" title="Permalink to this headline">¶</a></h2>
+<p>This section formalizes the design of our experiment which will
+answer to which degree the BCIs can measure alpha from guidelines
+by MacKenzie&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-mackenzie-human-computer-2013">42</a><span class="citation">]</span></span>.
+Revisiting our
+method, it is assumed that alpha levels are higher when eyes are
+closed than when eyes are open. From this assumption, we reach
+the hypothesis tested in the experiment:</p>
+<p>H1</p>
+<blockquote>
+<div>The EEG recorded while eyes are closed contains higher alpha levels
+than EEG recorded while eyes are open.</div></blockquote>
+<p>The independent variables (factors) of the experiment are the <em>eye states</em>:
+(<em>i</em>) open; and (<em>ii</em>) closed. The dependent variable is simply the alpha
+level. The task of the participants is to relax as much as possible (keep
+blink, face muscles and eye-movement at a minimum). We did a pilot experiment on
+our selves and on a domain expert within experimental psychology to catch
+potential problems which led to a slight refining of the execution procedure.
+We later carried out the experiment on 6 participants (4 males and 2 females).</p>
+<p>To ensure that we would not only measure a precedence effect or some other
+learning effect - i.e. gaining familiarity with wearing a brain interface and
+thus being increasingly comfortable and relaxed (which minimizes EMG and EOG
+noise) - we varied the BCI recording order as lined out in Table&nbsp;<a href="#table-experiment-headset-latin-square">3.3</a>. We now describe in more detail
+the execution of the experiment.</p>
+<div class="figure align-center" id="table-experiment-headset-latin-square">
+<center><table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="28%" />
+<col width="28%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head align-right">Participant</th>
+<th class="head align-left">Headset 1</th>
+<th class="head align-left">Headset 2</th>
+<th class="head align-left">Headset 3</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td class="align-right">1</td>
+<td class="align-left">EPOC (o/c)</td>
+<td class="align-left">MindWave (c/o)</td>
+<td class="align-left">TrueSense Kit (o/c)</td>
+</tr>
+<tr class="row-odd"><td class="align-right">2</td>
+<td class="align-left">MindWave (c/o)</td>
+<td class="align-left">TrueSense Kit (o/c)</td>
+<td class="align-left">EPOC (c/o)</td>
+</tr>
+<tr class="row-even"><td class="align-right">3</td>
+<td class="align-left">TrueSense Kit (o/c)</td>
+<td class="align-left">EPOC (c/o)</td>
+<td class="align-left">MindWave (o/c)</td>
+</tr>
+<tr class="row-odd"><td class="align-right">4</td>
+<td class="align-left">TrueSense Kit (c/o)</td>
+<td class="align-left">MindWave (o/c)</td>
+<td class="align-left">EPOC (c/o)</td>
+</tr>
+<tr class="row-even"><td class="align-right">5</td>
+<td class="align-left">EPOC (o/c)</td>
+<td class="align-left">TrueSense Kit (c/o)</td>
+<td class="align-left">MindWave (o/c)</td>
+</tr>
+<tr class="row-odd"><td class="align-right">6</td>
+<td class="align-left">MindWave (c/o)</td>
+<td class="align-left">EPOC (o/c)</td>
+<td class="align-left">TrueSense Kit (c/o)</td>
+</tr>
+</tbody>
+</table>
+<p class="caption"><strong>Figure 3.3:</strong> Experiment order for headsets and participants - o = open and c = closed</p>
+</center></div><div class="section" id="execution">
+<span id="table-experiment-headset-latin-square"></span><h3>3.2.1 Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h3>
+<p>The setting was a dark room with no sun light, a lap top computer with
+a still image to focus on (Hokusai, &quot;The great wave&quot;), a table and an office
+chair (Figure&nbsp;<a href="#fig-experiment-setup">3.4</a>).</p>
+<div class="figure compound align-center" id="fig-experiment-setup">
+<div style="width: 35%" class="subfigure align-center" id="fig-experiment-setup-w-epoc">
+<a class="reference internal image-reference" href="../_images/experiment-setup-w-epoc.jpg"><img alt="Using EPOC" src="../_images/experiment-setup-w-epoc.jpg" style="width: 100%;" /></a>
+<p class="caption"><strong>(a)</strong> Using EPOC.</p>
+</div>
+<div style="width: 35%" class="subfigure align-center" id="fig-experiment-setup-w-sense">
+<a class="reference internal image-reference" href="../_images/experiment-setup-w-truesense.jpg"><img alt="Using TrueSense Kit" src="../_images/experiment-setup-w-truesense.jpg" style="width: 100%;" /></a>
+<p class="caption"><strong>(b)</strong> Using TrueSense Kit.</p>
+</div>
+<div style="width: 35%" class="subfigure align-center" id="fig-experiment-setup-w-mindwave">
+<a class="reference internal image-reference" href="../_images/experiment-setup-w-mindwave.jpg"><img alt="Using MindWave." src="../_images/experiment-setup-w-mindwave.jpg" style="width: 70%;" /></a>
+<p class="caption"><strong>(c)</strong> Using MindWave.</p>
+</div>
+<p class="caption"><strong>Figure 3.4:</strong> Experiment setup.</p>
+</div><p id="fig-experiment-setup">Before entering the recording room, the participant was instructed in a
+breathing exercise to help her relax. The exercise consisted of breathing slowly
+through the nose while continuously counting 1 down when exhaling. The count
+down starts from 4 and whenever 0 is reached it starts over from 4.</p>
+<p>The procedure for each participant - BCI combination was this:</p>
+<ul class="simple">
+<li>The participant entered the recording room, sat down and got a headset mounted.</li>
+<li>The participant was instructed to sit still, keep eye movement and
+blinking to a minimum, relax face muscles and to do the simple
+breathing exercise instructed earlier.</li>
+<li>The participant was instructed to focus at a specific point in the image
+when having open eyes (to hold visual stimuli constant across all participants and
+headsets).</li>
+<li>3 times in a row, we recorded for 5 minutes. After 2.5 minutes
+the participant is instructed verbally to close or open her eyes.</li>
+</ul>
+<p>This procedure was repeated until all 3 BCIs had been recorded.
+After each session (3 recordings with the same headset) we asked
+the participant: (<em>i</em>) &quot;<em>how relaxed did you feel during the recordings
+from 1 to 10, where 10 is very relaxed?</em>&quot;; and (<em>ii</em>) &quot;<em>how comfortable was
+it to wear the headset from 1 to 10, where 10 is very comfortable?</em>&quot;. The
+results of this questionnaire are listed in Table&nbsp;<a href="#table-experiment-final-relaxed-comfort">3.5</a>. They indicate that
+TrueSense Kit is the most comfortable BCI to wear and that the EPOC and
+MindWave BCIs are both &quot;medium&quot; comfortable. The results also indicates
+that the subjects were quite evenly relaxed across the different BCIs.</p>
+<div class="figure align-center" id="table-experiment-final-relaxed-comfort">
+<center><table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="20%" />
+<col width="20%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head align-left">&nbsp;</th>
+<th class="head align-left">EPOC</th>
+<th class="head align-left">MindWave</th>
+<th class="head align-left">TrueSense Kit</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td class="align-left">Level of relaxation</td>
+<td class="align-left">7.17 ±1.60</td>
+<td class="align-left">8.17 ±1.17</td>
+<td class="align-left">8.33 ±0.82</td>
+</tr>
+<tr class="row-odd"><td class="align-left">BCI comfort</td>
+<td class="align-left">5.67 ±2.73</td>
+<td class="align-left">5.00 ±1.67</td>
+<td class="align-left">8.50 ±2.06</td>
+</tr>
+</tbody>
+</table>
+<p class="caption"><strong>Figure 3.5:</strong> Experiment micro questionary</p>
+</center></div></div>
+<div class="section" id="data-processing-cleaning-and-analysis">
+<span id="ch-experiment-processing"></span><span id="table-experiment-final-relaxed-comfort"></span><h3>3.2.2 Data processing, cleaning and analysis<a class="headerlink" href="#data-processing-cleaning-and-analysis" title="Permalink to this headline">¶</a></h3>
+<p>From the 5 minutes recorded, we extract 2 minutes of open eyes and 2 minutes of
+closed eyes - thus discarding a 15 second margin on either side of each
+extraction. These two extractions are subject for the frequency comparison.</p>
+<p>For frequency estimation, we use the <em>P.D. Welch algorithm</em> which cuts up the data
+in small time windows and for each frequency in each window the density of that
+frequency is calculated/estimated using FFT&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-welch-use-1967">68</a><span class="citation">]</span></span>. These frequency densities are then squared and summed
+up within a frequency band resulting in a total estimation of the power of that
+frequency band in the input signal (Appendix&nbsp;<a class="reference internal" href="../appendix_experiment.html#appendix-experiment"><em>Experiment - signal processing</em></a>).</p>
+<p>We compare alpha levels between the open/closed eyes conditions in two ways:
+(<em>i</em>) Direct comparison by dividing alpha band power under closed-eyes condition
+with alpha band power under open-eyes condition. This is how the alpha band
+power is calculated in the Smartphone Brain Scanner alpha feedback training
+experiment&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-stopczynski-smartphones-2013">59</a><span class="citation">]</span></span>. We call this the
+&quot;<em>absolute alpha</em>&quot; measure. (<em>ii</em>) We also compare the relative alpha levels of
+each condition. The relative alpha level is found by dividing the alpha band
+power with a broad &quot;total&quot; band power (in our case 5 Hz - 25 Hz) to get a
+measure of how much the total band power is made up of alpha. Dividing the
+relative alpha level under closed-eyes condition with the relative alpha level
+under open-eyes condition gives us the &quot;<em>relative alpha</em>&quot; measure. This approach
+is used in&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-finnigan-resting-2011">24</a><span class="citation">]</span></span> to estimate theta band power.</p>
+<div class="math" id="equation-eq-absolute-alpha">
+<span class="eqno">(1)</span>\[\alpha_\textrm{absolute} = \frac{\sum \alpha_\textrm{closed eyes}} {\sum \alpha_\textrm{open eyes}}\]</div>
+<div class="math" id="equation-eq-relative-alpha">
+<span class="eqno">(2)</span>\[\alpha_\textrm{relative} = \frac{\dfrac{\sum \alpha_\textrm{closed eyes}}{\sum \textrm{ EEG power closed eyes} }}{\dfrac{\sum \alpha_\textrm{open eyes}}{ \sum \textrm{EEG power open eyes}}}\]</div>
+<p>The absolute alpha measure compares the alpha levels under each condition
+(open/closed eyes) isolated from the total EEG power level (Equation&nbsp;<a href="#equation-eq-absolute-alpha">1</a>). The relative alpha measure will account for the total
+EEG power by comparing alpha relative to the total EEG power under each
+condition (Equation&nbsp;<a href="#equation-eq-relative-alpha">2</a>). We expect the latter to be the most
+reliable measure of alpha in that it will be more resistant to EMG/EOG noise
+(under the assumption that such noise will raise the overall EEG power level
+somewhat evenly which matches our observations from recordings under induced EMG
+and EOG).</p>
+<p>We did some simple filtering by discarding bins where the alpha or total band
+power deviates from mean by more than 4 * std.dev.  In these cases, the power
+would mainly origin from EMG/EOG. For each headset, this cleaning excluded 2 of
+the 18 recordings.  The mean values ± standard deviation are listed in Table&nbsp;<a href="#table-experiment-final-result-mean">3.6</a>. The mean value of the absolute
+and relative alpha measures inform about the degree to which a higher alpha
+level has been detected under closed-eyes condition.  The standard deviation
+informs about the consistency of the recording measure and BCI combination
+(lower std.dev. means more consistent).  The resulting data suggests:</p>
+<ul class="simple">
+<li>The EPOC and MindWave BCIs can detect alpha (mean is &gt; 1).</li>
+<li>The EPOC headset detect the most alpha.</li>
+<li>The relative alpha measure is the most reliable (i.e. lower std.dev.) as
+expected.</li>
+<li>The TrueSense Kit sensor only shows a vague difference in alpha between the
+two conditions which is unlikely to be
+sufficient for alpha feedback training. Furthermore Figure&nbsp;<a href="#fig-experiment-final-7-truesense-alpha-power">3.7f</a> exemplifies the general tendency that
+the recordings of TrueSense Kit are noisy and lack the expected alpha peak
+under closed-eyes condition. The narrow peak around 12,5 Hz is likely to be
+some power grid noise being picked up (which we experienced a lot with the
+TrueSense Kit). Figure&nbsp;<a href="#fig-experiment-final-13-truesense-alpha-power">3.8f</a> also
+show noisy data from the TrueSense Kit. In this case we see a lot of
+low frequency noise and its harmonics - the series of peaks appearing approximately
+every 3 Hz. This noise pattern is roughly the same under
+open and closed eyes conditions which indicates that the main source of the
+recording is not EEG (i.e. the alpha peak is missing).</li>
+</ul>
+<p>Figure&nbsp;<a href="#fig-final-experiment-recording-7">3.7</a> and
+Figure&nbsp;<a href="#fig-final-experiment-recording-13">3.8</a> show recordings of each
+BCI for two different participants. They exemplify how the alpha peak varies
+between individuals. For example, Participant 3 has an alpha peak under
+closed-eyes condition around 10.5 Hz while participant 5 has one around 11.5 Hz.</p>
+<div class="figure align-center" id="table-experiment-final-result-mean">
+<center><table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="24%" />
+<col width="20%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head align-right">Measure</th>
+<th class="head align-left">EPOC</th>
+<th class="head align-left">MindWave</th>
+<th class="head align-left">TrueSense Kit</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td class="align-right">Absolute alpha</td>
+<td class="align-left">4.50 ±3.12</td>
+<td class="align-left">2.37 ±1.54</td>
+<td class="align-left">0.87 ±0.40</td>
+</tr>
+<tr class="row-odd"><td class="align-right">Relative alpha</td>
+<td class="align-left">2.12 ±0.63</td>
+<td class="align-left">1.55 ±0.60</td>
+<td class="align-left">1.06 ±0.21</td>
+</tr>
+</tbody>
+</table>
+<p class="caption"><strong>Figure 3.6:</strong> Mean values of the absolute and relative alpha measures</p>
+<span class="target" id="table-experiment-final-result-mean"></span></center></div><div class="figure compound align-center" id="fig-final-experiment-recording-7">
+<div style="width: 49%" class="subfigure align-center" id="fig-experiment-final-7-emotiv-alpha-progress">
+<a class="reference internal image-reference" href="../_images/experiment-final-7-epoc-alpha-progress.png"><img alt="EPOC alpha progress." src="../_images/experiment-final-7-epoc-alpha-progress.png" style="width: 100%;" /></a>
+<p class="caption"><strong>(a)</strong> EPOC alpha progress. Alpha peaks: 9,5 Hz (open eyes) and 10,5 Hz (closed eyes).</p>
+</div>
+<div style="width: 49%" class="subfigure align-center" id="fig-experiment-final-7-emotiv-alpha-power">
+<a class="reference internal image-reference" href="../_images/experiment-final-7-epoc-pwelch-power.png"><img alt="EPOC (pwelch) power." src="../_images/experiment-final-7-epoc-pwelch-power.png" style="width: 100%;" /></a>
+<p class="caption"><strong>(b)</strong> EPOC power of each frequency.</p>
+</div>
+<div style="width: 49%" class="subfigure align-center" id="fig-experiment-final-7-mindwave-alpha-progress">
+<a class="reference internal image-reference" href="../_images/experiment-final-7-mindwave-alpha-progress.png"><img alt="EPOC alpha progress." src="../_images/experiment-final-7-mindwave-alpha-progress.png" style="width: 100%;" /></a>
+<p class="caption"><strong>(c)</strong> Mindwave alpha progress. Alpha peaks: 8,5 Hz (open eyes) and 10,5 Hz (closed eyes).</p>
+</div>
+<div style="width: 49%" class="subfigure align-center" id="fig-experiment-final-7-mindwave-alpha-power">
+<a class="reference internal image-reference" href="../_images/experiment-final-7-mindwave-pwelch-power.png"><img alt="Mindwave power of each frequency." src="../_images/experiment-final-7-mindwave-pwelch-power.png" style="width: 100%;" /></a>
+<p class="caption"><strong>(d)</strong> Mindwave power of each frequency.</p>
+</div>
+<div style="width: 49%" class="subfigure align-center" id="fig-experiment-final-7-truesense-alpha-progress">
+<a class="reference internal image-reference" href="../_images/experiment-final-7-truesense-alpha-progress.png"><img alt="True Sense Kit alpha progress." src="../_images/experiment-final-7-truesense-alpha-progress.png" style="width: 100%;" /></a>
+<p class="caption"><strong>(e)</strong> True Sense Kit alpha progress. Alpha peaks: 12,5 Hz (open eyes) and 8 Hz (closed eyes).</p>
+</div>
+<div style="width: 49%" class="subfigure align-center" id="fig-experiment-final-7-truesense-alpha-power">
+<a class="reference internal image-reference" href="../_images/experiment-final-7-truesense-pwelch-power.png"><img alt="True Sense Kit power of each frequency." src="../_images/experiment-final-7-truesense-pwelch-power.png" style="width: 100%;" /></a>
+<p class="caption"><strong>(f)</strong> True Sense Kit power of each frequency. Pay attention to the narrow (noise) peak around 12,5 with open eyes.</p>
+</div>
+<p class="caption"><strong>Figure 3.7:</strong> Plots from recordings of participant 3 from the experiment. On the left, alpha progress
+with eyes open (red line) and eyes closed (black line) are plotted. On the right,
+the power of each
+frequency is plotted - notice the alpha peak around 10 Hz in the EPOC and MindWave
+recordings under closed-eyes condition.</p>
+</div><div class="figure compound align-center" id="fig-final-experiment-recording-13">
+<div style="width: 49%" class="subfigure align-center" id="fig-experiment-final-13-emotiv-alpha-progress">
+<a class="reference internal image-reference" href="../_images/experiment-final-13-epoc-alpha-progress.png"><img alt="EPOC alpha progress." src="../_images/experiment-final-13-epoc-alpha-progress.png" style="width: 100%;" /></a>
+<p class="caption"><strong>(a)</strong> EPOC alpha progress. Alpha peaks: 8,5 Hz (open eyes) and 11,5 Hz (closed eyes).</p>
+</div>
+<div style="width: 49%" class="subfigure align-center" id="fig-experiment-final-13-emotiv-alpha-power">
+<a class="reference internal image-reference" href="../_images/experiment-final-13-epoc-pwelch-power.png"><img alt="EPOC (pwelch) power." src="../_images/experiment-final-13-epoc-pwelch-power.png" style="width: 100%;" /></a>
+<p class="caption"><strong>(b)</strong> EPOC power of each frequency.</p>
+</div>
+<div style="width: 49%" class="subfigure align-center" id="fig-experiment-final-13-mindwave-alpha-progress">
+<a class="reference internal image-reference" href="../_images/experiment-final-13-mindwave-alpha-progress.png"><img alt="EPOC alpha progress." src="../_images/experiment-final-13-mindwave-alpha-progress.png" style="width: 100%;" /></a>
+<p class="caption"><strong>(c)</strong> Mindwave alpha progress. Alpha peaks: 8,5 Hz (open eyes) and 11,5 Hz (closed eyes).</p>
+</div>
+<div style="width: 49%" class="subfigure align-center" id="fig-experiment-final-13-mindwave-alpha-power">
+<a class="reference internal image-reference" href="../_images/experiment-final-13-mindwave-pwelch-power.png"><img alt="Mindwave power of each frequency." src="../_images/experiment-final-13-mindwave-pwelch-power.png" style="width: 100%;" /></a>
+<p class="caption"><strong>(d)</strong> Mindwave power of each frequency.</p>
+</div>
+<div style="width: 49%" class="subfigure align-center" id="fig-experiment-final-13-truesense-alpha-progress">
+<a class="reference internal image-reference" href="../_images/experiment-final-13-truesense-alpha-progress.png"><img alt="True Sense Kit alpha progress." src="../_images/experiment-final-13-truesense-alpha-progress.png" style="width: 100%;" /></a>
+<p class="caption"><strong>(e)</strong> True Sense Kit alpha progress. Alpha peaks: 8 Hz (open eyes) and 8 Hz (closed eyes).</p>
+</div>
+<div style="width: 49%" class="subfigure align-center" id="fig-experiment-final-13-truesense-alpha-power">
+<a class="reference internal image-reference" href="../_images/experiment-final-13-truesense-pwelch-power.png"><img alt="True Sense Kit power of each frequency." src="../_images/experiment-final-13-truesense-pwelch-power.png" style="width: 100%;" /></a>
+<p class="caption"><strong>(f)</strong> True Sense Kit power of each frequency.</p>
+</div>
+<p class="caption"><strong>Figure 3.8:</strong> Plots from recordings of participant 5. On the left, alpha progress
+with eyes open (red line) and eyes closed (black line) are plotted. On the right,
+the power of each
+frequency is plotted - notice the alpha peak around 11.5 Hz in the EPOC and MindWave
+recordings under closed-eyes condition.</p>
+</div></div>
+</div>
+<div class="section" id="choice-of-bci">
+<span id="fig-final-experiment-recording-13"></span><h2>3.3 Choice of BCI<a class="headerlink" href="#choice-of-bci" title="Permalink to this headline">¶</a></h2>
+<p>We have lined up the parameters of the evaluation in Table&nbsp;<a href="#table-bci-evaluation">3.9</a>. We choose the MindWave BCI in the further
+development of AlphaTrainer because: (<em>i</em>) it can detect alpha; (<em>ii</em>) it does
+not require assistance or preparation time to use; (<em>iii</em>) it supports Bluetooth
+communication; finally (<em>ii-ii</em>) it has out of the box SDK support for mobile
+devices including access to raw EEG data.</p>
+<p>The rationale behind these arguments is based on our overall method which
+includes building a system deployable for actual use. In a research context (or
+any context requiring spatial resolution), the EPOC is an excellent choice. And
+in a quantified-self context in which offline recording and processing is
+possible, the TrueSense Kit is the obvious choice due to its size and comfort.</p>
+<p>Another advantage of the MindWave is that it seems to best represent the future
+of consumer BCIs. As mentioned in Section&nbsp;<a class="reference internal" href="../ch-background/index.html#ch-background-future-headsets">2.2.4</a>, the next generation of consumer BCIs
+feature Bluetooth connectivity and a dry sensor configuration. By using MindWave
+in the further development of AlphaTrainer, we are best prepared for adapting to
+future BCIs.</p>
+<div class="figure align-center" id="table-bci-evaluation">
+<center><table border="1" class="docutils">
+<colgroup>
+<col width="38%" />
+<col width="24%" />
+<col width="18%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head align-left align-top">&nbsp;</th>
+<th class="head align-top">EPOC</th>
+<th class="head align-top">MindWave</th>
+<th class="head align-top">TrueSense Kit</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td class="align-left align-top"><strong>Outputs raw EEG</strong></td>
+<td class="align-top">(yes)</td>
+<td class="align-top">yes</td>
+<td class="align-top">yes</td>
+</tr>
+<tr class="row-odd"><td class="align-left align-top"><strong>Channels</strong></td>
+<td class="align-top">14</td>
+<td class="align-top">1</td>
+<td class="align-top">1 and up</td>
+</tr>
+<tr class="row-even"><td class="align-left align-top"><strong>Ability to measure alpha
+(1-10)</strong></td>
+<td class="align-top">10</td>
+<td class="align-top">7</td>
+<td class="align-top">0</td>
+</tr>
+<tr class="row-odd"><td class="align-left align-top"><strong>Preparation time
+(minutes)</strong></td>
+<td class="align-top">&gt; 10 min</td>
+<td class="align-top">&lt; 1 min</td>
+<td class="align-top">1-5 min</td>
+</tr>
+<tr class="row-even"><td class="align-left align-top"><strong>Dry sensors</strong></td>
+<td class="align-top">No</td>
+<td class="align-top">Yes</td>
+<td class="align-top">Yes</td>
+</tr>
+<tr class="row-odd"><td class="align-left align-top"><strong>Comfort to wear (1 - 10)</strong></td>
+<td class="align-top">5.67 ±2.73</td>
+<td class="align-top">5.00 ±1.67</td>
+<td class="align-top">8.50 ±2.06</td>
+</tr>
+<tr class="row-even"><td class="align-left align-top"><strong>Bluetooth support</strong></td>
+<td class="align-top">no</td>
+<td class="align-top">yes</td>
+<td class="align-top">no</td>
+</tr>
+<tr class="row-odd"><td class="align-left align-top"><strong>Mobile SDKs</strong></td>
+<td class="align-top">(yes)</td>
+<td class="align-top">yes</td>
+<td class="align-top">(yes)</td>
+</tr>
+</tbody>
+</table>
+<p class="caption"><strong>Figure 3.9:</strong> BCI evaluation</p>
+</center></div><p class="rubric" id="table-bci-evaluation">Footnotes</p>
+<table class="docutils footnote" frame="void" id="foot-experiment-opi-wearsensor" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td><a class="reference external" href="http://op-innovations.com/en/wearsensor">http://op-innovations.com/en/wearsensor</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-experiment-octave" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[2]</a></td><td><a class="reference external" href="http://www.gnu.org/software/octave">http://www.gnu.org/software/octave</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../ch-design/index.html" title="4 Design"
+             >next</a></li>
+        <li class="right" >
+          <a href="../ch-background/index.html" title="2 Background"
+             >previous</a> |</li>
+        <li><a href="../index.html">AlphaTrainer</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright by Martin Poulsen and Pelle Krøgholt, 2013..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,992 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2 Background &mdash; AlphaTrainer</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="AlphaTrainer" href="../index.html" />
+    <link rel="next" title="3 Evaluation of 3 consumer BCIs" href="../ch-experiment/index.html" />
+    <link rel="prev" title="1 Introduction" href="../ch-intro/index.html" />
+
+<link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+<link rel="stylesheet" type="text/css" href="../_static/colorbox/colorbox.css" />
+
+<script type="text/javascript" src="../_static/colorbox/jquery.colorbox-min.js"></script>
+
+<script type="text/javascript">
+	function endsWith(str, suffix) {
+	    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+	}
+
+    $(document).ready(function() {
+    	var im, imsrc;
+    	$('img').each(function() {
+    		im = $(this);
+    		imsrc = im.attr('src');
+    		imalt = im.attr('alt');
+    		if (endsWith(imsrc, 'svg')) {
+    			im.wrap($('<a>').attr({'href': imsrc, 'title': imalt}).addClass('svglink'));
+    		}
+    	});
+
+    	$('a.svglink').colorbox({
+    		'width': '95%',
+    		'height': '95%',
+    		'photo': true});
+    });
+</script>
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../ch-experiment/index.html" title="3 Evaluation of 3 consumer BCIs"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="../ch-intro/index.html" title="1 Introduction"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">AlphaTrainer</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2 Background</a><ul>
+<li><a class="reference internal" href="#bci-eeg">2.1 BCI / EEG</a><ul>
+<li><a class="reference internal" href="#classic-bci-applications-and-techniques">2.1.1 Classic BCI applications and techniques</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#consumer-bcis">2.2 Consumer BCIs</a><ul>
+<li><a class="reference internal" href="#emotiv-epoc">2.2.1 Emotiv EPOC</a></li>
+<li><a class="reference internal" href="#neurosky-mindwave-mobile">2.2.2 NeuroSky MindWave Mobile</a></li>
+<li><a class="reference internal" href="#truesense-kit">2.2.3 TrueSense Kit</a></li>
+<li><a class="reference internal" href="#future-headsets">2.2.4 Future headsets</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#neurofeedback">2.3 Neurofeedback</a><ul>
+<li><a class="reference internal" href="#neurofeedback-in-practice">2.3.1 Neurofeedback in practice</a></li>
+<li><a class="reference internal" href="#stress-and-alpha-feedback-training">2.3.2 Stress and alpha feedback training</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#related-works">2.4 Related works</a><ul>
+<li><a class="reference internal" href="#brainball">2.4.1 Brainball</a></li>
+<li><a class="reference internal" href="#biozen">2.4.2 BioZen</a></li>
+<li><a class="reference internal" href="#smartphone-brain-scanner-2">2.4.3 Smartphone Brain Scanner 2</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sum-up-of-background-and-related-systems">2.5 Sum up of background and related systems</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../ch-intro/index.html"
+                        title="previous chapter">1 Introduction</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../ch-experiment/index.html"
+                        title="next chapter">3 Evaluation of 3 consumer BCIs</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/ch-background/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="background">
+<span id="ch-background"></span><h1>2 Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h1>
+<p>In this chapter we start out briefly explaining what EEG is and how a
+Brain-Computer Interface (BCI) works including typical approaches to data
+processing and classical applications. We then move on to describe relevant
+consumer BCIs. Finally, we outline neurofeedback training and how it relates to
+stress reduction. We conclude the chapter with an overview of neurofeedback
+systems which are either aimed at consumers or using consumer BCIs.</p>
+<div class="section" id="bci-eeg">
+<h2>2.1 BCI / EEG<a class="headerlink" href="#bci-eeg" title="Permalink to this headline">¶</a></h2>
+<p>The brain consists of billions of neurons. Communication between neurons is
+manifested in electrical signals. Electroencephalography (EEG) measures this
+electrical activity along the scalp. This is a well established technique from
+the 1920s. EEG has a low spatial but a high temporal resolution which makes it
+ideal for recording changes in brain activities in response to events. A BCI
+takes brain activity - for example in the form of an EEG signal (which is the
+case for all BCIs mentioned in this thesis) - as input&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-tong-quantitative-2009">61</a><span class="citation">]</span></span>. For example, Figure&nbsp;<a href="#fig-eeg-with-alpha-waves">2.1</a> shows an EEG signal with visible alpha waves.</p>
+<div class="figure align-center" id="fig-eeg-with-alpha-waves">
+<a class="reference internal image-reference" href="../_images/eeg_wave_with_alpha.png"><img alt="EEG with alpha waves" src="../_images/eeg_wave_with_alpha.png" style="width: 100%;" /></a>
+<p class="caption"><strong>Figure 2.1:</strong> EEG signal with alpha waves marked with black boxes.</p>
+</div>
+<p>Brain activity is not the only source of electrical signals along the
+scalp. Muscle activation also relies on electrical signals, the measuring of
+which is called electromyography (EMG). Eye movement furthermore discharges
+electricity due to the eyes dipole properties - measuring this signal is called
+electrooculography (EOG). In the context of measuring EEG, EMG and EOG are
+typical noise artifacts&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-majumdar-human-2011">43</a><span class="citation">]</span></span>.</p>
+<p>EEG is measured either with stand-alone electrodes or electrodes attached to a
+cap. Examples of high fidelity EEG BCIs are the <em>gamma-2-cap</em> from <em>g.tec</em><a class="footnote-reference" href="#foot-background-gtec" id="id1"><sup>1</sup></a> and <em>Easy Cap</em> from EASYCAP
+<a class="footnote-reference" href="#foot-background-easycap" id="id2"><sup>2</sup></a>. Some caps can even have up to 256 electrodes
+mounted&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-tong-quantitative-2009">61</a><span class="citation">]</span></span>. Caps need mounting preparations
+with gel to improve the conductivity between scalp and electrodes. We have tried
+out the <em>gamma-2-cap</em> during a BCI seminar in Aalborg 2013 (Figure&nbsp;
+<a href="#fig-bci-classic-cap-martin-pelle">2.2</a>). A hi-fi EEG based BCI cost around
+10-15.000 Euro and includes, for example, a cap with electrodes, cables
+and an amplifier.</p>
+<p>The EEG data is usually processed and analyzed off line with tools like EEG-lab&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-delorme-eeglab-2004">19</a><span class="citation">]</span></span> or FieldTrip&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-oostenveld-fieldtrip-2011">52</a><span class="citation">]</span></span> which are open-source plug-ins to MATLAB&nbsp;<a class="footnote-reference" href="#foot-background-matlab" id="id3"><sup>3</sup></a>.</p>
+<div class="figure align-center" id="fig-bci-classic-cap-martin-pelle">
+<a class="reference internal image-reference" href="../_images/gcap2_martin_pelle_collage.png"><img alt="Gamma-2-cap" src="../_images/gcap2_martin_pelle_collage.png" style="width: 70%;" /></a>
+<p class="caption"><strong>Figure 2.2:</strong> Martin and Pelle wearing a gamma-2-cap mounted by Gunther Krausz from g.tec</p>
+</div>
+<div class="section" id="classic-bci-applications-and-techniques">
+<h3>2.1.1 Classic BCI applications and techniques<a class="headerlink" href="#classic-bci-applications-and-techniques" title="Permalink to this headline">¶</a></h3>
+<p>There are different approaches to processing a raw EEG signal. Some of these and
+their typical applications are briefly covered below.</p>
+<p>Evoked Potentials correlates visual/auditory stimuli with EEG responses. When an
+event of significance is perceived, the brain fires certain action
+responses. One widely used response is the P300 which manifests itself as a peak
+in the EEG signal 300 ms after a stimulus - for example a flash of an image. In
+the <em>intendiX</em> <a class="footnote-reference" href="#foot-background-intendix" id="id4"><sup>4</sup></a> P300 speller application from
+<em>g.tec</em> different letters are flashed for user while the P300 action response is
+used to determine which letter the user wants to select.</p>
+<p>Motor imagery is another classic approach to BCI in which an imagined movement
+of a body part causes motor cortex activity which is detected by the BCI. In
+this way imagined movement can be used for example to control wheel chairs and
+other vehicles&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-mcfarland-brain-computer-2011">46</a><span class="citation">]</span></span>. This technique
+has been used in gaming as well, e.g. for trigger activation&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-coyle-eeg-based-2011">17</a><span class="citation">]</span></span>. Motor imagery requires spatialization
+(localization) of brain activity especially within motor cortex. This
+presents a challenge for EEG based BCIs since they have a low spatial
+resolution.</p>
+<p>Classification of EEG signals are widely used within BCI applications. For
+example, it has been used for unique identification of a person for
+authentication purpose&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-schmalstieg-gaze-directed-2010">57</a><span class="citation">]</span></span>. Various
+research groups uses classifications to predict epilepsy attacks&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-stam-nonlinear-2005">58</a><span class="citation">]</span></span><span class="citation">[<a class="reference internal" href="../bibliography.html#citation-meng-feature-2010">47</a><span class="citation">]</span></span>. Others do pattern
+matching on walking motions for assisting in rehabilitation after strokes
+<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-kuramoto-trigger-2012">36</a><span class="citation">]</span></span>. This approach has also been used to classify:
+(<em>i</em>) emotions like joy and anger; and (<em>ii</em>) human expressions like a happy
+facial expression or a mental mood&nbsp; <span class="citation">[<a class="reference internal" href="../bibliography.html#citation-hutchison-emotional-2011">21</a><span class="citation">]</span></span>
+<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-bekkedal-human-2011">11</a><span class="citation">]</span></span> <span class="citation">[<a class="reference internal" href="../bibliography.html#citation-ichi-ito-association-2010">30</a><span class="citation">]</span></span>.</p>
+<div class="figure compound align-center" id="fig-background-eeg-raw-fft">
+<div style="width: 48%" class="subfigure align-center" id="fig-background-mindwave-eeg-raw">
+<a class="reference internal image-reference" href="../_images/mindwave_eeg_raw.png"><img alt="Single channel raw EEG" src="../_images/mindwave_eeg_raw.png" style="width: 100%;" /></a>
+<p class="caption"><strong>(a)</strong> Single channel raw EEG with 512 samples per second.</p>
+</div>
+<div style="width: 48%" class="subfigure align-center" id="fig-background-mindwave-eeg-fft">
+<a class="reference internal image-reference" href="../_images/mindwave_eeg_fft.png"><img alt="Single channel raw EEG applied FFT" src="../_images/mindwave_eeg_fft.png" style="width: 100%;" /></a>
+<p class="caption"><strong>(b)</strong> Single channel EEG after Fast Fourier transform (FFT) has been applied.</p>
+</div>
+<p class="caption"><strong>Figure 2.3:</strong> Raw EEG and Fast Fourier transformed EEG.</p>
+</div><p id="fig-background-eeg-raw-fft">Frequency analysis is another technique for processing EEG data.
+Neurons are organized in networks and communication among them is always ongoing
+in oscillatory patterns. Frequency analysis estimates the power of each
+frequency component. One common approach to frequency analysis is to apply Fast
+Fourier transform (FFT) - a simple example is plotted in Figure&nbsp;<a href="#fig-background-eeg-raw-fft">2.3</a>. When applying FFT we go from a time domain
+into a frequency domain as can be seen on the x-axis values of the plots before
+and after FFT. Frequency analysis is often used in conjunction with
+other methods of analysis - for example to extract features for classification&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-tong-quantitative-2009">61</a><span class="citation">]</span></span>. It is also used stand-alone either for
+neurofeedback or in research aiming to correlate certain frequency patterns with
+some condition or cognitive task. This is very typical within EEG research
+exemplified by a study showing that &quot;<em>... high resting theta power in healthy
+older adults is associated with better cognitive function</em>&quot;&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-finnigan-resting-2011">24</a><span class="citation">]</span></span>.</p>
+<p>Frequency analysis is interesting due to the correlation between frequencies and
+mental states&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-hammond-what-2007">27</a><span class="citation">]</span></span>&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-rangaswamy-beta-2002">54</a><span class="citation">]</span></span>. A rough overview is lined up in Table&nbsp;<a href="#table-background-frequency-bands">2.4</a>.</p>
+<div class="figure align-center" id="table-background-frequency-bands">
+<center><table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="20%" />
+<col width="61%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head align-left">Brainwave Type</th>
+<th class="head align-left">Frequency range</th>
+<th class="head align-left">Mental states and conditions</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td class="align-left"><strong>Delta</strong></td>
+<td class="align-left">0.5Hz to 3.5Hz</td>
+<td class="align-left">Deep sleep</td>
+</tr>
+<tr class="row-odd"><td class="align-left"><strong>Theta</strong></td>
+<td class="align-left">3.5Hz to 8Hz</td>
+<td class="align-left">Falling asleep</td>
+</tr>
+<tr class="row-even"><td class="align-left"><strong>Alpha</strong></td>
+<td class="align-left">8Hz to 12Hz</td>
+<td class="align-left">Relaxed awake state (dominant with eyes closed)</td>
+</tr>
+<tr class="row-odd"><td class="align-left"><strong>Beta</strong></td>
+<td class="align-left">12Hz to 30Hz</td>
+<td class="align-left">Mental activity, attention, concentration</td>
+</tr>
+<tr class="row-even"><td class="align-left"><strong>Midrange
+Beta</strong></td>
+<td class="align-left">16Hz to 20Hz</td>
+<td class="align-left">Thinking, aware of self &amp; surroundings</td>
+</tr>
+<tr class="row-odd"><td class="align-left"><strong>High Beta</strong></td>
+<td class="align-left">21Hz to 30Hz</td>
+<td class="align-left">Alertness, agitation</td>
+</tr>
+<tr class="row-even"><td class="align-left"><strong>Gamma</strong></td>
+<td class="align-left">30Hz to 100Hz</td>
+<td class="align-left">Reflects the mechanism of consciousness</td>
+</tr>
+</tbody>
+</table>
+<p class="caption"><strong>Figure 2.4:</strong> Generalized frequency bands</p>
+</center></div><p id="table-background-frequency-bands">The hi-fi BCIs are getting mobile. This trend is exemplified by a mobile version
+of the <em>Easy Cap</em> and helmets with built in EEG sensors for soldiers&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-matthews-real-2008">45</a><span class="citation">]</span></span>. Another branch of BCIs that have come far in
+getting mobile are the consumer BCIs as described in the next section.</p>
+</div>
+</div>
+<div class="section" id="consumer-bcis">
+<span id="ch-background-consumer-bcis"></span><h2>2.2 Consumer BCIs<a class="headerlink" href="#consumer-bcis" title="Permalink to this headline">¶</a></h2>
+<p>Within recent years consumer BCIs have emerged and moved BCIs outside the
+laboratories. An early consumer BCI was the Neural Impulse Actuator (NIA)&nbsp;<a class="footnote-reference" href="#foot-background-nia" id="id5"><sup>9</sup></a> released in 2008 featuring a three forehead sensor
+configuration and connectivity through a desktop box with cables. NIA was
+intended primarily for gaming and cost around 100 USD (it is not in production
+any longer). Consumer headsets today typically offer additional sensors
+(accelerometer, gyroscope, etc) and wireless connectivity.  An overview of
+current state consumer BCIs is presented in Table&nbsp;<a href="#table-consumer-bcis">2.5</a>.</p>
+<div class="figure align-center" id="table-consumer-bcis">
+<center><table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="17%" />
+<col width="17%" />
+<col width="15%" />
+<col width="15%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head align-left align-top">Feature</th>
+<th class="head align-top">Emotiv EPOC (Research)</th>
+<th class="head align-top">MindWave Mobile</th>
+<th class="head align-top">TrueSense Kit (OPI)</th>
+<th class="head align-top">Muse</th>
+<th class="head align-top">Emotiv INSIGHT</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td class="align-left align-top"><strong>Raw EEG</strong></td>
+<td class="align-top">No / Yes</td>
+<td class="align-top">Yes</td>
+<td class="align-top">Yes</td>
+<td class="align-top">Yes</td>
+<td class="align-top">Yes</td>
+</tr>
+<tr class="row-odd"><td class="align-left align-top"><strong>Electrodes</strong></td>
+<td class="align-top">14</td>
+<td class="align-top">1</td>
+<td class="align-top">2</td>
+<td class="align-top">4</td>
+<td class="align-top">5</td>
+</tr>
+<tr class="row-even"><td class="align-left align-top"><strong>Locations</strong></td>
+<td class="align-top">AF3, F7, F3, FC5, T7,
+P7, O1, O2, P8, T8,
+FC6, F4, F8, AF4</td>
+<td class="align-top">--</td>
+<td class="align-top">--</td>
+<td class="align-top">AF3, AF4, TP9, TP10</td>
+<td class="align-top">AF3, AF4, T7, T8, Pz</td>
+</tr>
+<tr class="row-odd"><td class="align-left align-top"><strong>Sensors type</strong></td>
+<td class="align-top">Wet</td>
+<td class="align-top">Dry</td>
+<td class="align-top">Dry/gel</td>
+<td class="align-top">Dry</td>
+<td class="align-top">Dry</td>
+</tr>
+<tr class="row-even"><td class="align-left align-top"><strong>Sampling rates</strong></td>
+<td class="align-top">128Hz</td>
+<td class="align-top">512Hz</td>
+<td class="align-top">512Hz</td>
+<td class="align-top">100-600Hz</td>
+<td class="align-top">128Hz</td>
+</tr>
+<tr class="row-odd"><td class="align-left align-top"><strong>Protocol</strong></td>
+<td class="align-top">USB Dongle</td>
+<td class="align-top">Bluetooth</td>
+<td class="align-top">ZigBee</td>
+<td class="align-top">Bluetooth</td>
+<td class="align-top">Bluetooth</td>
+</tr>
+<tr class="row-even"><td class="align-left align-top"><strong>Power</strong></td>
+<td class="align-top">12 hours</td>
+<td class="align-top">6-8 hours (AAA bat.)</td>
+<td class="align-top">18 hours</td>
+<td class="align-top">10 hours</td>
+<td class="align-top">4 hours</td>
+</tr>
+<tr class="row-odd"><td class="align-left align-top"><strong>Off Line recording</strong></td>
+<td class="align-top">N/A</td>
+<td class="align-top">N/A</td>
+<td class="align-top">Memory chip</td>
+<td class="align-top">N/A</td>
+<td class="align-top">microSD card</td>
+</tr>
+<tr class="row-even"><td class="align-left align-top"><strong>Extra Sensors</strong></td>
+<td class="align-top">Gyroscope</td>
+<td class="align-top">None</td>
+<td class="align-top">Accelerometer,
+temperature</td>
+<td class="align-top">Accelerometer</td>
+<td class="align-top">Accelerometer,
+magnetometer</td>
+</tr>
+<tr class="row-odd"><td class="align-left align-top"><strong>SDK</strong></td>
+<td class="align-top">OSX, Windows</td>
+<td class="align-top">Android, IOS, Windows,
+OSX</td>
+<td class="align-top">Linux, Windows, OSX</td>
+<td class="align-top">Android, IOS, Linux,
+Windows, OSX</td>
+<td class="align-top">Android, IOS, Linux,
+Windows, OSX</td>
+</tr>
+<tr class="row-even"><td class="align-left align-top"><strong>Price</strong></td>
+<td class="align-top">300/750 USD</td>
+<td class="align-top">100 EURO</td>
+<td class="align-top">40 EURO</td>
+<td class="align-top">269 EURO</td>
+<td class="align-top">300 USD</td>
+</tr>
+<tr class="row-odd"><td class="align-left align-top"><strong>Released</strong></td>
+<td class="align-top">2009</td>
+<td class="align-top">2011</td>
+<td class="align-top">2013</td>
+<td class="align-top">Ann. 2014</td>
+<td class="align-top">Ann. 2014</td>
+</tr>
+</tbody>
+</table>
+<p class="caption"><strong>Figure 2.5:</strong> Listing of consumer BCIs compared by selected features.</p>
+</center></div><p id="table-consumer-bcis">These headsets are interesting to our project. Relevant features and how they
+have been used in research is lined out in the next sections.</p>
+<div class="figure compound align-center" id="fig-background-consumer-bcis-images">
+<div style="width: 45%" class="subfigure align-center" id="fig-background-consumer-bcis-epoc">
+<a class="reference internal image-reference" href="../_images/bci-emotiv-epoc.jpg"><img alt="Emotiv EPOC" src="../_images/bci-emotiv-epoc.jpg" style="width: 100%;" /></a>
+<p class="caption"><strong>(a)</strong> Emotiv EPOC. The image show USB Dongle, electrodes and the EPOC headset</p>
+</div>
+<div style="width: 45%" class="subfigure align-center" id="fig-background-consumer-bcis-mindwave">
+<a class="reference internal image-reference" href="../_images/bci-neurosky-mindwave-mobile.jpg"><img alt="NeuroSky MindWave Mobile" src="../_images/bci-neurosky-mindwave-mobile.jpg" style="width: 100%;" /></a>
+<p class="caption"><strong>(b)</strong> NeuroSky MindWave Mobile headset.</p>
+</div>
+<div style="width: 45%" class="subfigure align-center" id="fig-background-consumer-bcis-truesense">
+<a class="reference internal image-reference" href="../_images/bci-truesense-kit.jpg"><img alt="TrueSense Kit" src="../_images/bci-truesense-kit.jpg" style="width: 100%;" /></a>
+<p class="caption"><strong>(c)</strong> TrueSense Kit. The image show USB controller (w. ZigBee receiver), memory module and TrueSense sensor band.</p>
+</div>
+<p class="caption"><strong>Figure 2.6:</strong> Images of 3 consumer BCIs.</p>
+</div><div class="section" id="emotiv-epoc">
+<span id="ch-background-epoc"></span><span id="fig-background-consumer-bcis-images"></span><h3>2.2.1 Emotiv EPOC<a class="headerlink" href="#emotiv-epoc" title="Permalink to this headline">¶</a></h3>
+<p>EPOC has out of the box a desktop SDK and a set of tools aimed at gaming. The
+closed source SDK provides detection of emotions, expressions, cognitive states
+and more&nbsp;<a class="footnote-reference" href="#foot-background-emotiv" id="id6"><sup>6</sup></a> (Figure&nbsp;<a href="#fig-background-consumer-bcis-epoc">2.6a</a>).</p>
+<p>There is also a research edition of the EPOC headset which can record raw
+EEG. It comes with the <em>TestBench</em> desktop application for
+recording and viewing the raw EEG data. TestBench can process EEG into
+various frequency bands and the raw EEG data can be exported in an EDF-format
+(multichannel biological and physical signals) <a class="footnote-reference" href="#foot-background-edf" id="id7"><sup>7</sup></a> (Appendix&nbsp;<a class="reference internal" href="../appendix_background_testbench.html#appendix-background-testbench"><em>Emotiv EPOC TestBench</em></a>).</p>
+<p>Before using the EPOC headset, the user has to moist each of its 14 electrode in
+a saline solution and then attach each electrode to the headset. This
+preparation took us about 10-15 minutes when some routine was achieved.</p>
+<p>The EPOC has no SDK for mobile devices, but has been hacked for mobile usage in
+conjunction with the USB dongle - we return to this in Section&nbsp;<a class="reference internal" href="#sec-related-works">2.4</a>.</p>
+<p>EPOC seems to be the consumer BCI that appears most frequently in research
+papers. An overview of its application within research is given below.</p>
+<p>The <em>FlyingBuddy2</em> uses motor imagery to make it possible for a disabled person
+to steer a Drone with the future perspective of steering a wheel chair&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-yu-flyingbuddy2-2012">72</a><span class="citation">]</span></span>. A group in Spain uses the out of the box SDK
+classified facial expression (based on EMG) such as open and close clinch
+combined with EOG data to steer a tractor&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-gomez-gil-steering-2011">26</a><span class="citation">]</span></span>. Again using SDK classifications, an emotion
+based chat application has been build featuring avatars that changes their
+expression from angry to happy based on the emotional state of a person&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-wright-emochat-2010">70</a><span class="citation">]</span></span>. In a recent M.Sc. thesis the EPOC was used for a
+brain wave biometrics authentication system&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-petersen-development-2012">53</a><span class="citation">]</span></span>. The <em>NeuroPhone</em> project used a P300
+approach to make phone calls on a smart phone - however the EEG processing was
+performed on a laptop&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-campbell-neurophone-2010">16</a><span class="citation">]</span></span>. Finally, EPOC
+has also been used in a human-robot interaction study where they used EEG to
+classify human satisfaction of the interaction with a robot&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-esfahani-using-2011">23</a><span class="citation">]</span></span>.</p>
+<p>EPOC has also been used by media researchers at the Danish
+Broadcasting Corporation (DR) as a supplemental tool to qualitative interviews
+and questionnaires. Throughout the video screening of a TV Drama production,
+the screening participants' brain states were measured in terms of EPOC SDK
+values such as excitement, frustration and attention. In an
+interview with Harddisken (a DR radio program about technology), Jacob Lyng
+Wieland - in charge of the experimental usage of BCI during video screenings -
+reported that they had skipped using the EPOC headset because it was too
+cumbersome to use&nbsp;<a class="footnote-reference" href="#foot-background-harddisk" id="id8"><sup>8</sup></a>.</p>
+</div>
+<div class="section" id="neurosky-mindwave-mobile">
+<span id="ch-background-mindwave"></span><h3>2.2.2 NeuroSky MindWave Mobile<a class="headerlink" href="#neurosky-mindwave-mobile" title="Permalink to this headline">¶</a></h3>
+<p>NeuroSky MindWave Mobile (MindWave)&nbsp;<a class="footnote-reference" href="#foot-background-mindwave" id="id9"><sup>10</sup></a> offers
+desktop and mobile SDKs (IOS and Android). The closed source SDK features
+frequencies processing and analysis outputting values for the level of
+&quot;attention&quot; and &quot;meditation&quot;&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-neurosky-brain-2009">50</a><span class="citation">]</span></span> (Figure&nbsp;<a href="#fig-background-consumer-bcis-mindwave">2.6b</a>). The SDK also provides information
+about eye blinks and a number of frequency bands which we previously have lined
+out in Figure&nbsp;<a href="#table-background-frequency-bands">2.4</a>. The
+MindWave SDK outputs the following frequency bands: delta (0.5 - 2.75Hz), theta (3.5 - 6.75Hz),
+low-alpha (7.5 - 9.25Hz), high-alpha (10 - 11.75Hz), low-beta (13 - 16.75Hz),
+high-beta (18 - 29.75Hz), low-gamma (31 - 39.75Hz) and mid-gamma (41 - 49.75Hz)&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-neurosky-thinkgear-2012">51</a><span class="citation">]</span></span>.</p>
+<p>The headset is easy to use and the SDK includes a simple Bluetooth API that
+seamlessly supports device connectivity. Due to its connectivity options and SDK
+signal processing, the MindWave Mobile requires little effort to embed in a
+prototype. This has been done, for example, in a recent paper by Marchesi.
+He uses MindWave in the
+BRAVO project to detect attention among school children in an e-learning
+setting. If a child's attention level is under some threshold, it its reported
+to the other children who are encouraged to offer their help&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-marchesi-bravo-2013">44</a><span class="citation">]</span></span>. In another study, a research group uses
+MindWave to measure
+attention during an online game. They specifically look at the attention
+levels provided by the SDK versus self reported attention levels among a group of
+participants. They conclude that the self reports and the SDK values are correlated&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-hutchison-assessing-2009">56</a><span class="citation">]</span></span>. Another paper uses the attention and
+meditation SDK values to examine the stress levels among participants while
+performing various tasks. It concluded that the
+MindSet <a class="footnote-reference" href="#foot-background-mindset" id="id10"><sup>12</sup></a> was able to measure an increase in stress
+induced by the tasks performed (Stroop test, Tower of Hanoi)&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-crowley-evaluating-2010">18</a><span class="citation">]</span></span>.
+In&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-yasui-brainwave-2009">71</a><span class="citation">]</span></span>
+the brain state - defined in terms
+of EEG frequency composition - of a test subject driving a car is measured by
+a predecessor to the MindWave. Raw EEG data is recorded to a mobile phone via
+bluetooth and its frequency composition is analyzed offline.
+Interestingly, the results show a change in the brain wave frequency pattern
+when the driver performed, for example, a phone call.
+Finally, in a M.Sc. thesis, classification of the raw EEG data from the MindSet
+is used to control a snake-like game aimed at children&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-larsen-classification-2011">37</a><span class="citation">]</span></span>.</p>
+<p>MindWave comes out of the box with a mobile application named <em>Brainwave
+Visualizer</em> which let its user inspect the current levels of the 8 frequency
+bands supported by the SDK. The app also provides simple neurofeedback by
+letting its user control the flying height of a ball by the SDK &quot;meditation&quot;
+value or the intensity of a flame by the SDK &quot;attention&quot; value. The same
+approach to neurofeedback is used in the third party app <em>Transcend</em> by Personal
+Neuro. During meditation the user can get a flower to grow by increasing the
+&quot;meditation&quot; SDK value&nbsp;<a class="footnote-reference" href="#foot-background-transcend" id="id11"><sup>11</sup></a>.</p>
+</div>
+<div class="section" id="truesense-kit">
+<span id="ch-background-truesense-kit"></span><h3>2.2.3 TrueSense Kit<a class="headerlink" href="#truesense-kit" title="Permalink to this headline">¶</a></h3>
+<p>TrueSense Kit is the newest, cheapest, most portable headset. It comes with OPI
+Console, an open source desktop application for recording and viewing raw EEG
+data and analyzing sleep, meditation etc. from recorded EEG. It also enables exporting data as
+EDF-files for further processing and analysis in other applications. The OPI
+Console also offers sleep analysis and yoga performance analysis&nbsp;<a class="footnote-reference" href="#foot-background-opi" id="id12"><sup>13</sup></a> (Figure&nbsp;<a href="#fig-background-consumer-bcis-truesense">2.6c</a>, Appendix&nbsp;<a class="reference internal" href="../appendix_background_truesense_console.html#appendix-background-truesense-console"><em>TrueSense Kit console</em></a>). The TrueSense Kit sensor(s) can
+be placed on various parts of the body for measuring blood flow, heart rate, body
+temperature and body movements.</p>
+<p>TrueSense Kit records either directly to an internal memory module or transmit
+data over ZigBee radio to the OPI Console through a USB receiver. The sensors
+can be combined in a multi sensor configuration attached various places on the
+head or body.</p>
+<p>TrueSense Kit provides no immediate mobile device connectivity but the OPI Console
+application can likely be ported to Android since it is build with the QT
+framework&nbsp;<a class="footnote-reference" href="#foot-background-qt" id="id13"><sup>14</sup></a>. Another approach would be to build a
+native C++ Android module from the TrueSense Kit C++ SDK. Since few Android
+devices currently support ZigBee out of the box, this would require an
+external receiver board.</p>
+<p>TrueSense Kit is not yet covered in any papers despite its support for flexible
+experimental setups. TrueSense Kit was warmly received by the quantified self
+community at the yearly QS conference in Amsterdam 2013&nbsp;<a class="footnote-reference" href="#foot-background-quantified-2013" id="id14"><sup>15</sup></a>.</p>
+</div>
+<div class="section" id="future-headsets">
+<span id="ch-background-future-headsets"></span><h3>2.2.4 Future headsets<a class="headerlink" href="#future-headsets" title="Permalink to this headline">¶</a></h3>
+<p>New consumer BCIs are about to arrive, for example <em>Muse</em>&nbsp;<a class="footnote-reference" href="#foot-background-muse" id="id15"><sup>16</sup></a> (as briefly mentioned in the Introduction Section&nbsp;<a class="reference internal" href="../ch-intro/index.html#ch-intro-neurofeedback-stress-and-bci">1.1</a>) and <em>Emotiv INSIGHT</em>&nbsp;<a class="footnote-reference" href="#foot-background-insight" id="id16"><sup>17</sup></a>. These new headsets have some characteristics in
+common which seem to be representative for the new generation of consumer BCIs:</p>
+<ul class="simple">
+<li>they support Bluetooth</li>
+<li>they use dry electrodes</li>
+<li>they are discrete and comfortable to wear</li>
+</ul>
+<p>An interesting fact is that both of these headbands are
+crowdfunded. Muse raised 287,472 USD in 2012 from an unknown amount of
+supporters at Indiegogo&nbsp;<a class="footnote-reference" href="#foot-background-indiegogo" id="id17"><sup>18</sup></a>. EPOC Insight had
+pledged 1,643,117 USD by the end of September 2013 from nearly 5000 people on
+Kickstarter&nbsp;<a class="footnote-reference" href="#foot-background-kickstarter" id="id18"><sup>19</sup></a>. This trends an interest in
+low cost consumer BCIs and exemplifies pretotyping by presenting and selling the
+product before it has actually been build&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-jeremy-pretotypingwork-2012">32</a><span class="citation">]</span></span>.</p>
+<p>Most importantly, these new BCIs strengthen the possibility for neurofeedback
+among consumers in their daily settings. In the next section we focus on the
+neurofeedback concept.</p>
+</div>
+</div>
+<div class="section" id="neurofeedback">
+<h2>2.3 Neurofeedback<a class="headerlink" href="#neurofeedback" title="Permalink to this headline">¶</a></h2>
+<p>When given real time feedback on its oscillations, the brain can learn to
+control and change them. This is interesting since the brains oscillations are
+significantly correlated with brain functions and behavior as well as with
+psychiatric diseases&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-zoefel-neurofeedback-2011">73</a><span class="citation">]</span></span>. Neurofeedback
+training exploits this mechanism by providing feedback based on oscillation
+frequencies correlated with some desirable function or behavior.</p>
+<p>The neurofeedback mechanism was discovered and developed in the 1960s, but the
+first controlled studies providing clinical evidence supporting neurofeedback
+training effects were published in the 1980s&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-angelakis-eeg-2007">5</a><span class="citation">]</span></span>. Since then, the efficacy of neurofeedback therapy
+has been documented in several studies&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-lofthouse-review-2012">40</a><span class="citation">]</span></span>&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-arns-efficacy-2009">6</a><span class="citation">]</span></span>&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-white-alphatheta-2009">69</a><span class="citation">]</span></span> and
+neurofeedback <a class="footnote-reference" href="#foot-aap" id="id19"><sup>20</sup></a> is listed among the treatments with highest evidence
+support for certain conditions according to The American Academy of Pediatrics
+(AAP)&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-aap-2013">1</a><span class="citation">]</span></span>. Neurofeedback is routinely used in
+treatment of a number of conditions including Attention Deficit Hyperactivity
+Disorder (ADHD), anxiety, epilepsy, and addictive disorders&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-angelakis-eeg-2007">5</a><span class="citation">]</span></span>.</p>
+<p>Besides its clinical usage, a number of studies show that neurofeedback training
+can increase cognitive performance. For example, it has been shown to increase
+semantic working memory,
+focused attention, perceptual sensitivity and reaction time&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-angelakis-eeg-2007">5</a><span class="citation">]</span></span>. Neurofeedback training has also been shown
+effective by real-life behavioral measures - e.g. by increasing musical
+performance in a stressful context among conservatory students in a study
+designed to ensure ecological validity&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-egner-ecological-2003">22</a><span class="citation">]</span></span>.</p>
+<div class="section" id="neurofeedback-in-practice">
+<h3>2.3.1 Neurofeedback in practice<a class="headerlink" href="#neurofeedback-in-practice" title="Permalink to this headline">¶</a></h3>
+<p>In a typical clinical context, neurofeedback sessions of 45-60 minutes duration
+are performed twice per week. The number of treatments depend on the individual
+response to the training and the condition being treated - e.g. 40-80 sessions
+are suggested in ADHD treatment&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-angelakis-eeg-2007">5</a><span class="citation">]</span></span>.</p>
+<p>Neurofeedback therapy is relatively expensive. For example, 40 training sessions
+cost &gt; DKR 30.000,- at Ann-Helen Pettersen's clinic&nbsp;<a class="footnote-reference" href="#foot-background-hjernetraening" id="id20"><sup>5</sup></a>.</p>
+</div>
+<div class="section" id="stress-and-alpha-feedback-training">
+<span id="sec-background-stress-alpha-feedback-training"></span><h3>2.3.2 Stress and alpha feedback training<a class="headerlink" href="#stress-and-alpha-feedback-training" title="Permalink to this headline">¶</a></h3>
+<p>Alpha feedback training is the subset of neurofeedback training for
+which the goal state of the feedback is defined in terms of the amount
+of alpha waves - thereby seeking to increase the alpha activity.</p>
+<p>Alpha activity is associated with a relaxed consciousness&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-angelakis-eeg-2007">5</a><span class="citation">]</span></span>. Together with theta, alpha is the EEG
+frequency band in which effects of meditation are most significant&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-aftanas-changes-2003">4</a><span class="citation">]</span></span>&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-brandmeyer-meditation-2013">15</a><span class="citation">]</span></span>. Alpha 'blocking' (i.e.,
+reduction) is associated with alertness&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-angelakis-eeg-2007">5</a><span class="citation">]</span></span>. Thus, by increasing alpha levels, alpha
+feedback training has been shown - amongst other positive effects such
+as increased cognitive performance - to reduce stress and anxiety&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-zoefel-neurofeedback-2011">73</a><span class="citation">]</span></span>&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-angelakis-eeg-2007">5</a><span class="citation">]</span></span>&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-white-alphatheta-2009">69</a><span class="citation">]</span></span>.</p>
+<p>With a classification approach, EEG has been used to classify subjects
+from either a chronically stressed or a control group with a success
+rate higher than 90%&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-khosrowabadi-brain-computer-2011">33</a><span class="citation">]</span></span>. This
+testifies to the manifestation of stress in EEG data.</p>
+<p>The dominant frequency within the alpha band - the <em>alpha peak</em> - and the
+amplitude of the alpha band varies between individuals&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-bazanova-comments-2012">9</a><span class="citation">]</span></span>&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-angelakis-eeg-2007">5</a><span class="citation">]</span></span>&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-zoefel-neurofeedback-2011">73</a><span class="citation">]</span></span>. An alpha feedback training
+system can account for this by calibrating according
+to the individual alpha peak and the baseline amount of alpha. This is,
+for example, the approach taken in the alpha feedback system presented in&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-stopczynski-smartphones-2013">59</a><span class="citation">]</span></span>. The importance of giving
+feedback on individually determined frequency bands is investigated in&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-bazanova-comments-2012">9</a><span class="citation">]</span></span>
+and concludes that
+&quot;<em>Neurofeedback training
+applied in individual EEG frequency ranges was much
+more efficient than neurofeedback training of standard
+EEG frequency ranges</em>&quot;.</p>
+</div>
+</div>
+<div class="section" id="related-works">
+<span id="sec-related-works"></span><h2>2.4 Related works<a class="headerlink" href="#related-works" title="Permalink to this headline">¶</a></h2>
+<p>Having explained current state of consumer EEG BCIs, the neurofeedback mechanism
+and how alpha feedback training can help to reduce stress, we now present
+existing systems and research within the consumer neurofeedback domain. There is
+only a limited number of such systems and research for reasons already mentioned
+above:</p>
+<ol class="arabic simple">
+<li>Neurofeedback therapy is expanding but not widely adopted yet.</li>
+<li>Consumer BCIs have only emerged within recent years. They are still maturing and not
+widely adopted yet.</li>
+</ol>
+<p>This section present and discuss the commercially available systems
+Brainball and BioZen and the research project SmartphoneBrainScanner2.</p>
+<div class="section" id="brainball">
+<span id="ch-background-brain-ball"></span><h3>2.4.1 Brainball<a class="headerlink" href="#brainball" title="Permalink to this headline">¶</a></h3>
+<p>According to the researchers behind, Brainball &quot;<em>... dwells in the realm between
+art and research, entertainment and science, method and object</em>&quot;&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-hjelm-research-2003">29</a><span class="citation">]</span></span>. They present a game with a tangible user
+interface in which two opponents sit on a chair separated by a table. A steel
+ball lies between them. The players wear specialized BCIs
+mounted on their foreheads and somewhat similar to the NIA system (see Section
+<a class="reference internal" href="#ch-background-consumer-bcis">2.2</a>).
+The EEG signal is analyzed into its frequency components and the ball
+will roll away from the most relaxed player (drawing on the correlation between
+alpha activity and relaxation). While playing, the players are able to see a
+screen visualizing their EEG activity. The creators of Brainball interestingly
+reports that playing the game leads to increased relaxation by measure of both
+Galvanic Skin Response (GSR) and self reports
+<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-hjelm-research-2003">29</a><span class="citation">]</span></span>. Brainball experienced a lot of attention
+including honorary mention at Ars Electronica 2000 and 100+ appearances on
+TV. However, it remains a niche product within gaming and entertainment due to
+the dependency on specialized hardware (BCI, ball, screen, etc). The
+Brainball BCI system is commercially available through a Swedish
+company under the name <em>Mindball</em> <a class="footnote-reference" href="#foot-background-mindball" id="id21"><sup>21</sup></a> (Figure&nbsp;<a href="#fig-bci-related-mindball-game">2.7</a>).</p>
+<div class="figure align-center" id="fig-bci-related-mindball-game">
+<a class="reference internal image-reference" href="../_images/mindball-game.jpg"><img alt="Mindball game" src="../_images/mindball-game.jpg" style="width: 80%;" /></a>
+<p class="caption"><strong>Figure 2.7:</strong> Brainball BCI system in the new version named Mindball. A
+monitor displays the brain activity of the participants (Image courtesy of
+Interactive Productline IP AB).</p>
+</div>
+</div>
+<div class="section" id="biozen">
+<span id="ch-background-bio-zen"></span><h3>2.4.2 BioZen<a class="headerlink" href="#biozen" title="Permalink to this headline">¶</a></h3>
+<p>BioZen&nbsp;<a class="footnote-reference" href="#foot-background-biozen" id="id22"><sup>23</sup></a> is a consumer biofeedback system
+developed by the National Center for Telehealth and Technology (T2) under the US
+Department of Defense. The fact alone that this organization is behind a
+biofeedback system witnesses to the increasing adoptation of the biofeedback
+(here under neurofeedback) method. The system consists of an Android application&nbsp;<a class="footnote-reference" href="#foot-background-biozen-app" id="id23"><sup>22</sup></a> in conjunction with one or more consumer
+bio-sensors. Several sensors are supported including heart rate, skin
+temperature, GSR and EEG sensors. For EEG measurements, the Neurosky MindWave
+(and some older Neurosky BCIs) are supported. The BioZen app uses processed data
+delivered from the Neurosky SDK (Delta, Theta, Low Alpha, High Alpha, Low Beta,
+High Beta, Low Gamma, Mid Gamma, (e)Attention, (e)Meditation) and these values
+can form the basis for neurofeedback training. Relying on the Neurosky SDK for
+frequency analysis, BioZen is bound to the limited set of frequency spectra
+mentioned above.</p>
+<p>On the BioZen web page, T2 claims that &quot;<em>BioZen is the first portable, low-cost
+method for clinicians and patients to use biofeedback in and out of the clinic</em>&quot;
+and that &quot;<em>[BioZen] takes many of the large medical sensors in a clinic and puts
+them in the hands of anyone with a smart phone</em>&quot;&nbsp;<a class="footnote-reference" href="#foot-background-biozen" id="id24"><sup>23</sup></a>. In other words, it is promoted for clinical usage -
+a claim the authors of this thesis are very cautious about making on behalf of
+AlphaTrainer (see Section <a class="reference internal" href="../ch-intro/index.html#ch-intro-limitations">1.5</a>).</p>
+<div class="figure compound align-center" id="fig-background-biozen-app-feedback">
+<div style="width: 30%" class="subfigure align-center" id="fig-background-biozen-feedback">
+<a class="reference internal image-reference" href="../_images/biozen_feedback.png"><img alt="BioZen feedback" src="../_images/biozen_feedback.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(a)</strong> BioZen feedback consisting of a sun varying from dark (low alpha) to light (high alpha).
+A new age soundtrack loops in the background (can be
+disabled in the configuration).</p>
+</div>
+<div style="width: 30%" class="subfigure align-center" id="fig-background-biozen-feedback-gain-control">
+<a class="reference internal image-reference" href="../_images/biozen_feedback_gain_control.png"><img alt="Gain alpha." src="../_images/biozen_feedback_gain_control.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(b)</strong> The input gain of the feedback parameter (i.e. the alpha band) can be adjusted through a slider thus providing a manual calibration.</p>
+</div>
+<div style="width: 30%" class="subfigure align-center" id="fig-background-biozen-feedback-save">
+<a class="reference internal image-reference" href="../_images/biozen_feedback_save.png"><img alt="Save feedback session." src="../_images/biozen_feedback_save.png" style="width: 80%;" /></a>
+<p class="caption"><strong>(c)</strong> Save feedback session with a tag (meditation, breathing, entertainment or
+working) and a note.</p>
+</div>
+<p class="caption"><strong>Figure 2.8:</strong> Screenshots of the neurofeedback from the BioZen Android app using
+the MindWave BCI (Images courtesy of BioZen).</p>
+</div><p id="fig-background-biozen-app-feedback">The feedback consists of an image of a hill in which the background brightness
+and the visibility of a foreground tree are the feedback variables. The
+background is brighter when the chosen parameter (e.g. some EEG power band) is
+higher while the foreground tree is more visible when the chosen parameter is
+more stable&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-t2-biozenusersman-1-7-0-pdf-2013">60</a><span class="citation">]</span></span> (see Figure&nbsp;<a href="#fig-background-biozen-app-feedback">2.8</a>).</p>
+</div>
+<div class="section" id="smartphone-brain-scanner-2">
+<span id="ch-background-smartphone-brain-scanner-2"></span><h3>2.4.3 Smartphone Brain Scanner 2<a class="headerlink" href="#smartphone-brain-scanner-2" title="Permalink to this headline">¶</a></h3>
+<p>The Smartphone Brain Scanner is developed at the Technical University of Denmark
+(DTU). The project aims at moving EEG research out of the laboratory by means of
+low cost wireless BCIs and smart phone based real-time neuroimaging software
+which &quot;<em>may transform neuroscience experimental paradigms</em>&quot;&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-stopczynski-smartphones-2013">59</a><span class="citation">]</span></span>. The important notion here is that while
+leaving the laboratory and using consumer interfaces, the focus is still on
+research.</p>
+<p>They are in principle headset agnostic and support the <em>Easy Cap</em> and EPOC (described in Section <a class="reference internal" href="#ch-background-epoc">2.2.1</a>)
+BCIs. The EPOC is both used in its standard configuration and in a modified
+configuration in which it is merged with hi-fi gel based electrodes. On the
+software side, they use their Smartphone Brain Scanner (SBS2) open source
+software framework including state of the art EEG signal processing such as
+source reconstruction, noise filtering and frequency analysis&nbsp;<a class="footnote-reference" href="#foot-background-smartphonebrainscanner" id="id25"><sup>24</sup></a>. It is build on the QT C++ framework&nbsp;<a class="footnote-reference" href="#foot-background-qt" id="id26"><sup>14</sup></a> which allows compilation to the major desktop and
+mobile operating systems. However, it is not trivial to embed a QT module inside
+another native applications e.g. on the Android platform. Wireless connection to
+the EPOC BCI goes via an USB dongle and requires an Android phone to be rooted
+to function, the platform does not provide an easy way of interfacing with BCIs
+via bluetooth. Furthermore it requires the research edition of the EPOC.</p>
+<p>To validate the design of the Smartphone Brain Scanner, the research team behind
+has build 3 brain imaging applications including an alpha training
+application. Again, the focus is on research - specifically, the interface
+parameters of neurofeedback training are investigated. The efficacy of two
+different feedbacks were compared in a controlled study by measuring increase in
+alpha amplitudes with each interface during a week of intensive training. One
+feedback show a square changing colors between blue over gray to red for which
+red represents high alpha. In another interface, high alpha amplitudes manifests
+itself in the creation of small boxes and the color of the boxes created. By
+keeping the created boxes visible during the 5 minute training period, the
+interface reveals performance history thus &quot;<em>allowing the user to easily compare
+methods for increasing the amplitudes</em>&quot;&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-stopczynski-smartphones-2013">59</a><span class="citation">]</span></span> (Figure&nbsp;<a href="#fig-related-smartphone-brain-scanner-feedback">2.9</a>). The training effect
+measured by comparing baselines revealed only a statistic significant increase
+in alpha for the box changing colors while the alpha levels during training were
+significantly higher using the square creation interface.</p>
+<p>The conclusions especially relevant to this thesis are that:</p>
+<ol class="arabic simple">
+<li>Alpha feedback training is feasible in a mobile setup.</li>
+<li>Alpha levels during training (effect of feedback) is not necessarily
+correlated with a general increase in alpha levels (effect of training).</li>
+</ol>
+<div class="figure align-center" id="fig-related-smartphone-brain-scanner-feedback">
+<a class="reference internal image-reference" href="../_images/smartphone-brain-scanner-feedback.png"><img alt="Smartphone Brain Scanner neurofeedback interface" src="../_images/smartphone-brain-scanner-feedback.png" style="width: 60%;" /></a>
+<p class="caption"><strong>Figure 2.9:</strong> Smartphone Brain Scanner neurofeedback interface. High alpha amplitudes manifests
+itself in the creation of small boxes and their color. By
+keeping the created boxes visible during the 5 minute training period, the
+interface reveals performance history&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-stopczynski-smartphones-2013">59</a><span class="citation">]</span></span>.
+Image courtesy of the Smartphone Brain Scanner project.</p>
+</div>
+</div>
+</div>
+<div class="section" id="sum-up-of-background-and-related-systems">
+<h2>2.5 Sum up of background and related systems<a class="headerlink" href="#sum-up-of-background-and-related-systems" title="Permalink to this headline">¶</a></h2>
+<p>Table&nbsp;<a href="#table-related-systems">2.10</a> lists neurofeedback systems
+which are either commercially available or use a consumer BCI.
+These systems have been chosen because they
+outline the current state of systems in the domain of AlphaTrainer.
+The parameters highlighted in the table express
+parameters desirable or necessary for a consumer neurofeedback system.
+No existing system includes all parameters. For example,
+no consumer available system includes the ability to give feedback on individually
+adapted frequency bands which is important for the effectiveness of
+the feedback training (see Section&nbsp;<a class="reference internal" href="#sec-background-stress-alpha-feedback-training">2.3.2</a>).
+This &quot;gap&quot; among current neurofeedback systems is our motivation
+for designing and building
+AlphaTrainer as discussed in the following chapters.</p>
+<div class="figure align-center" id="table-related-systems">
+<center><table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="23%" />
+<col width="12%" />
+<col width="12%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head align-left align-top">Parameters</th>
+<th class="head align-top">Brainwave Visualizer &amp;
+Transcend</th>
+<th class="head align-top">Brianball</th>
+<th class="head align-top">BioZen</th>
+<th class="head align-top">Alpha feedback app -
+Smartphone Brain Scanner</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td class="align-left align-top"><strong>Convenient (dry sensor +
+bluetooth connectivity)</strong>.</td>
+<td class="align-top">yes</td>
+<td class="align-top">no</td>
+<td class="align-top">yes</td>
+<td class="align-top">no</td>
+</tr>
+<tr class="row-odd"><td class="align-left align-top"><strong>Headset agnostic</strong>.</td>
+<td class="align-top">no</td>
+<td class="align-top">no</td>
+<td class="align-top">yes</td>
+<td class="align-top">(yes)</td>
+</tr>
+<tr class="row-even"><td class="align-left align-top"><strong>Individual feedback.
+spectra</strong></td>
+<td class="align-top">no</td>
+<td class="align-top">n/a</td>
+<td class="align-top">no</td>
+<td class="align-top">yes</td>
+</tr>
+<tr class="row-odd"><td class="align-left align-top"><strong>Efficacy documented</strong>.</td>
+<td class="align-top">no</td>
+<td class="align-top">no</td>
+<td class="align-top">no</td>
+<td class="align-top">yes</td>
+</tr>
+<tr class="row-even"><td class="align-left align-top"><strong>Available to customers</strong>.</td>
+<td class="align-top">yes</td>
+<td class="align-top">yes</td>
+<td class="align-top">yes</td>
+<td class="align-top">no</td>
+</tr>
+<tr class="row-odd"><td class="align-left align-top"><strong>Low cost</strong>.</td>
+<td class="align-top">yes</td>
+<td class="align-top">no</td>
+<td class="align-top">yes</td>
+<td class="align-top">n/a</td>
+</tr>
+</tbody>
+</table>
+<p class="caption"><strong>Figure 2.10:</strong> Related systems</p>
+</center></div><p class="rubric" id="table-related-systems">Footnotes</p>
+<table class="docutils footnote" frame="void" id="foot-background-gtec" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference external" href="http://www.gtec.at">http://www.gtec.at</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-background-easycap" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td><a class="reference external" href="http://www.easycap.de/easycap">http://www.easycap.de/easycap</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-background-matlab" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td><a class="reference external" href="http://www.mathworks.se/products/matlab">http://www.mathworks.se/products/matlab</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-background-intendix" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td><a class="reference external" href="http://www.gtec.at/Products/Complete-Solutions/intendiX-Specs-Features">http://www.gtec.at/Products/Complete-Solutions/intendiX-Specs-Features</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-background-hjernetraening" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id20">[5]</a></td><td><a class="reference external" href="http://www.hjernetraening.dk/prisliste.html">http://www.hjernetraening.dk/prisliste.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-background-emotiv" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[6]</a></td><td><a class="reference external" href="http://emotiv.com">http://emotiv.com</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-background-edf" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[7]</a></td><td><a class="reference external" href="http://www.edfplus.info">http://www.edfplus.info</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-background-harddisk" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id8">[8]</a></td><td><a class="reference external" href="http://www.dr.dk/radio/player/ondemand/legacybyrid/1588020#!">http://www.dr.dk/radio/player/ondemand/legacybyrid/1588020#!</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-background-nia" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[9]</a></td><td><a class="reference external" href="http://ocz.com/consumer/company/newsroom/news/ocz-announces-availability-of-vista-64-bit-drivers-for-the-nia-neural-impulse-actuator-gaming-peripheral">http://ocz.com/consumer/company/newsroom/news/ocz-announces-availability-of-vista-64-bit-drivers-for-the-nia-neural-impulse-actuator-gaming-peripheral</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-background-mindwave" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id9">[10]</a></td><td><a class="reference external" href="http://www.neurosky.com/products/mindwavemobile.aspx">http://www.neurosky.com/products/mindwavemobile.aspx</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-background-transcend" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id11">[11]</a></td><td>Android app: <a class="reference external" href="https://play.google.com/store/apps/details?id=com.personalneuro.transcend">https://play.google.com/store/apps/details?id=com.personalneuro.transcend</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-background-mindset" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id10">[12]</a></td><td>The experiment used a MindSet headset (the generation before
+MindWave but with the same chipset and electrode)&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-crowley-evaluating-2010">18</a><span class="citation">]</span></span>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-background-opi" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id12">[13]</a></td><td><a class="reference external" href="http://op-innovations.com">http://op-innovations.com</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-background-qt" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[14]</td><td><em>(<a class="fn-backref" href="#id13">1</a>, <a class="fn-backref" href="#id26">2</a>)</em> <a class="reference external" href="http://qt-project.org">http://qt-project.org</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-background-quantified-2013" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id14">[15]</a></td><td><a class="reference external" href="http://quantifiedself.com/conference/Amsterdam-2013">http://quantifiedself.com/conference/Amsterdam-2013</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-background-muse" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id15">[16]</a></td><td><a class="reference external" href="http://www.interaxon.ca">http://www.interaxon.ca</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-background-insight" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id16">[17]</a></td><td><a class="reference external" href="http://www.kickstarter.com/projects/tanttle/emotiv-insight-optimize-your-brain-fitness-and-per">http://www.kickstarter.com/projects/tanttle/emotiv-insight-optimize-your-brain-fitness-and-per</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-background-indiegogo" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id17">[18]</a></td><td><a class="reference external" href="http://www.indiegogo.com/projects/muse-the-brain-sensing-headband-that-lets-you-control-things-with-your-mind">http://www.indiegogo.com/projects/muse-the-brain-sensing-headband-that-lets-you-control-things-with-your-mind</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-background-kickstarter" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id18">[19]</a></td><td><a class="reference external" href="http://www.kickstarter.com">http://www.kickstarter.com</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-aap" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id19">[20]</a></td><td>a subset of biofeedback which is the term mentioned in the The American
+Academy of Pediatrics (AAC) recommendations.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-background-mindball" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id21">[21]</a></td><td><a class="reference external" href="http://www.mindball.se">http://www.mindball.se</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-background-biozen-app" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id23">[22]</a></td><td>Android App: <a class="reference external" href="https://play.google.com/store/apps/details?id=com.t2">https://play.google.com/store/apps/details?id=com.t2</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-background-biozen" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[23]</td><td><em>(<a class="fn-backref" href="#id22">1</a>, <a class="fn-backref" href="#id24">2</a>)</em> <a class="reference external" href="http://t2health.org/apps/biozen">http://t2health.org/apps/biozen</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-background-smartphonebrainscanner" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id25">[24]</a></td><td>: <a class="reference external" href="https://github.com/SmartphoneBrainScanner">https://github.com/SmartphoneBrainScanner</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../ch-experiment/index.html" title="3 Evaluation of 3 consumer BCIs"
+             >next</a></li>
+        <li class="right" >
+          <a href="../ch-intro/index.html" title="1 Introduction"
+             >previous</a> |</li>
+        <li><a href="../index.html">AlphaTrainer</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright by Martin Poulsen and Pelle Krøgholt, 2013..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+    </div>
+  </body>
+</html>

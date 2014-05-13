@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>7 Conclusion &mdash; AlphaTrainer</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="AlphaTrainer" href="../index.html" />
+    <link rel="next" title="Emotiv EPOC TestBench" href="../appendix_background_testbench.html" />
+    <link rel="prev" title="6 User evaluation" href="../ch-evaluation/index.html" />
+
+<link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+<link rel="stylesheet" type="text/css" href="../_static/colorbox/colorbox.css" />
+
+<script type="text/javascript" src="../_static/colorbox/jquery.colorbox-min.js"></script>
+
+<script type="text/javascript">
+	function endsWith(str, suffix) {
+	    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+	}
+
+    $(document).ready(function() {
+    	var im, imsrc;
+    	$('img').each(function() {
+    		im = $(this);
+    		imsrc = im.attr('src');
+    		imalt = im.attr('alt');
+    		if (endsWith(imsrc, 'svg')) {
+    			im.wrap($('<a>').attr({'href': imsrc, 'title': imalt}).addClass('svglink'));
+    		}
+    	});
+
+    	$('a.svglink').colorbox({
+    		'width': '95%',
+    		'height': '95%',
+    		'photo': true});
+    });
+</script>
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../appendix_background_testbench.html" title="Emotiv EPOC TestBench"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="../ch-evaluation/index.html" title="6 User evaluation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">AlphaTrainer</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">7 Conclusion</a><ul>
+<li><a class="reference internal" href="#future-work">7.1 Future work</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../ch-evaluation/index.html"
+                        title="previous chapter">6 User evaluation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../appendix_background_testbench.html"
+                        title="next chapter">Emotiv EPOC TestBench</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/ch-conclusion/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="conclusion">
+<span id="ch-conclusion"></span><h1>7 Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h1>
+<p>This thesis has examined the feasibility of building a system comprising of a low cost consumer BCI and a mobile device which enables alpha feedback training embedded in everyday life. We started our investigations by evaluating three consumer BCIs of interest - especially regarding their ability to measure alpha waves. Based on the results, we chose to use the MindWave Mobile BCI since it is able to measure alpha and is the best exponent for the next generation of consumer BCIs.</p>
+<p>We continued our investigation by designing, implementing and evaluating AlphaTrainer, an Android based alpha feedback training system. The AlphaTrainer app features:</p>
+<ul class="simple">
+<li>Neurofeedback with multiple modalities (vision, audio and tactile).</li>
+<li>Analysis of raw EEG data which enables feedback on individually determined frequency bands.</li>
+<li>Performance history tracking.</li>
+<li>Proactive interaction which keeps track of when to calibrate and record baseline.</li>
+<li>A modular architecture which enables addition of headsets, data processing modules and feedbacks.</li>
+</ul>
+<p>We performed a real world evaluation in which 4 evaluation participants used AlphaTrainer for a week at home, at work and while traveling. We learned that:</p>
+<ul class="simple">
+<li>The participants experienced using AlphaTrainer to be immediately rewarding and perceived the training practice as a de-stressing exercise.</li>
+<li>Participants were generally positive about using AlphaTrainer and could see themselves use it and even buy a BCI in order to perform alpha training.</li>
+<li>The data collected during the evaluation indicates that AlphaTrainer deployed in a real world scenario is able to measure alpha and that the feedback mechanism increases alpha.</li>
+<li>The AlphaTrainer system performed as expected during the evaluation without noticeable technical problems.</li>
+</ul>
+<p>From the evaluation results we are able to verify our hypothesis and conclude that <em>it is possible to build a neurofeedback system comprising of a consumer BCI and a mobile device</em>.</p>
+<p>An interesting next step would be to investigate the training effect of using AlphaTrainer over a longer period of time. Though this is deemed out of scope in this thesis, we have initiated the first steps to make such an investigation. We have done so by planning a release of AlphaTrainer during December 2013 to the <em>Google Play Store</em> <a class="footnote-reference" href="#foot-conclusion-play-store" id="id1"><sup>1</sup></a>.</p>
+<div class="section" id="future-work">
+<span id="sec-future-work"></span><h2>7.1 Future work<a class="headerlink" href="#future-work" title="Permalink to this headline">¶</a></h2>
+<p>In the short term, we will finish an iteration of the AlphaTrainer design taking the concrete outcomes of the user evaluation as input.</p>
+<p>In the long term, it would be interesting to investigate the efficacy of AlphaTrainer. As mentioned above, the AlphaTrainer app support data collection which enables anonymous tracking of individual development in alpha levels over time. Still, this method would not conclusively answer whether any observed increase in alpha was caused by the feedback mechanism - for example, an increase in alpha could be caused by just taking the time to relax, by a method (such as meditation) performed while using AlphaTrainer or some unrelated change in the subjects situation. The neurofeedback component of AlphaTrainer could be isolate and investigated in a controlled longitudinal study including three groups: (<em>i</em>) one group would perform alpha feedback training; (<em>ii</em>) a &quot;placebo&quot; group would think they performed alpha feedback training but without actually controlling the feedback (which could for example be pre-programmed); finally (<em>iii</em>) a third group would perform a control activity i.e. performing a de-stressing breathing exercise or just lying comfortably on the floor while getting their EEG activity measured. These three groups would perform an equal amount of their activities respectively over a substantial period of time. Comparing the development in baseline alpha levels between the groups would inform about the efficacy of the neurofeedback component of AlphaTrainer.</p>
+<p>If AlphaTrainer in conjunction with the MindWave BCI - the configuration investigated in this thesis - turns out not to be effective, it would be interesting to see how it performs with future headsets. Same thing goes for new feedbacks and processing modules which are replaceable due to the modular architecture of AlphaTrainer. We speculate that a consumer BCI headset, at some point at least, will meet the requirements for neurofeedback training. This point illustrates that this thesis' contribution of designing, implementing and evaluating AlphaTrainer still has value should the case be that the current MindWave configuration of AlphaTrainer turn out not to be efficacious.</p>
+<p>If (or when) AlphaTrainer on the other hand turns out to be effective, it opens up to a lot of exciting future research. It would be extremely interesting to investigate how AlphaTrainer or the neurofeedback principles of the AlphaTrainer app might fit in a clinical context. For example, patients could be ordered neurofeedback training on their phone as part of their treatment. This would give the patients the convenience of performing neurofeedback training where and when it fits them best. Clinical professionals would be able to monitor the training progress. The system could include an event model in which a clinical professional would be notified if a certain patterns in the training data occurred. The frequency band on which the feedback is given (the alpha band in case of AlphaTrainer) could be changed in order to widen the neurofeedback application areas to for example ADHD in which case beta and theta frequency bands are often the basis for neurofeedback training.</p>
+<p>In a consumer context, it is an open and exiting question whether there is a base for adopting neurofeedback training as it is expressed in AlphaTrainer and how this potential consumer base develop over time when new generations of consumer BCIs appear. The evaluation hints that there could be a potential for AlphaTrainer adaptation - at least our 4 test participants found value in using AlphaTrainer. To further investigate this potential, our plan is to collect as much data as possible when releasing AlphaTrainer for free (or rather letting users pay with anonymous data) to the Google Play Store. This data, usage patterns and user feedback is valuable and could lead to the development of the next generation of AlphaTrainer, which might realize some commercial potential.</p>
+<p>The vision for AlphaTrainer's future is to put the prospects of neurofeedback into the hands of everyone with a smart phone and a low-cost consumer BCI.</p>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="foot-conclusion-play-store" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference external" href="https://play.google.com">https://play.google.com</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../appendix_background_testbench.html" title="Emotiv EPOC TestBench"
+             >next</a></li>
+        <li class="right" >
+          <a href="../ch-evaluation/index.html" title="6 User evaluation"
+             >previous</a> |</li>
+        <li><a href="../index.html">AlphaTrainer</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright by Martin Poulsen and Pelle Krøgholt, 2013..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+    </div>
+  </body>
+</html>

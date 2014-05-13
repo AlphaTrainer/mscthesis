@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Design - storyboards &mdash; AlphaTrainer</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="AlphaTrainer" href="index.html" />
+    <link rel="next" title="Software" href="appendix_software.html" />
+    <link rel="prev" title="Design - personas" href="appendix_design_personas.html" />
+
+<link rel="stylesheet" type="text/css" href="_static/custom.css" />
+<link rel="stylesheet" type="text/css" href="_static/colorbox/colorbox.css" />
+
+<script type="text/javascript" src="_static/colorbox/jquery.colorbox-min.js"></script>
+
+<script type="text/javascript">
+	function endsWith(str, suffix) {
+	    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+	}
+
+    $(document).ready(function() {
+    	var im, imsrc;
+    	$('img').each(function() {
+    		im = $(this);
+    		imsrc = im.attr('src');
+    		imalt = im.attr('alt');
+    		if (endsWith(imsrc, 'svg')) {
+    			im.wrap($('<a>').attr({'href': imsrc, 'title': imalt}).addClass('svglink'));
+    		}
+    	});
+
+    	$('a.svglink').colorbox({
+    		'width': '95%',
+    		'height': '95%',
+    		'photo': true});
+    });
+</script>
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="appendix_software.html" title="Software"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="appendix_design_personas.html" title="Design - personas"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">AlphaTrainer</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="appendix_design_personas.html"
+                        title="previous chapter">Design - personas</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="appendix_software.html"
+                        title="next chapter">Software</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/appendix_design_storyboards.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="design-storyboards">
+<span id="appendix-design-storyboards"></span><h1>Design - storyboards<a class="headerlink" href="#design-storyboards" title="Permalink to this headline">¶</a></h1>
+<p>The storyboards frame 3 scenarios of AlphaTrainer system: (<em>i</em>) home; (<em>ii</em>) work; and (<em>iii</em>) in between (commutting).</p>
+<a class="reference internal image-reference" href="_images/design-scenario-work.png"><img alt="Alpha training at work" class="align-center" src="_images/design-scenario-work.png" style="width: 100%;" /></a>
+<p>Scenario 1: Peter performing alpha training at work. Frame 1: Peter has a busy day with a lot of deadlines waiting around the corner. Frame 2: Before lunch, he finds a quiet spot. Frame 3: He performs 15 minutes of alpha training. Frame 4: He finds himself relaxed and gets back to work.</p>
+<a class="reference internal image-reference" href="_images/design-scenario-commuting.png"><img alt="Alpha training at work" class="align-center" src="_images/design-scenario-commuting.png" style="width: 100%;" /></a>
+<p>Scenario 2: Peter performing alpha training on the train home. Frame 1: Peter waits for the train. Frame 2: He finds a seat. Frame 3: To best abstract from the surroundings, he chooses to train with closed eyes. Frame 4: He performs 5 minutes of alpha training and raises his alpha level substantially which gives him a score of 120%.</p>
+<a class="reference internal image-reference" href="_images/design-scenario-home.png"><img alt="Alpha training at work" class="align-center" src="_images/design-scenario-home.png" style="width: 100%;" /></a>
+<p>Scenario 3: Peter performing alpha training at work. Frame 1: Peter sits at home and decides to train some alpha with his favorite visual feedback. Frame 2: He trains and gets more relaxed. Frame 3: After a 5 minute training session has finished, he decides to train again. Frame 4: He feels relaxed and moves on to reading a book.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="appendix_software.html" title="Software"
+             >next</a></li>
+        <li class="right" >
+          <a href="appendix_design_personas.html" title="Design - personas"
+             >previous</a> |</li>
+        <li><a href="index.html">AlphaTrainer</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright by Martin Poulsen and Pelle Krøgholt, 2013..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+    </div>
+  </body>
+</html>
