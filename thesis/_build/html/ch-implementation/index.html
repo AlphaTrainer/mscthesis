@@ -1,0 +1,926 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>5 Implementation &mdash; AlphaTrainer</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="AlphaTrainer" href="../index.html" />
+    <link rel="next" title="6 User evaluation" href="../ch-evaluation/index.html" />
+    <link rel="prev" title="4 Design" href="../ch-design/index.html" />
+
+<link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+<link rel="stylesheet" type="text/css" href="../_static/colorbox/colorbox.css" />
+
+<script type="text/javascript" src="../_static/colorbox/jquery.colorbox-min.js"></script>
+
+<script type="text/javascript">
+	function endsWith(str, suffix) {
+	    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+	}
+
+    $(document).ready(function() {
+    	var im, imsrc;
+    	$('img').each(function() {
+    		im = $(this);
+    		imsrc = im.attr('src');
+    		imalt = im.attr('alt');
+    		if (endsWith(imsrc, 'svg')) {
+    			im.wrap($('<a>').attr({'href': imsrc, 'title': imalt}).addClass('svglink'));
+    		}
+    	});
+
+    	$('a.svglink').colorbox({
+    		'width': '95%',
+    		'height': '95%',
+    		'photo': true});
+    });
+</script>
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../ch-evaluation/index.html" title="6 User evaluation"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="../ch-design/index.html" title="4 Design"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">AlphaTrainer</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">5 Implementation</a><ul>
+<li><a class="reference internal" href="#signal-processing-library">5.1 Signal processing library</a></li>
+<li><a class="reference internal" href="#android-app">5.2 Android app</a><ul>
+<li><a class="reference internal" href="#overview">5.2.1 Overview</a></li>
+<li><a class="reference internal" href="#state-management">5.2.2 State management</a></li>
+<li><a class="reference internal" href="#headset">5.2.3 Headset</a></li>
+<li><a class="reference internal" href="#signal-processing">5.2.4 Signal processing</a></li>
+<li><a class="reference internal" href="#data-flow">5.2.5 Data flow</a></li>
+<li><a class="reference internal" href="#feedback-user-interfaces">5.2.6 Feedback user interfaces</a></li>
+<li><a class="reference internal" href="#models-and-persistent-storage">5.2.7 Models and persistent storage</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cloud-based-storage">5.3 Cloud based storage</a><ul>
+<li><a class="reference internal" href="#alphatrainserservice-client">5.3.1 AlphaTrainserService Client</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#summary">5.4 Summary</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../ch-design/index.html"
+                        title="previous chapter">4 Design</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../ch-evaluation/index.html"
+                        title="next chapter">6 User evaluation</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/ch-implementation/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="implementation">
+<span id="ch-implementation"></span><h1>5 Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h1>
+<div class="figure align-center" id="fig-implementation-alphatrainer-system-overview">
+<a class="reference internal image-reference" href="../_images/alphatrainer-system-overview.png"><img alt="AlphaTrainer system overview" src="../_images/alphatrainer-system-overview.png" style="width: 100%;" /></a>
+<p class="caption"><strong>Figure 5.1:</strong> Overview of the AlphaTrainer system components</p>
+</div>
+<p>AlphaTrainer is a system composed of several components. This chapter presents
+each of their implementation. Figure&nbsp;<a href="#fig-implementation-alphatrainer-system-overview">5.1</a> gives an overview of
+the different parts of AlphaTrainer and their relationship.</p>
+<div class="section" id="signal-processing-library">
+<span id="ch-implementation-signal-processing-library"></span><h2>5.1 Signal processing library<a class="headerlink" href="#signal-processing-library" title="Permalink to this headline">¶</a></h2>
+<p>Starting low level, we have implemented a small <em>C++</em> library for processing raw
+EEG data (Appendix&nbsp;<a class="reference internal" href="../appendix_software.html#appendix-alphatrainer-signal-processing-library"><em>AlphaTrainer signal processing library</em></a>). It is based on the
+open-source OpenCV 2 library&nbsp;<a class="footnote-reference" href="#foot-implementation-open-cv" id="id1"><sup>3</sup></a>.</p>
+<p>OpenCV is primarily used for computer vision and contains methods for image
+analysis and processing. OpenCV 2 has been rewritten from <em>C</em> to <em>C++</em> and is
+optimized to handle numerical data like vectors or matrices of float values&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-baggio-mastering-2012">7</a><span class="citation">]</span></span>. This is exactly what we need when
+processing EEG data which at this level is represented as
+arrays of float values.</p>
+<p>The implementation of this library is based on the signal processing and EEG
+data knowledge gained from the BCI Evaluation Chapter&nbsp;<a class="reference internal" href="../ch-experiment/index.html#ch-experiment">3</a>. The strategies, algorithms and data cleaning are roughly
+mirrored 1:1 in this library the main difference being that this library is
+intended for real-time usage.</p>
+<p>Implementing the signal processing in C++ was chosen due to its performance
+advantages over Java in regard to numerical manipulation
+<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-ratabouil-android-2012">55</a><span class="citation">]</span></span>. This may seem overkill for the current
+MindWave BCI configuration in which 512 data points are processed every second,
+but it secures scalability for future headsets presumably increasing sample rate
+and depth. For the same reason, we refrain from making the assumption that a headset
+carries only one channel by letting the library support multichannel EEG data&nbsp;<a class="footnote-reference" href="#foot-implementation-multichannel-eeg" id="id2"><sup>2</sup></a>.</p>
+<p>The library can be called from the Java Virtual Machine (JVM) through the Java
+Native Interface (JNI)&nbsp;<a class="footnote-reference" href="#foot-implementation-java-jni" id="id3"><sup>4</sup></a>&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-liu-android-2013">39</a><span class="citation">]</span></span>.</p>
+<p>Usage of the library is defined in the <tt class="docutils literal"><span class="pre">opencvbrainprocessor.h</span></tt> interface:</p>
+<div class="highlight-guess"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre> <span class="err">#</span><span class="n">include</span> <span class="s">&quot;opencv2/core/core.hpp&quot;</span>
+ <span class="err">#</span><span class="n">include</span> <span class="s">&quot;signalprocessingutil.h&quot;</span>
+
+ <span class="err">#</span><span class="n">ifndef</span> <span class="n">OPENCVBRAINPROCESSOR_H_</span>
+ <span class="err">#</span><span class="n">define</span> <span class="n">OPENCVBRAINPROCESSOR_H_</span>
+<span class="hll">
+</span><span class="hll"> <span class="kt">float</span> <span class="n">getBrainProcessed</span><span class="p">(</span><span class="kt">float</span> <span class="n">eeg</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">channels</span><span class="p">,</span> <span class="kt">int</span> <span class="n">samples</span><span class="p">,</span> <span class="kt">int</span> <span class="n">Fs</span><span class="p">,</span>
+</span><span class="hll">                         <span class="kt">float</span> <span class="n">lowCutFq</span><span class="p">,</span> <span class="kt">float</span> <span class="n">highCutFq</span><span class="p">,</span> <span class="kt">float</span> <span class="n">alphaPeak</span><span class="p">);</span>
+</span> <span class="kt">float</span> <span class="nf">getAlphaPeak</span><span class="p">(</span><span class="kt">float</span> <span class="n">eeg</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">channels</span><span class="p">,</span> <span class="kt">int</span> <span class="n">samples</span><span class="p">,</span> <span class="kt">int</span> <span class="n">Fs</span><span class="p">);</span>
+ <span class="kt">void</span> <span class="nf">getMinMax</span><span class="p">(</span><span class="kt">float</span> <span class="n">alphaLevels</span><span class="p">[],</span> <span class="kt">float</span><span class="o">*</span> <span class="n">result</span><span class="p">,</span> <span class="kt">int</span> <span class="n">alphaLevelsLength</span><span class="p">,</span> <span class="kt">int</span> <span class="n">factor</span><span class="p">);</span>
+ <span class="err">#</span><span class="n">endif</span> <span class="cm">/* OPENCVBRAINPROCESSOR_H_ */</span>
+</pre></div>
+</td></tr></table></div>
+<p>This interface is implemented in <tt class="docutils literal"><span class="pre">opencvbrainprocessor.cpp</span></tt>. It contains three
+methods which in combination make up our signal processing. We now briefly
+explain the substance of each method.</p>
+<p>The <tt class="docutils literal"><span class="pre">getRelativeAlphaLevel()</span></tt> method computes the relative alpha level taking
+raw EEG data and the alpha peak frequency as input. The procedure consists of:
+(<em>i</em>) applying FFT to the EEG data; (<em>ii</em>) then for each frequency bin of the
+FFT output, the value is squared (to go from amplitude to power); finally
+(<em>iii</em>) return the relative alpha level which is calculated by dividing the
+power of the alpha band (defined as 1 Hz to either side of the alpha peak
+frequency) with the power of the total band (defined as the band between the
+lowCutFq and highCutFq parameters).  During the BCI evaluation we had good
+experiences with a low cut frequency of 5 Hz and a high cut frequency of 25
+Hz (<a class="reference internal" href="../ch-experiment/index.html#ch-experiment-processing">3.2.2</a>). These values are currently used by AlphaTrainer.</p>
+<p>The <tt class="docutils literal"><span class="pre">getAlphaPeak()</span></tt> method computes which frequency has the highest occurring
+amplitude within the alpha band (7 Hz - 13 Hz) taking raw EEG (recorded during
+calibration) as input. The procedure is this: (<em>i</em>) apply FFT to the EEG data;
+(<em>ii</em>) trim the resulting frequency domain down to the alpha band and; (<em>iii</em>) find
+the maximum amplitude and return the corresponding frequency.</p>
+<p>Finally, the method <tt class="docutils literal"><span class="pre">getMinMax()</span></tt> computes how alpha levels should be mapped
+to feedback states.  The resulting min and max values determine, for example,
+the thresholds for the Box feedbacks red and green states. It takes an array of
+relative alpha levels (from a baseline recording) as input. The procedure is to:
+(<em>i</em>) calculate mean and standard deviation of the input alpha levels; (<em>ii</em>)
+set min/max values to mean +/- the standard deviation multiplied with a factor
+(a method parameter); finally (<em>iii</em>) if min &lt; 0 it is replaced by the lowest
+appearing value in the input data.</p>
+<p>By design, this signal processing library is kept stateless. For example, it
+receives the alpha peak frequency and sample rate for every alpha level
+processing call. Keeping the processing module stateless simplifies the
+integration with the app by allowing a low coupling. This will be elaborated in
+the following section in which the library's user - the Android app - is
+explained.</p>
+</div>
+<div class="section" id="android-app">
+<h2>5.2 Android app<a class="headerlink" href="#android-app" title="Permalink to this headline">¶</a></h2>
+<p>Android is an open source operating system (OS) for mobile devices initiated by
+Google. Our rationales for choosing
+this platform includes that: (<em>i</em>) fits well for prototyping; (<em>ii</em>) has gained wide
+adoption; and (<em>iii</em>) has unrestricted deployment to end users through the Google Play store.</p>
+<p>Android is a mature OS and is currently released in version 4.4. AlphaTrainer
+requires Android 3.0 (API level 9) or later&nbsp;<a class="footnote-reference" href="#foot-implementation-android-api-level" id="id4"><sup>6</sup></a>.</p>
+<p>An introduction to the Android programming model is out of scope - the interested reader
+is referred to the comprehensive official documentation&nbsp;<a class="footnote-reference" href="#foot-implementation-android" id="id5"><sup>5</sup></a>.
+Instead, this section will focus on the overall architecture and the most important design patterns
+used in the AlphaTrainer Android app implementation.</p>
+<div class="section" id="overview">
+<h3>5.2.1 Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-center" id="fig-implementation-alphatrainer-android-app-architecture">
+<a class="reference internal image-reference" href="../_images/alphatrainer-android-app-architecture.png"><img alt="AlphaTrainer Android app architecture overview" src="../_images/alphatrainer-android-app-architecture.png" style="width: 100%;" /></a>
+<p class="caption"><strong>Figure 5.2:</strong> AlphaTrainer Android app architecture overview.</p>
+</div>
+<p>An overview of the architecture is shown in Figure&nbsp;<a href="#fig-implementation-alphatrainer-android-app-architecture">5.2</a>. The diagram is
+by no means exhaustive and the aim is to highlight the relationships between
+BCIs (headsets), data processing, feedback views, application state and
+persistent storage. This diagram will function as the reference throughout the
+presentation of the Android app in the succeeding sections.</p>
+<p>A main architectural goal of the implementation is a modular design which
+enables replacement of the different components i.e. the headset, data processor
+or the feedback view. How modularity is achieved will emerge during the
+discussion of the individual components and their relations to other components.</p>
+</div>
+<div class="section" id="state-management">
+<h3>5.2.2 State management<a class="headerlink" href="#state-management" title="Permalink to this headline">¶</a></h3>
+<p>We take a singleton approach&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-bloch-effective-2008">14</a><span class="citation">]</span></span> to global app
+state management. The singleton is implemented in the <tt class="docutils literal"><span class="pre">App</span></tt> class which
+extends the Android framework <tt class="docutils literal"><span class="pre">Application</span></tt>. In short, the Android framework
+guarantees that exactly one instance of the class is loaded at all times
+throughout the lifetime of the application, which makes it safe to write a
+<tt class="docutils literal"><span class="pre">getInstance()</span></tt> method&nbsp;<a class="footnote-reference" href="#foot-implementation-android-application" id="id6"><sup>1</sup></a>.
+Our application singleton is the center point for: (<em>i</em>) reading user
+preferences which takes place in the <tt class="docutils literal"><span class="pre">SessionManager</span></tt>; (<em>ii</em>) reading and
+writing from persistent storage which takes place in the data access object
+<tt class="docutils literal"><span class="pre">DAO</span></tt>; and (<em>iii</em>) managing headset connection which is takes place in
+<tt class="docutils literal"><span class="pre">HeadsetManager</span></tt> as well as in the singleton itself.</p>
+<table class="docutils footnote" frame="void" id="foot-implementation-android-application" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[1]</a></td><td><a class="reference external" href="http://developer.android.com/reference/android/app/Application.html">http://developer.android.com/reference/android/app/Application.html</a></td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="headset">
+<h3>5.2.3 Headset<a class="headerlink" href="#headset" title="Permalink to this headline">¶</a></h3>
+<p>To support future consumer BCIs such as the already announced Muse and Emotiv
+INSIGHT (see Section&nbsp;<a class="reference internal" href="../ch-background/index.html#ch-background-future-headsets">2.2.4</a>), we have put effort into
+being as headset agnostic as
+possible. Implementing the signal processing ourselves is one way of doing so
+since this allows us not to rely on the signal processing abilities of a
+specific BCIs SDK.</p>
+<p>Another way to obtain headset agnosticism is by communicating with the specific
+BCIs through a thin interface thus abstracting from the specific BCIs API by
+wrapping it in an implementation of the <tt class="docutils literal"><span class="pre">&lt;&lt;IHeadsetManagement&gt;&gt;</span></tt> interface:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre> <span class="kn">package</span> <span class="n">dk</span><span class="o">.</span><span class="na">itu</span><span class="o">.</span><span class="na">alphatrainer</span><span class="o">.</span><span class="na">interfaces</span><span class="o">;</span>
+<span class="hll"> <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">IHeadset</span> <span class="o">{</span>
+</span>     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getNrOfChannels</span><span class="o">();</span>
+     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getSampleRate</span><span class="o">();</span>
+     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getIcon</span><span class="o">();</span>
+ <span class="o">}</span>
+ <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">IHeadsetManagement</span> <span class="kd">extends</span> <span class="n">IHeadset</span> <span class="o">{</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">startDataStream</span><span class="o">();</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">stopDataStream</span><span class="o">();</span>
+ <span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Only the <tt class="docutils literal"><span class="pre">HeadsetManager</span></tt> uses the <tt class="docutils literal"><span class="pre">&lt;&lt;IHeadsetManagement&gt;&gt;</span></tt> interface. All other
+communication with the headset goes through the methods defined by <tt class="docutils literal"><span class="pre">&lt;&lt;IHeadset&gt;&gt;</span></tt>
+through which meta-data about the headset can be accessed.</p>
+<p>AlphaTrainer currently contains two <tt class="docutils literal"><span class="pre">&lt;&lt;IHeadsetManagement&gt;&gt;</span></tt> implementations:
+<tt class="docutils literal"><span class="pre">DummyHeadset</span></tt> and <tt class="docutils literal"><span class="pre">MindWaveMobile</span></tt> - both in the
+<tt class="docutils literal"><span class="pre">dk.itu.alphatrainer.headset</span></tt> package. The <tt class="docutils literal"><span class="pre">DummyHeadset</span></tt> is used for
+development and testing and it outputs a random signal.  The <tt class="docutils literal"><span class="pre">MindWaveMobile</span></tt>
+implements and uses the <em>ThinkGear</em> API&nbsp;<a class="footnote-reference" href="#foot-implementation-thinkgear-api" id="id7"><sup>7</sup></a> bundled with the MindWave Mobile headset
+(Section&nbsp;<a class="reference internal" href="../ch-background/index.html#ch-background-mindwave">2.2.2</a>). Concrete communication with the
+MindWave headset goes through the <tt class="docutils literal"><span class="pre">TGDevice</span></tt> class. An example of the
+<tt class="docutils literal"><span class="pre">&lt;&lt;IHeadsetManagement&gt;&gt;</span></tt> interface implementation is shown below:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</pre></div></td><td class="code"><div class="highlight"><pre> <span class="kn">package</span> <span class="n">dk</span><span class="o">.</span><span class="na">itu</span><span class="o">.</span><span class="na">alphatrainer</span><span class="o">.</span><span class="na">headset</span><span class="o">;</span>
+ <span class="o">...</span>
+ <span class="kn">import</span> <span class="nn">com.neurosky.thinkgear.TGDevice</span><span class="o">;</span>
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MindWaveMobile</span> <span class="kd">implements</span> <span class="n">IHeadsetManagement</span> <span class="o">{</span>
+<span class="hll">     <span class="kd">private</span> <span class="n">BluetoothAdapter</span> <span class="n">bluetoothAdapter</span><span class="o">;</span>
+</span><span class="hll">     <span class="kd">private</span> <span class="n">TGDevice</span> <span class="n">tgDevice</span><span class="o">;</span>
+</span>     <span class="o">...</span>
+     <span class="kd">public</span> <span class="nf">MindWaveMobile</span><span class="o">(</span><span class="n">IHeadsetListener</span> <span class="n">listener</span><span class="o">)</span> <span class="o">{</span>
+         <span class="k">this</span><span class="o">.</span><span class="na">listener</span> <span class="o">=</span> <span class="n">listener</span><span class="o">;</span>
+     <span class="o">}</span>
+     <span class="o">...</span>
+     <span class="nd">@Override</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">startDataStream</span><span class="o">()</span> <span class="o">{</span>
+         <span class="o">...</span>
+         <span class="n">bluetoothAdapter</span> <span class="o">=</span> <span class="n">BluetoothAdapter</span><span class="o">.</span><span class="na">getDefaultAdapter</span><span class="o">();</span>
+         <span class="o">...</span>
+         <span class="k">if</span> <span class="o">(</span><span class="n">bluetoothAdapter</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+<span class="hll">             <span class="n">tgDevice</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TGDevice</span><span class="o">(</span><span class="n">bluetoothAdapter</span><span class="o">,</span> <span class="n">handler</span><span class="o">);</span>
+</span>         <span class="o">}</span>
+         <span class="o">...</span>
+         <span class="n">tgDevice</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+         <span class="o">...</span>
+     <span class="o">}</span>
+     <span class="nd">@Override</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">stopDataStream</span><span class="o">()</span> <span class="o">{</span>
+         <span class="n">tgDevice</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
+         <span class="n">tgDevice</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+     <span class="o">}</span>
+     <span class="o">...</span>
+</pre></div>
+</td></tr></table></div>
+<p>Distribution of data from the headset is implemented in a publish subscribe pattern.
+In order to receive data from the headset, a class must implement the <tt class="docutils literal"><span class="pre">&lt;&lt;IHeadsetDataListener&gt;&gt;</span></tt>
+interface:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="hll"><span class="kn">package</span> <span class="n">dk</span><span class="o">.</span><span class="na">itu</span><span class="o">.</span><span class="na">alphatrainer</span><span class="o">.</span><span class="na">interfaces</span><span class="o">;</span>
+</span><span class="hll">    <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">IHeadsetDataListener</span> <span class="o">{</span>
+</span><span class="hll">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onDataPacket</span><span class="o">(</span><span class="kt">int</span> <span class="n">channels</span><span class="o">,</span> <span class="kt">float</span><span class="o">[][]</span> <span class="n">data</span><span class="o">);</span>
+</span><span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Whenever a headset receives data, it calls its <tt class="docutils literal"><span class="pre">&lt;&lt;IHeadsetListener&gt;&gt;</span></tt> with the data formatted
+in the form of an array of float arrays each representing an EEG channel. This will
+always be the <tt class="docutils literal"><span class="pre">HeadsetManager</span></tt> which is the only class implementing the <tt class="docutils literal"><span class="pre">&lt;&lt;IHeadsetListener&gt;&gt;</span></tt>
+interface which generalizes the <tt class="docutils literal"><span class="pre">&lt;&lt;IHeadsetDataListener&gt;&gt;</span></tt> and <tt class="docutils literal"><span class="pre">&lt;&lt;IHeadsetConnectionStatusListener&gt;&gt;</span></tt>
+interfaces. The HeadsetManager then distributes the data to each of its registered
+<tt class="docutils literal"><span class="pre">&lt;&lt;IHeadsetDataListener&gt;&gt;</span></tt> thus carrying out the publisher act. Below we see an example
+showing how the private class <tt class="docutils literal"><span class="pre">CalibrationDataHandler</span></tt> within <tt class="docutils literal"><span class="pre">ActivityCalibrate</span></tt>
+first registers itself for receiving EEG data (l. 7) and later calls the headset for
+meta-data (l. 8-9).</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre> <span class="kn">package</span> <span class="n">dk</span><span class="o">.</span><span class="na">itu</span><span class="o">.</span><span class="na">alphatrainer</span><span class="o">.</span><span class="na">calibration</span><span class="o">;</span>
+ <span class="o">...</span>
+ <span class="kd">private</span> <span class="kd">class</span> <span class="nc">CalibrationDataHandler</span> <span class="kd">implements</span> <span class="n">IHeadsetDataListener</span> <span class="o">{</span>
+     <span class="o">...</span>
+     <span class="kd">public</span> <span class="nf">CalibrationDataHandler</span><span class="o">(</span><span class="n">ActivityCalibrate</span> <span class="n">parent</span><span class="o">)</span> <span class="o">{</span>
+         <span class="k">this</span><span class="o">.</span><span class="na">parent</span> <span class="o">=</span> <span class="n">parent</span><span class="o">;</span>
+<span class="hll">         <span class="n">App</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">getHeadsetManager</span><span class="o">().</span><span class="na">subscribeData</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+</span><span class="hll">         <span class="n">Fs</span> <span class="o">=</span> <span class="n">App</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">getHeadsetManager</span><span class="o">().</span><span class="na">getHeadset</span><span class="o">().</span><span class="na">getSampleRate</span><span class="o">();</span>
+</span>         <span class="kt">int</span> <span class="n">numberOfChannels</span> <span class="o">=</span> <span class="n">App</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">getHeadsetManager</span><span class="o">().</span><span class="na">getHeadset</span><span class="o">().</span><span class="na">getNrOfChannels</span><span class="o">();</span>
+         <span class="o">...</span>
+</pre></div>
+</td></tr></table></div>
+<p>The distribution of connection status updates is similarly implemented in a
+publish subscribe pattern using the <tt class="docutils literal"><span class="pre">&lt;&lt;IHeadsetConnectionStatusListener&gt;&gt;</span></tt>
+interface.</p>
+<p>Since the headset can be changed by the user through a settings entry and we
+generally want the app to depend as little as possible on the concrete
+headset implementations, we have implemented the factory pattern. Specifically,
+the headsets are instantiated by the <tt class="docutils literal"><span class="pre">HeadsetFactory</span></tt> in the package
+<tt class="docutils literal"><span class="pre">dk.itu.alphatrainer.factories</span></tt> which is responsible for instantiating a concrete
+headset appropriate for the current headset settings entry.</p>
+</div>
+<div class="section" id="signal-processing">
+<h3>5.2.4 Signal processing<a class="headerlink" href="#signal-processing" title="Permalink to this headline">¶</a></h3>
+<p>The implementation of the signal processing takes the same approach as was
+taken with the
+headsets to achieve modularity.
+Again, the communication goes through a thin interface which allows for
+easy replacement of the signal processing module.</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre> <span class="kn">package</span> <span class="n">dk</span><span class="o">.</span><span class="na">itu</span><span class="o">.</span><span class="na">alphatrainer</span><span class="o">.</span><span class="na">interfaces</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">dk.itu.alphatrainer.model.AlphaMinMax</span><span class="o">;</span>
+<span class="hll"> <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ISignalProcessor</span> <span class="o">{</span>
+</span>     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">getBandPower</span><span class="o">(</span><span class="kt">float</span><span class="o">[][]</span> <span class="n">data</span><span class="o">,</span> <span class="kt">int</span> <span class="n">Fs</span><span class="o">,</span> <span class="kt">float</span> <span class="n">alphaPeak</span><span class="o">);</span>
+     <span class="kd">public</span> <span class="kt">float</span> <span class="nf">getAlphaPeak</span><span class="o">(</span><span class="kt">float</span><span class="o">[][]</span> <span class="n">data</span><span class="o">,</span> <span class="kt">int</span> <span class="n">Fs</span><span class="o">);</span>
+     <span class="kd">public</span> <span class="n">AlphaMinMax</span> <span class="nf">getMinMax</span><span class="o">(</span><span class="kt">float</span><span class="o">[]</span> <span class="n">alphaPowers</span><span class="o">);</span>
+ <span class="o">}</span>
+<span class="hll"> <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ISignalProcessingListener</span> <span class="o">{</span>
+</span>     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSignalProcessed</span><span class="o">(</span><span class="kt">float</span> <span class="n">bandPower</span><span class="o">);</span>
+ <span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p><tt class="docutils literal"><span class="pre">&lt;&lt;ISignalProcessor&gt;&gt;</span></tt> is currently implemented by <tt class="docutils literal"><span class="pre">DummySignalProcessor</span></tt> and
+<tt class="docutils literal"><span class="pre">OpenCVSignalProcessor</span></tt> found in the <tt class="docutils literal"><span class="pre">dk.itu.alphatrainer.signalprocessing</span></tt>
+package. The <tt class="docutils literal"><span class="pre">DummySignalProcessor</span></tt> is for development and testing, and it
+simply outputs dummy values. <tt class="docutils literal"><span class="pre">OpenCVSignalProcessor</span></tt> encapsulates the OpenCV
+based library described in Section&nbsp;<a class="reference internal" href="#ch-implementation-signal-processing-library">5.1</a>. In the example below,
+important lines of
+<tt class="docutils literal"><span class="pre">OpenCVSignalProcessor</span></tt> are shown in which it receives its listener
+in the constructor and
+declares its usage of the C++ library (Section&nbsp;<a class="reference internal" href="#ch-implementation-signal-processing-library">5.1</a>) through the <tt class="docutils literal"><span class="pre">native</span></tt>
+keyword:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span class="hll"> <span class="kn">package</span> <span class="n">dk</span><span class="o">.</span><span class="na">itu</span><span class="o">.</span><span class="na">alphatrainer</span><span class="o">.</span><span class="na">signalprocessing</span><span class="o">;</span>
+</span> <span class="o">...</span>
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">OpenCVSignalProcessor</span> <span class="kd">implements</span> <span class="n">ISignalProcessor</span> <span class="o">{</span>
+     <span class="o">...</span>
+<span class="hll">     <span class="kd">private</span> <span class="n">ISignalProcessingListener</span> <span class="n">listener</span><span class="o">;</span>
+</span>     <span class="kd">public</span> <span class="nf">OpenCVSignalProcessor</span><span class="o">(</span><span class="n">ISignalProcessingListener</span> <span class="n">listener</span><span class="o">)</span> <span class="o">{</span>
+         <span class="k">this</span><span class="o">.</span><span class="na">listener</span> <span class="o">=</span> <span class="n">listener</span><span class="o">;</span>
+     <span class="o">}</span>
+     <span class="o">...</span>
+     <span class="kd">public</span> <span class="kd">native</span> <span class="kt">float</span> <span class="nf">getRelativeAlphaLevel</span><span class="o">(</span><span class="kt">float</span><span class="o">[]</span> <span class="n">eeg</span><span class="o">,</span> <span class="kt">int</span> <span class="n">samples</span><span class="o">,</span> <span class="kt">int</span> <span class="n">Fs</span><span class="o">,</span> <span class="kt">float</span> <span class="n">alphaPeak</span><span class="o">);</span>
+     <span class="o">...</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="data-flow">
+<h3>5.2.5 Data flow<a class="headerlink" href="#data-flow" title="Permalink to this headline">¶</a></h3>
+<p>This section describes the data flow and call hierarchy involved from
+the point where the BCI receives raw EEG data up till the point where the
+feedback view is called with a processed and normalized alpha level.</p>
+<p>As can be seen in the app overview diagram Figure&nbsp;<a href="#fig-implementation-alphatrainer-android-app-architecture">5.2</a>, the
+<tt class="docutils literal"><span class="pre">FeedbackLogic</span></tt> class connects the raw EEG data, the signal processing and the
+feedback UI. Figure&nbsp;<a href="#fig-flow-diagram-feedback">5.3</a> shows a
+flow diagram of the calls involved from raw EEG is received to the feedback UI
+is called. Notice how all calls between the classes are interface method calls
+and would be exactly the same for other combinations of headset, processor and
+feedback UI.</p>
+<p>The diagram also shows our usage of the publish subscribe pattern in that the
+<tt class="docutils literal"><span class="pre">HeadsetManager</span></tt> distributes the received EEG data to all listeners
+registered for receiving data.</p>
+<div class="figure align-center" id="fig-flow-diagram-feedback">
+<a class="reference internal image-reference" href="../_images/flow-diagram-feedback.png"><img alt="Flow from EEG to feedback" src="../_images/flow-diagram-feedback.png" style="width: 100%;" /></a>
+<p class="caption"><strong>Figure 5.3:</strong> Flow of data from from headset receiving raw EEG to the feedback is drawn.</p>
+</div>
+</div>
+<div class="section" id="feedback-user-interfaces">
+<span id="ch-implementation-feedback-ui-s"></span><h3>5.2.6 Feedback user interfaces<a class="headerlink" href="#feedback-user-interfaces" title="Permalink to this headline">¶</a></h3>
+<p>A feedback UI is generalized in a simple interface:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre> <span class="kn">package</span> <span class="n">dk</span><span class="o">.</span><span class="na">itu</span><span class="o">.</span><span class="na">alphatrainer</span><span class="o">.</span><span class="na">interfaces</span><span class="o">;</span>
+<span class="hll"> <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">IFeedbackUi</span> <span class="o">{</span>
+</span>     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawFeedback</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">);</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">stop</span><span class="o">();</span>
+ <span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>The <tt class="docutils literal"><span class="pre">drawFeedback()</span></tt> method takes a normalized alpha level from 0 to 100 and
+transforms this number into a visible, auditive or tactile feedback to the user.
+We have currently implemented 5 different feedback UIs found in the
+<tt class="docutils literal"><span class="pre">dk.itu.alphatrainer.ui.feedback</span></tt> package - reference the Design Chapter&nbsp;<a class="reference internal" href="../ch-design/index.html#ch-design">4</a> for a visual and conceptual explanation of each feedback
+Figure&nbsp;<a href="../ch-design/index.html#fig-final-prototype-app-feedbacks">4.5</a>. The feedback package
+consists of:</p>
+<ol class="arabic simple">
+<li><em>Box</em> is implemented in the <tt class="docutils literal"><span class="pre">FeedbackBox</span></tt> class. It uses build-in Android
+animation features to make the transitions from red to green depending on the
+normalized alpha level.</li>
+<li><em>Circles</em> is implemented in the <tt class="docutils literal"><span class="pre">FeedbackCollision</span></tt> class. It uses an
+Android WebView and the circles are based on the open-source visualization
+Javascript library <em>d3.js</em>&nbsp;<a class="footnote-reference" href="#foot-implementation-d3js" id="id8"><sup>8</sup></a>. The WebView
+loads the Javascript and HTML/CSS from the Android specific <em>assets</em> folder
+within the AlphaTrainer Android app.
+On receiving a normalized alpha level, <tt class="docutils literal"><span class="pre">FeedbackCollision</span></tt> dispatches it
+to the WebView which handles the feedback actuation in a Javascript method.</li>
+<li><em>Vibration</em> is implemented in the <tt class="docutils literal"><span class="pre">FeedbackVibrate</span></tt> class and utilizes the
+Android system service architecture through which the vibration of the phone
+can be accessed.</li>
+<li><em>Tone</em> is implemented in the <tt class="docutils literal"><span class="pre">FeedbackAudioSynth</span></tt> class. It uses the build
+in Android audio library in conjunction with pure Java to crate a small
+synthesizer.</li>
+<li><em>Bells</em> is implemented in the <tt class="docutils literal"><span class="pre">FeedbackAudioClips</span></tt> class. It uses another
+build in Android audio library able to load and play sound clips from files.</li>
+</ol>
+<p>Similar to the headsets, the feedbacks can be changed by the user through a setting.
+For the same reason, we also use the factory pattern to
+instantiate a concrete feedback UI class. This responsibility is delegated
+to the <tt class="docutils literal"><span class="pre">FeedbackUiFactory</span></tt> which read the user setting and instantiate the
+appropriate feedback.</p>
+</div>
+<div class="section" id="models-and-persistent-storage">
+<span id="ch-implementation-models-persistent-storage"></span><h3>5.2.7 Models and persistent storage<a class="headerlink" href="#models-and-persistent-storage" title="Permalink to this headline">¶</a></h3>
+<p>We have benefited of the built in SQLite&nbsp;<a class="footnote-reference" href="#foot-implementation-sqlite" id="id9"><sup>9</sup></a> database
+within the Android framework. All training data such as alpha peak frequencies and
+the relative alpha levels are timestamped and persistently stored in the SQLite database
+from where they can be
+queried with SQL&nbsp;<a class="footnote-reference" href="#foot-implementation-sql" id="id10"><sup>10</sup></a>. The raw EEG data is currently
+stored in plain text files on the mobile device's SD card.</p>
+<p>All concrete database communication takes place in the <tt class="docutils literal"><span class="pre">DAO</span></tt> class from the
+<tt class="docutils literal"><span class="pre">dk.itu.alphatrainer.datastorage</span></tt> package. This encapsulation
+represents another typical design-pattern with Java and Android&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-wei-android-2012">64</a><span class="citation">]</span></span>.</p>
+<p>We have modeled a training and a processed alpha level respectively as
+<tt class="docutils literal"><span class="pre">Recording</span></tt> and <tt class="docutils literal"><span class="pre">AlphaLevel</span></tt> classes within the <tt class="docutils literal"><span class="pre">dk.itu.alphatrainer.model</span></tt> package.
+Below a snippet from the <tt class="docutils literal"><span class="pre">AlphaLevel</span></tt> class:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre></div></td><td class="code"><div class="highlight"><pre> <span class="kn">package</span> <span class="n">dk</span><span class="o">.</span><span class="na">itu</span><span class="o">.</span><span class="na">alphatrainer</span><span class="o">.</span><span class="na">model</span><span class="o">;</span>
+ <span class="o">...</span>
+ <span class="kn">import</span> <span class="nn">com.google.gson.annotations.Expose</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">com.google.gson.annotations.SerializedName</span><span class="o">;</span>
+ <span class="o">...</span>
+<span class="hll"> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AlphaLevel</span> <span class="o">{</span>
+</span>     <span class="nd">@Expose</span>
+     <span class="nd">@SerializedName</span><span class="o">(</span><span class="s">&quot;alpha_level&quot;</span><span class="o">)</span>
+     <span class="kd">private</span> <span class="kt">float</span> <span class="n">alphaLevel</span><span class="o">;</span>
+<span class="hll">     <span class="nd">@Expose</span>
+</span>     <span class="nd">@SerializedName</span><span class="o">(</span><span class="s">&quot;normalized_alpha_level&quot;</span><span class="o">)</span>
+     <span class="kd">private</span> <span class="kt">int</span> <span class="n">normalizedAlphaLevel</span><span class="o">;</span>
+     <span class="nd">@Expose</span>
+     <span class="nd">@SerializedName</span><span class="o">(</span><span class="s">&quot;time_stamp&quot;</span><span class="o">)</span>
+     <span class="kd">private</span> <span class="kt">long</span> <span class="n">timeStamp</span><span class="o">;</span>
+<span class="hll">     <span class="kd">public</span> <span class="nf">AlphaLevel</span><span class="o">(</span><span class="kt">float</span> <span class="n">alphaLevel</span><span class="o">,</span> <span class="kt">int</span> <span class="n">normalizedAlphaLevel</span><span class="o">,</span> <span class="kt">long</span> <span class="n">timeStamp</span><span class="o">)</span> <span class="o">{</span>
+</span>         <span class="k">this</span><span class="o">.</span><span class="na">alphaLevel</span> <span class="o">=</span> <span class="n">alphaLevel</span><span class="o">;</span>
+         <span class="k">this</span><span class="o">.</span><span class="na">normalizedAlphaLevel</span> <span class="o">=</span> <span class="n">normalizedAlphaLevel</span><span class="o">;</span>
+         <span class="k">this</span><span class="o">.</span><span class="na">timeStamp</span> <span class="o">=</span> <span class="n">timeStamp</span><span class="o">;</span>
+     <span class="o">}</span>
+<span class="hll">     <span class="kd">public</span> <span class="kt">float</span> <span class="nf">getAlphaLevel</span><span class="o">()</span> <span class="o">{</span>
+</span>         <span class="k">return</span> <span class="n">alphaLevel</span><span class="o">;</span>
+     <span class="o">}</span>
+     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getNormalizedAlphaLevel</span><span class="o">()</span> <span class="o">{</span>
+         <span class="k">return</span> <span class="n">normalizedAlphaLevel</span><span class="o">;</span>
+     <span class="o">}</span>
+     <span class="kd">public</span> <span class="kt">long</span> <span class="nf">getTimeStamp</span><span class="o">()</span> <span class="o">{</span>
+         <span class="k">return</span> <span class="n">timeStamp</span><span class="o">;</span>
+     <span class="o">}</span>
+ <span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Some fields of the <tt class="docutils literal"><span class="pre">AlphaLevel</span></tt> class are annotated with <tt class="docutils literal"><span class="pre">&#64;Expose</span></tt> and <tt class="docutils literal"><span class="pre">&#64;SerializedName</span></tt>.
+This is part of the Gson library&nbsp;<a class="footnote-reference" href="#foot-implementation-gson" id="id11"><sup>11</sup></a> which we use to serialize the models to JavaScript objects (JSON)&nbsp;<a class="footnote-reference" href="#foot-implementation-json" id="id12"><sup>12</sup></a>. With the annotations we can control which fields of the class should be serialized and how the naming should be. We post the JSON serialized
+training data to a cloud based web service over HTTP, which is elaborated below in Section&nbsp;<a class="reference internal" href="#ch-implementation-alphatrainer-cloud-based-storage">5.3</a>). The JSON training object has this structure:</p>
+<div class="highlight-json"><pre> {
+     "user_id" : "9cc6e095-4efa-4cc2-85ff-c792b34e40f5" ,
+     "type" : "Baseline" ,
+     "alpha_levels" : [
+         {
+             "time_stamp" : 1382695986 ,
+             "normalized_alpha_level" : 6 ,
+             "alpha_level" : 0.016940186
+         },
+         ...
+     ] ,
+     "headset_type" : "mindwave_mobile" ,
+     "feedback_ui_type" : "feedback_audio_clips" ,
+     "average_alpha_level" : 0.07930513 ,
+     "time_stamp_start" : 1382695986 ,
+     "time_stamp_end" : 1382696286 ,
+     "length" : 300 ,
+     "max_alpha_level" : 0.15 ,
+     "min_alpha_level" : 0.008 ,
+     "alpha_peak_fq" : 9.362069
+ }</pre>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">user_id</span></tt> is in an id anonymously generated client side (in the Android app)
+using the <tt class="docutils literal"><span class="pre">UUID</span></tt> class from the standard Java library. Generating and storing the id
+client side ensures that the web service cannot know who the user behind the id is.</p>
+<p>The actual post to the cloud based storage is handled in a non-blocking asynchronous
+task - the <tt class="docutils literal"><span class="pre">PostRecordingToServiceTask</span></tt> class in the <tt class="docutils literal"><span class="pre">dk.itu.alphatrainer.cloud</span></tt>
+package - which is called when a feedback or baseline recording is finished. If the
+recording is not successfully posted to the service (which is identified by the absence
+of a returned row-number from the service), this will be attempted again later.</p>
+</div>
+</div>
+<div class="section" id="cloud-based-storage">
+<span id="ch-implementation-alphatrainer-cloud-based-storage"></span><h2>5.3 Cloud based storage<a class="headerlink" href="#cloud-based-storage" title="Permalink to this headline">¶</a></h2>
+<p>The AlphaTrainer system currently relies on a cloud based NoSQL database to
+store training data from its users (Appendix&nbsp;<a class="reference internal" href="../appendix_software.html#appendix-alphatrainer-mongolab-cloud-storage"><em>Mongolab cloud storage</em></a>). We currently use the
+open-source MongoDB&nbsp;<a class="footnote-reference" href="#foot-implementation-mongodb" id="id13"><sup>13</sup></a> database hosted in the cloud
+as a service by MongoLab&nbsp;<a class="footnote-reference" href="#foot-implementation-mongolab" id="id14"><sup>14</sup></a> - but MongoDB can in
+principle be installed anywhere. MongoDB is a document based database opposed
+to a traditional relational database like SQLite which we use within the
+AlphaTrainer Android app (Section&nbsp;<a class="reference internal" href="#ch-implementation-models-persistent-storage">5.2.7</a>). MongoDB stores data, for
+example a training session including an array of alpha levels, as documents
+grouped into collections - the
+documents are very similar to JSON objects&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-nayak-instant-2013">49</a><span class="citation">]</span></span>.</p>
+<p>This database storage choice for the current AlphaTrainer system is founded in
+the <em>software as a service</em> (SaaS) concept - &quot;<em>... SaaS delivers software and
+data as a service over the internet ...</em>&quot;&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-fox-engineering-2013">25</a><span class="citation">]</span></span>. Advantages of the cloud based MongoDB at
+MongoLab include that we can access it: (<em>i</em>) through command line and do queries
+directly in the database; (<em>ii</em>) through a specific language dependent driver
+for example for Java; finally (<em>iii</em>) MongoLab exposes an RESTful web service
+API out of the box offering Create, Read, Update and Delete (CRUD) operations&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-coulouris-distributed-2012">20</a><span class="citation">]</span></span>. This cloud service component of the
+AlphaTrainer system enables the AlphaTrainer Android app to upload training
+data which can be consumed by the AlphaTrainerService Client explained
+below in Section&nbsp;<a class="reference internal" href="#ch-implementation-alphatrainer-service-client">5.3.1</a> and
+any future clients with the need for accessing the data - for example a client created
+for usage by a clinical professional.</p>
+<p>At last we show our usage of one of the features MongoDB offers, namely the ability to map
+reduce large data set - the map reduce concept is taken from
+functional programming&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-abelson-structure-1996">2</a><span class="citation">]</span></span>. The following example
+shows how all the average alpha level per user interface can be
+queried from all recordings in the training dataset through map reduction:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre> <span class="kd">var</span> <span class="nx">mapFeedbackUIAvgAlpha</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+   <span class="nx">emit</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">feedback_ui_type</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">average_alpha_level</span><span class="p">);</span>
+ <span class="p">};</span>
+ <span class="kd">var</span> <span class="nx">reduceAvgAlpha</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">feedbackUIType</span><span class="p">,</span> <span class="nx">averageAlphaLevel</span><span class="p">)</span> <span class="p">{</span>
+   <span class="k">return</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">avg</span><span class="p">(</span><span class="nx">averageAlphaLevel</span><span class="p">);</span>
+ <span class="p">};</span>
+ <span class="kd">function</span> <span class="nx">showFeedbackUITypeAvgAlphaLevelAvg</span><span class="p">()</span> <span class="p">{</span>
+   <span class="nx">db</span><span class="p">.</span><span class="nx">trainings</span><span class="p">.</span><span class="nx">mapReduce</span><span class="p">(</span>
+     <span class="nx">mapFeedbackUIAvgAlpha</span><span class="p">,</span>
+     <span class="nx">reduceAvgAlpha</span><span class="p">,</span>
+     <span class="p">{</span> <span class="nx">out</span><span class="o">:</span> <span class="s2">&quot;feedback_ui_alpha_average&quot;</span> <span class="p">});</span>
+   <span class="k">return</span> <span class="nx">db</span><span class="p">.</span><span class="nx">feedback_ui_alpha_average</span><span class="p">.</span><span class="nx">find</span><span class="p">();</span>
+ <span class="p">}</span>
+ <span class="nx">showFeedbackUITypeAvgAlphaLevelAvg</span><span class="p">();</span>
+</pre></div>
+</td></tr></table></div>
+<p>First the function maps all the feedback user interfaces and average alpha levels
+from all the trainings and then reduce it by averaging the items created in the
+map step. This procedure produces the following JSON response:</p>
+<div class="highlight-json"><pre> { "_id" : "feedback_box", "value" : 0.09779977771875001 } // Box
+ { "_id" : "feedback_collision", "value" : 0.09649314506956522 } // Circles
+ { "_id" : "feedback_vibrate", "value" : 0.14137012283529413 } // Vibrate
+ { "_id" : "feedback_audio_clips", "value" : 0.0934931038888889 } // Bells
+ { "_id" : "feedback_audio_synth", "value" : 0.11333089719230771 } // Tone</pre>
+</div>
+<p>This in an example of a query which would be really interesting to run when AlphaTrainer
+(hopefully) has been used by many people over a long period of time. We return to this
+perspective in the Future works Section&nbsp;<a class="reference internal" href="../ch-conclusion/index.html#sec-future-work">7.1</a>.</p>
+<div class="section" id="alphatrainserservice-client">
+<span id="ch-implementation-alphatrainer-service-client"></span><h3>5.3.1 AlphaTrainserService Client<a class="headerlink" href="#alphatrainserservice-client" title="Permalink to this headline">¶</a></h3>
+<p>We have created a simple <em>webapp</em> client - AlphaTrainserService
+which can consume the cloud based storage at MongoLab (Appendix&nbsp;<a class="reference internal" href="../appendix_software.html#appendix-alphatrainerservice-client"><em>AlphaTrainerService client</em></a>). At the moment this webapp
+simply allows viewing the recorded data grouped by (anonymous) users and
+their training sessions, see  Figure&nbsp;<a href="#fig-alpha-trainer-service">5.4</a>.</p>
+<div class="figure align-center" id="fig-alpha-trainer-service">
+<a class="reference internal image-reference" href="../_images/alphatrainer-service.png"><img alt="AlphaTrainerService" src="../_images/alphatrainer-service.png" style="width: 80%;" /></a>
+<p class="caption"><strong>Figure 5.4:</strong> Screenshot of the AlphaTrainerService webapp</p>
+</div>
+<p>The AlphaTrainserService webapp is implemented with the Play Framework&nbsp;<a class="footnote-reference" href="#foot-implementation-playframework" id="id15"><sup>15</sup></a> which is written in Scala&nbsp;<a class="footnote-reference" href="#foot-implementation-scala" id="id16"><sup>16</sup></a> - a functional
+programming language built on top of Java&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-hilton-play-2013">28</a><span class="citation">]</span></span>. The webapp uses the the Bootstrap front-end
+framework&nbsp;<a class="footnote-reference" href="#foot-implementation-bootstrap" id="id17"><sup>17</sup></a> for the user interface combined with
+BackBone.js&nbsp;<a class="footnote-reference" href="#foot-implementation-backbonejs" id="id18"><sup>18</sup></a> - a MVC based JavaScript
+framework. Bootstrap is highly flexible and
+met our simple UI requirements out of the box. BackBone.js is used to
+continuously pull in new training recordings without reloading the webpage&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-mirgorod-backbone-2013">48</a><span class="citation">]</span></span>.</p>
+<p>The AlphaTrainserService Client is currently deployed to Heroku&nbsp;<a class="footnote-reference" href="#foot-implementation-heroku" id="id19"><sup>19</sup></a> - a SaaS hosting environment built on top of the
+Amazon AWS infrastructure&nbsp;<a class="footnote-reference" href="#foot-implementation-aws" id="id20"><sup>20</sup></a>.</p>
+<p>JSON and RESTful web service are first citizen concepts within the Play
+Framework. This means AlphaTrainserService could also expose a web service if,
+for example, the AlphaTrainer system should encounter requirements which can not
+be meet by the MongoLab web service. Additionally, the Play Framework can be
+used to build type-safe and a highly scalable web services as well.</p>
+<p>With this cloud based client and data storage in hand we have a solid, flexible
+and highly scalable storage as an important infra structure underneath the
+AlphaTrainer Android application.</p>
+</div>
+</div>
+<div class="section" id="summary">
+<h2>5.4 Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>In this chapter, we have explained the central concepts of the implementation
+of AlphaTrainer. Most importantly, several design patterns have been applied
+to ensure a modular architecture of the Android app. This enables easy support for
+future headsets and new feedback views as well as replacement of the signal
+processing. The modularity ensures that the contribution of implementing the
+AlphaTrainer system still has value even if it should become apparent, for example,
+that the current state of BCIs are not good enough for performing neurofeedback.</p>
+<p>Through the explanation of the Android app, only few Android specific components
+were mentioned. The same is true for the app overview diagram in
+Figure&nbsp;<a href="#fig-implementation-alphatrainer-android-app-architecture">5.2</a> which
+has no dependencies on Android. This carries the point that we
+have separated the logic as much as possible from the Android specific components.
+This makes it easy to port the application to, for example, iOS even though it
+will have to be rewritten in Objective C for the iOS environment.
+The concepts are the same and the native signal processing library
+can even be compiled to and called from iOS as well. The cloud based storage
+is of course agnostic in regard to the OS of its clients as long as they speak HTTP.</p>
+<p>The scalable cloud based approach to data storage and the simple webapp consuming this
+data makes the proof of concept that the AlphaTrainer system could easily be integrated in,
+for example, a
+clinical context - in which case a client for the clinician would have to be designed and build
+for this purpose. This would raise some solvable security issues deemed out of scope for this
+AlphaTrainer system prototype.</p>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="foot-implementation-multichannel-eeg" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Multichannel EEG would require small adjustments in regard to the communicating with the library.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-implementation-open-cv" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[3]</a></td><td><a class="reference external" href="http://opencv.org">http://opencv.org</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-implementation-java-jni" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[4]</a></td><td><a class="reference external" href="http://docs.oracle.com/javase/7/docs/technotes/guides/jni">http://docs.oracle.com/javase/7/docs/technotes/guides/jni</a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-implementation-android" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[5]</a></td><td><a class="reference external" href="http://developer.android.com/">http://developer.android.com/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-implementation-android-api-level" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[6]</a></td><td>Main parts of the AlphaTrainer Android App work even from version
+2.3 (API level 9) and up except of the Circle feedback covered within Section&nbsp;<a class="reference internal" href="#ch-implementation-feedback-ui-s">5.2.6</a>
+which relies on browsers that implement Scalable Vector Graphics (SVG).</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-implementation-thinkgear-api" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[7]</a></td><td><a class="reference external" href="http://developer.neurosky.com/docs/doku.php?id=thinkgear_connector_tgc">http://developer.neurosky.com/docs/doku.php?id=thinkgear_connector_tgc</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-implementation-d3js" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id8">[8]</a></td><td><em>d3.js</em> is written in Javascript and it heavily relies on SVG - <a class="reference external" href="http://d3js.org">http://d3js.org</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-implementation-sqlite" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id9">[9]</a></td><td><a class="reference external" href="http://www.sqlite.org/">http://www.sqlite.org/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-implementation-sql" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id10">[10]</a></td><td><a class="reference external" href="http://en.wikipedia.org/wiki/SQL">http://en.wikipedia.org/wiki/SQL</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-implementation-gson" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id11">[11]</a></td><td><a class="reference external" href="https://code.google.com/p/google-gson">https://code.google.com/p/google-gson</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-implementation-json" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id12">[12]</a></td><td><a class="reference external" href="http://json.org">http://json.org</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-implementation-mongodb" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id13">[13]</a></td><td><a class="reference external" href="http://www.mongodb.org">http://www.mongodb.org</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-implementation-mongolab" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id14">[14]</a></td><td><a class="reference external" href="https://mongolab.com">https://mongolab.com</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-implementation-playframework" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id15">[15]</a></td><td><a class="reference external" href="http://www.playframework.com">http://www.playframework.com</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-implementation-scala" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id16">[16]</a></td><td><a class="reference external" href="http://www.scala-lang.org">http://www.scala-lang.org</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-implementation-bootstrap" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id17">[17]</a></td><td><a class="reference external" href="http://getbootstrap.com">http://getbootstrap.com</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-implementation-backbonejs" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id18">[18]</a></td><td><a class="reference external" href="http://backbonejs.org">http://backbonejs.org</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-implementation-heroku" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id19">[19]</a></td><td><a class="reference external" href="https://www.heroku.com">https://www.heroku.com</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="foot-implementation-aws" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id20">[20]</a></td><td><a class="reference external" href="http://aws.amazon.com">http://aws.amazon.com</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../ch-evaluation/index.html" title="6 User evaluation"
+             >next</a></li>
+        <li class="right" >
+          <a href="../ch-design/index.html" title="4 Design"
+             >previous</a> |</li>
+        <li><a href="../index.html">AlphaTrainer</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright by Martin Poulsen and Pelle Krøgholt, 2013..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+    </div>
+  </body>
+</html>

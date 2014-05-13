@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Experiment - signal processing &mdash; AlphaTrainer</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="AlphaTrainer" href="index.html" />
+    <link rel="next" title="MindWave forum posts" href="appendix_experiment_mindwave_fora_posts.html" />
+    <link rel="prev" title="TrueSense Kit console" href="appendix_background_truesense_console.html" />
+
+<link rel="stylesheet" type="text/css" href="_static/custom.css" />
+<link rel="stylesheet" type="text/css" href="_static/colorbox/colorbox.css" />
+
+<script type="text/javascript" src="_static/colorbox/jquery.colorbox-min.js"></script>
+
+<script type="text/javascript">
+	function endsWith(str, suffix) {
+	    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+	}
+
+    $(document).ready(function() {
+    	var im, imsrc;
+    	$('img').each(function() {
+    		im = $(this);
+    		imsrc = im.attr('src');
+    		imalt = im.attr('alt');
+    		if (endsWith(imsrc, 'svg')) {
+    			im.wrap($('<a>').attr({'href': imsrc, 'title': imalt}).addClass('svglink'));
+    		}
+    	});
+
+    	$('a.svglink').colorbox({
+    		'width': '95%',
+    		'height': '95%',
+    		'photo': true});
+    });
+</script>
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="appendix_experiment_mindwave_fora_posts.html" title="MindWave forum posts"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="appendix_background_truesense_console.html" title="TrueSense Kit console"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">AlphaTrainer</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Experiment - signal processing</a><ul>
+<li><a class="reference internal" href="#run-analysis">Run analysis</a><ul>
+<li><a class="reference internal" href="#download-code">Download code</a></li>
+<li><a class="reference internal" href="#prerequests">Prerequests</a></li>
+<li><a class="reference internal" href="#load-and-run">Load and run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="appendix_background_truesense_console.html"
+                        title="previous chapter">TrueSense Kit console</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="appendix_experiment_mindwave_fora_posts.html"
+                        title="next chapter">MindWave forum posts</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/appendix_experiment.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="experiment-signal-processing">
+<span id="appendix-experiment"></span><h1>Experiment - signal processing<a class="headerlink" href="#experiment-signal-processing" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="run-analysis">
+<h2>Run analysis<a class="headerlink" href="#run-analysis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="download-code">
+<h3>Download code<a class="headerlink" href="#download-code" title="Permalink to this headline">¶</a></h3>
+<p>Download code from (clone or zip): <a class="reference external" href="https://github.com/AlphaTrainer/alpha_bci_experiment/tree/final_handin">https://github.com/AlphaTrainer/alpha_bci_experiment/tree/final_handin</a></p>
+</div>
+<div class="section" id="prerequests">
+<h3>Prerequests<a class="headerlink" href="#prerequests" title="Permalink to this headline">¶</a></h3>
+<p>Octave 3.6.4 and up <a class="footnote-reference" href="#foot-appendix-octave-download" id="id1"><sup>1</sup></a>.</p>
+</div>
+<div class="section" id="load-and-run">
+<h3>Load and run<a class="headerlink" href="#load-and-run" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>$ cd alpha_bci_experiment
+# load signal processing package of Octave
+octave&gt; libs_install_and_load
+...
+  class opts;
+  ^~~~~
+  struct
+1 warning generated.</pre>
+</div>
+<p>Just ignore the warning for now we have loaded the signal package successfully
+and are ready to run the analysis - do:</p>
+<div class="highlight-python"><pre>octave&gt; run_analysis
+number_of_files =  24
+mindwave/1-20130814-pelle-2-open.mat
+OPEN EYES FIRST
+Discarded bins:0
+Discarded bins:0
+alpha_peak_start_sample =  19
+alpha_peak_end_sample =  23
+...
+...</pre>
+</div>
+<p>Coffee break while the whole data of the experiment gets processed and
+analyzed - at the end we get the result that is added to Table&nbsp;<a href="ch-experiment/index.html#table-experiment-final-result-mean">3.6</a>.</p>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="foot-appendix-octave-download" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference external" href="http://www.gnu.org/software/octave/download.html">http://www.gnu.org/software/octave/download.html</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="appendix_experiment_mindwave_fora_posts.html" title="MindWave forum posts"
+             >next</a></li>
+        <li class="right" >
+          <a href="appendix_background_truesense_console.html" title="TrueSense Kit console"
+             >previous</a> |</li>
+        <li><a href="index.html">AlphaTrainer</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright by Martin Poulsen and Pelle Krøgholt, 2013..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+    </div>
+  </body>
+</html>

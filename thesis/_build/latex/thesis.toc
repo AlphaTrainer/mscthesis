@@ -1,0 +1,94 @@
+\select@language {english}
+\contentsline {section}{Abstract}{iii}{Doc-Start}
+\contentsline {section}{Acknowledgements}{iv}{section*.1}
+\contentsline {section}{List of Tables}{ix}{section*.4}
+\contentsline {section}{List of Figures}{x}{section*.6}
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Neurofeedback, stress and brain-computer interfaces}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}Hypothesis}{2}{section.1.2}
+\contentsline {section}{\numberline {1.3}Method}{2}{section.1.3}
+\contentsline {section}{\numberline {1.4}Thesis overview}{3}{section.1.4}
+\contentsline {section}{\numberline {1.5}Limitations}{4}{section.1.5}
+\contentsline {chapter}{\numberline {2}Background}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}BCI / EEG}{5}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Classic BCI applications and techniques}{6}{subsection.2.1.1}
+\contentsline {section}{\numberline {2.2}Consumer BCIs}{8}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Emotiv EPOC}{10}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}NeuroSky MindWave Mobile}{11}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}TrueSense Kit}{12}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Future headsets}{13}{subsection.2.2.4}
+\contentsline {section}{\numberline {2.3}Neurofeedback}{14}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Neurofeedback in practice}{14}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Stress and alpha feedback training}{15}{subsection.2.3.2}
+\contentsline {section}{\numberline {2.4}Related works}{15}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Brainball}{16}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}BioZen}{17}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.3}Smartphone Brain Scanner 2}{17}{subsection.2.4.3}
+\contentsline {section}{\numberline {2.5}Sum up of background and related systems}{19}{section.2.5}
+\contentsline {chapter}{\numberline {3}Evaluation of 3 consumer BCIs}{21}{chapter.3}
+\contentsline {section}{\numberline {3.1}Pre-study}{21}{section.3.1}
+\contentsline {section}{\numberline {3.2}Experiment design}{24}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Execution}{25}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Data processing, cleaning and analysis}{26}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}Choice of BCI}{28}{section.3.3}
+\contentsline {chapter}{\numberline {4}Design}{32}{chapter.4}
+\contentsline {section}{\numberline {4.1}Design model and method}{32}{section.4.1}
+\contentsline {section}{\numberline {4.2}Design process}{34}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Initial experimental prototype}{34}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Early functioning Android prototype}{35}{subsection.4.2.2}
+\contentsline {section}{\numberline {4.3}AlphaTrainer}{39}{section.4.3}
+\contentsline {chapter}{\numberline {5}Implementation}{43}{chapter.5}
+\contentsline {section}{\numberline {5.1}Signal processing library}{44}{section.5.1}
+\contentsline {section}{\numberline {5.2}Android app}{46}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Overview}{46}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}State management}{46}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}Headset}{47}{subsection.5.2.3}
+\contentsline {subsection}{\numberline {5.2.4}Signal processing}{50}{subsection.5.2.4}
+\contentsline {subsection}{\numberline {5.2.5}Data flow}{51}{subsection.5.2.5}
+\contentsline {subsection}{\numberline {5.2.6}Feedback user interfaces}{52}{subsection.5.2.6}
+\contentsline {subsection}{\numberline {5.2.7}Models and persistent storage}{53}{subsection.5.2.7}
+\contentsline {section}{\numberline {5.3}Cloud based storage}{56}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}AlphaTrainserService Client}{57}{subsection.5.3.1}
+\contentsline {section}{\numberline {5.4}Summary}{59}{section.5.4}
+\contentsline {chapter}{\numberline {6}User evaluation}{61}{chapter.6}
+\contentsline {section}{\numberline {6.1}Method}{62}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Survey}{63}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Participant observation and a semi-structured interview}{64}{subsection.6.1.2}
+\contentsline {subsection}{\numberline {6.1.3}Data logging}{64}{subsection.6.1.3}
+\contentsline {section}{\numberline {6.2}Participants}{65}{section.6.2}
+\contentsline {section}{\numberline {6.3}Result}{65}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}Survey results}{65}{subsection.6.3.1}
+\contentsline {subsection}{\numberline {6.3.2}Observation and interview}{66}{subsection.6.3.2}
+\contentsline {subsection}{\numberline {6.3.3}Analysis of logged data}{69}{subsection.6.3.3}
+\contentsline {subsection}{\numberline {6.3.4}Sum up of results}{71}{subsection.6.3.4}
+\contentsline {chapter}{\numberline {7}Conclusion}{74}{chapter.7}
+\contentsline {section}{\numberline {7.1}Future work}{75}{section.7.1}
+\contentsline {chapter}{\numberline {A}Emotiv EPOC TestBench}{77}{appendix.A}
+\contentsline {chapter}{\numberline {B}TrueSense Kit console}{79}{appendix.B}
+\contentsline {chapter}{\numberline {C}Experiment - signal processing}{81}{appendix.C}
+\contentsline {section}{\numberline {C.1}Run analysis}{81}{section.C.1}
+\contentsline {subsection}{\numberline {C.1.1}Download code}{81}{subsection.C.1.1}
+\contentsline {subsection}{\numberline {C.1.2}Prerequests}{81}{subsection.C.1.2}
+\contentsline {subsection}{\numberline {C.1.3}Load and run}{81}{subsection.C.1.3}
+\contentsline {chapter}{\numberline {D}MindWave forum posts}{83}{appendix.D}
+\contentsline {chapter}{\numberline {E}Design - personas}{86}{appendix.E}
+\contentsline {section}{\numberline {E.1}4 personas}{86}{section.E.1}
+\contentsline {subsection}{\numberline {E.1.1}Morten}{86}{subsection.E.1.1}
+\contentsline {subsection}{\numberline {E.1.2}Niels}{87}{subsection.E.1.2}
+\contentsline {subsection}{\numberline {E.1.3}Olivia}{87}{subsection.E.1.3}
+\contentsline {subsection}{\numberline {E.1.4}Peter}{88}{subsection.E.1.4}
+\contentsline {chapter}{\numberline {F}Design - storyboards}{89}{appendix.F}
+\contentsline {chapter}{\numberline {G}Software}{91}{appendix.G}
+\contentsline {section}{\numberline {G.1}AlphaTrainer signal processing library}{91}{section.G.1}
+\contentsline {subsection}{\numberline {G.1.1}Prerequests}{91}{subsection.G.1.1}
+\contentsline {subsection}{\numberline {G.1.2}Load and run}{91}{subsection.G.1.2}
+\contentsline {section}{\numberline {G.2}AlphaTrainer Android App}{92}{section.G.2}
+\contentsline {subsection}{\numberline {G.2.1}Quick}{92}{subsection.G.2.1}
+\contentsline {subsection}{\numberline {G.2.2}Build from scratch}{92}{subsection.G.2.2}
+\contentsline {section}{\numberline {G.3}AlphaTrainerService}{93}{section.G.3}
+\contentsline {subsection}{\numberline {G.3.1}Mongolab cloud storage}{93}{subsection.G.3.1}
+\contentsline {subsection}{\numberline {G.3.2}AlphaTrainerService client}{93}{subsection.G.3.2}
+\contentsline {chapter}{\numberline {H}User evaluation}{95}{appendix.H}
+\contentsline {section}{\numberline {H.1}Hand out}{95}{section.H.1}
+\contentsline {section}{\numberline {H.2}Ordered baseline recordings}{97}{section.H.2}
+\contentsline {chapter}{Bibliography}{103}{section*.122}

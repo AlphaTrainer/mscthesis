@@ -1,0 +1,455 @@
+\begin{thebibliography}{10}
+
+\bibitem{_aap_2013}
+{AAP} Evidence-Based Child and Adolescent Psychosocial Interventions.
+\newblock Technical report, The American Academy of Pediatrics mental health,
+  2013.
+
+\bibitem{abelson_structure_1996}
+H.~Abelson, G.~J. Sussman, and J.~Sussman.
+\newblock {\em Structure and interpretation of computer programs}.
+\newblock {MIT} Press ; {McGraw-Hill}, Cambridge, Mass.; New York, 1996.
+
+\bibitem{abowd_human_2002}
+G.~D. Abowd, E.~D. Mynatt, and T.~Rodden.
+\newblock The human experience [of ubiquitous computing].
+\newblock {\em Pervasive Computing, {IEEE}}, 1(1):48–57, 2002.
+
+\bibitem{aftanas_changes_2003}
+L.~I. Aftanas and S.~A. Golosheikin.
+\newblock Changes in Cortical Activity in Altered States of Consciousness: The
+  Study of Meditation by High-Resolution {EEG}.
+\newblock {\em Human physiology}, 29(2):143–151, Mar. 2003.
+
+\bibitem{angelakis_eeg_2007}
+E.~Angelakis, S.~Stathopoulou, J.~L. Frymiare, D.~L. Green, J.~F. Lubar, and
+  J.~Kounios.
+\newblock {EEG} Neurofeedback: A Brief Overview and an Example of Peak Alpha
+  Frequency Training for Cognitive Enhancement in the Elderly.
+\newblock {\em The Clinical Neuropsychologist}, 21(1):110--129, Jan. 2007.
+
+\bibitem{arns_efficacy_2009}
+M.~Arns, d.~S. Ridder, U.~Strehl, M.~Breteler, and A.~Coenen.
+\newblock Efficacy of Neurofeedback Treatment in {ADHD:} the Effects on
+  Inattention, Impulsivity and Hyperactivity: a Meta-Analysis.
+\newblock {\em Clinical {EEG} and Neuroscience}, 40(3):180--189, 2009.
+
+\bibitem{baggio_mastering_2012}
+D.~L. Baggio.
+\newblock {\em Mastering {OpenCV} with practical computer vision projects:
+  step-by-step tutorials to solve common real-world computer vision problems
+  for desktop or mobile, from augmented reality and number plate recognition to
+  face recognition and {3D} head tracking}.
+\newblock Packt Pub., Birmington, 2012.
+
+\bibitem{bardram_ubiquitous_2010}
+J.~Bardram and A.~Friday.
+\newblock Ubiquitous Computing Systems.
+\newblock In {\em Ubiquitous computing fundamentals}, pages 38--88. Chapman \&
+  {Hall/CRC} Press, Boca Ragon, 2010.
+
+\bibitem{bazanova_comments_2012}
+O.~Bazanova.
+\newblock Comments for Current Interpretation {EEG} Alpha Activity: A Review
+  and Analysis.
+\newblock {\em Journal of Behavioral and Brain Science}, 02(02):239--248, 2012.
+
+\bibitem{beaudouin-lafon_designing_2004}
+M.~Beaudouin-Lafon.
+\newblock Designing interaction, not interfaces.
+\newblock In {\em Proceedings of the working conference on Advanced visual
+  interfaces}, page 15–22, 2004.
+
+\bibitem{bekkedal_human_2011}
+M.~Y. Bekkedal, J.~Rossi, and J.~Panksepp.
+\newblock Human brain {EEG} indices of emotions: Delineating responses to
+  affective vocalizations by measuring frontal theta event-related
+  synchronization.
+\newblock {\em Neuroscience \& Biobehavioral Reviews}, 35(9):1959--1970, Oct.
+  2011.
+
+\bibitem{benyon_designing_2005}
+D.~Benyon.
+\newblock {\em Designing interactive systems: people, activities, contexts,
+  technologies}.
+\newblock Addison-Wesley, Harlow, England ; New York, 2005.
+
+\bibitem{benyon_designing_2010}
+D.~Benyon.
+\newblock {\em Designing interactive systems: a comprehensive guide to {HCI}
+  and interaction design}.
+\newblock Addison Wesley, Harlow, England; New York, 2010.
+
+\bibitem{bloch_effective_2008}
+J.~Bloch.
+\newblock {\em Effective Java}.
+\newblock The Java series. Addison-Wesley, Upper Saddle River, {NJ}, 2nd ed
+  edition, 2008.
+
+\bibitem{brandmeyer_meditation_2013}
+T.~Brandmeyer and A.~Delorme.
+\newblock Meditation and Neurofeedback.
+\newblock {\em Frontiers in Psychology}, 4(688), 2013.
+
+\bibitem{campbell_neurophone:_2010}
+A.~Campbell, T.~Choudhury, S.~Hu, H.~Lu, M.~K. Mukerjee, M.~Rabbi, and R.~D.
+  Raizada.
+\newblock {NeuroPhone:} brain-mobile phone interface using a wireless {EEG}
+  headset.
+\newblock page~3. {ACM} Press, 2010.
+
+\bibitem{coulouris_distributed_2012}
+G.~F. Coulouris, editor.
+\newblock {\em Distributed systems: concepts and design}.
+\newblock Addison-Wesley, Boston, 5th ed edition, 2012.
+
+\bibitem{coyle_eeg-based_2011}
+D.~Coyle, J.~Garcia, A.~R. Satti, and T.~M. {McGinnity}.
+\newblock {EEG-based} continuous control of a game using a 3 channel motor
+  imagery {BCI:} {BCI} game.
+\newblock In {\em Computational Intelligence, Cognitive Algorithms, Mind, and
+  Brain ({CCMB)}, 2011 {IEEE} Symposium on}, page 1–7, 2011.
+
+\bibitem{crowley_evaluating_2010}
+K.~Crowley, A.~Sliney, I.~Pitt, and D.~Murphy.
+\newblock Evaluating a Brain-Computer Interface to Categorise Human Emotional
+  Response.
+\newblock {\em 2010 10th {IEEE} International Conference on Advanced Learning
+  Technologies}, pages 276--278, July 2010.
+
+\bibitem{delorme_eeglab:_2004}
+A.~Delorme and S.~Makeig.
+\newblock {EEGLAB:} an open source toolbox for analysis of single-trial {EEG}
+  dynamics including independent component analysis.
+\newblock {\em Journal of Neuroscience Methods}, 134(1):9--21, Mar. 2004.
+
+\bibitem{hutchison_emotional_2011}
+L.~Duan, X.~Wang, Z.~Yang, H.~Zhou, C.~Wu, Q.~Zhang, and J.~Miao.
+\newblock An Emotional Face Evoked {EEG} Signal Recognition Method Based on
+  Optimal {EEG} Feature and Electrodes Selection.
+\newblock In D.~Hutchison, T.~Kanade, J.~Kittler, J.~M. Kleinberg, F.~Mattern,
+  J.~C. Mitchell, M.~Naor, O.~Nierstrasz, C.~Pandu~Rangan, B.~Steffen,
+  M.~Sudan, D.~Terzopoulos, D.~Tygar, M.~Y. Vardi, G.~Weikum, B.-L. Lu,
+  L.~Zhang, and J.~Kwok, editors, {\em Neural Information Processing}, volume
+  7062, pages 296--305. Springer Berlin Heidelberg, Berlin, Heidelberg, 2011.
+
+\bibitem{egner_ecological_2003}
+T.~Egner and J.~H. Gruzelier.
+\newblock Ecological validity of neurofeedback: modulation of slow wave {EEG}
+  enhances musical performance.
+\newblock {\em Neuroreport}, 14(9):1221–1224, 2003.
+
+\bibitem{esfahani_using_2011}
+E.~T. Esfahani and V.~Sundararajan.
+\newblock {USING} {BRAIN–COMPUTER} {INTERFACES} {TO} {DETECT} {HUMAN}
+  {SATISFACTION} {IN} {HUMAN–ROBOT} {INTERACTION}.
+\newblock {\em International Journal of Humanoid Robotics}, 08(01):87--101,
+  Mar. 2011.
+
+\bibitem{finnigan_resting_2011}
+S.~Finnigan and I.~H. Robertson.
+\newblock Resting {EEG} theta power correlates with cognitive performance in
+  healthy older adults: Resting theta {EEG} correlates with cognitive aging.
+\newblock {\em Psychophysiology}, 48(8):1083--1087, Aug. 2011.
+
+\bibitem{fox_engineering_2013}
+A.~Fox and D.~Patterson.
+\newblock {\em Engineering software as a service: an agile approach using cloud
+  computing}.
+\newblock Strawberry Canyon {LLC}, San Francisco, {CA}, 2013.
+
+\bibitem{gomez-gil_steering_2011}
+J.~Gomez-Gil, I.~San-Jose-Gonzalez, L.~F. Nicolas-Alonso, and S.~Alonso-Garcia.
+\newblock Steering a Tractor by Means of an {EMG-Based} Human-Machine
+  Interface.
+\newblock {\em Sensors}, 11(12):7110--7126, July 2011.
+
+\bibitem{hammond_what_2007}
+D.~C. Hammond.
+\newblock What Is Neurofeedback?
+\newblock {\em Journal of Neurotherapy}, 10(4):25--36, Mar. 2007.
+
+\bibitem{hilton_play_2013}
+P.~Hilton, E.~Bakker, and F.~Canedo.
+\newblock {\em Play for Scala: covers Play 2}.
+\newblock Manning Publications, 2013.
+
+\bibitem{hjelm_research+_2003}
+S.~I. Hjelm.
+\newblock Research+ design: the making of Brainball.
+\newblock {\em Interactions}, 10(1):26–34, 2003.
+
+\bibitem{ichi_ito_association_2010}
+S.~ichi Ito, Y.~Mitsukura, K.~Sato, S.~Fujisawa, and M.~Fukumi.
+\newblock Association between ego scores and individual characteristics in
+  {EEG} analysis: Basic study on individual brain activity.
+\newblock In C.~A. Avizzano and E.~Ruffaldi, editors, {\em {RO-MAN}}, pages
+  210--215. {IEEE}, 2010.
+
+\bibitem{iso_iso_2010}
+Iso.
+\newblock {\em {ISO} 9241-210:2010 - Ergonomics of human-system interaction –
+  Part 210: Human-centred design for interactive systems}.
+\newblock 1 edition, 2010.
+
+\bibitem{jeremy_pretotypingwork_2012}
+C.~Jeremy.
+\newblock {\em {Pretotyping@Work}}.
+\newblock {PretotypeLabs.com}, 2012.
+
+\bibitem{khosrowabadi_brain-computer_2011}
+R.~Khosrowabadi, C.~Quek, K.~K. Ang, S.~W. Tung, and M.~Heijnen.
+\newblock A Brain-Computer Interface for classifying {EEG} correlates of
+  chronic mental stress.
+\newblock In {\em {IJCNN}}, pages 757--762. {IEEE}, 2011.
+
+\bibitem{klemmer_how_2006}
+S.~R. Klemmer, B.~Hartmann, and L.~Takayama.
+\newblock How bodies matter: five themes for interaction design.
+\newblock In {\em Proceedings of the 6th conference on Designing Interactive
+  systems}, page 140–149, 2006.
+
+\bibitem{kollmann_importance_2009}
+J.~Kollmann, H.~Sharp, and A.~Blandford.
+\newblock The Importance of Identity and Vision to User Experience Designers on
+  Agile Projects.
+\newblock pages 11--18. {IEEE}, Aug. 2009.
+
+\bibitem{kuramoto_trigger_2012}
+N.~Kuramoto, S.~ichi Ito, K.~Sato, and S.~Fujisawa.
+\newblock Trigger pattern detection method for assisting in ambulation
+  rehabilitation based on {EEG} analysis.
+\newblock In {\em {RO-MAN}}, pages 646--652. {IEEE}, 2012.
+
+\bibitem{larsen_classification_2011}
+E.~A. Larsen and A.~I. Wang.
+\newblock {\em Classification of {EEG} Signals in a Brain- Computer Interface
+  System}.
+\newblock PhD thesis, Norwegian University of Science and Technology -
+  Department of Computer and Information Science, 2011.
+
+\bibitem{lazar_research_2010}
+J.~Lazar.
+\newblock {\em Research methods in human-computer interaction}.
+\newblock Wiley, Chichester, West Sussex, {U.K}, 2010.
+
+\bibitem{liu_android_2013}
+F.~Liu.
+\newblock {\em Android native development kit cookbook}.
+\newblock Packt Publishing, Birmingham, 2013.
+
+\bibitem{lofthouse_review_2012}
+N.~Lofthouse, L.~E. Arnold, S.~Hersch, E.~Hurt, and R.~{DeBeus}.
+\newblock A review of neurofeedback treatment for pediatric {ADHD.}
+\newblock {\em Journal of attention disorders}, 16(5):351--72, July 2012.
+
+\bibitem{mackay_hci_1997}
+W.~E. Mackay and A.-L. Fayard.
+\newblock {HCI}, natural science and design: a framework for triangulation
+  across disciplines.
+\newblock In {\em Proceedings of the 2nd conference on Designing interactive
+  systems: processes, practices, methods, and techniques}, page 223–234,
+  1997.
+
+\bibitem{mackenzie_human-computer_2013}
+I.~S. {MacKenzie}.
+\newblock {\em Human-computer interaction: an empirical research perspective}.
+\newblock Elsevier, Amsterdam, 2013.
+
+\bibitem{majumdar_human_2011}
+K.~Majumdar.
+\newblock Human scalp {EEG} processing: Various soft computing approaches.
+\newblock {\em Applied Soft Computing}, 11(8):4433--4447, Dec. 2011.
+
+\bibitem{marchesi_bravo:_2013}
+M.~Marchesi and B.~Riccò.
+\newblock {BRAVO:} a brain virtual operator for education exploiting
+  brain-computer interfaces.
+\newblock page 3091. {ACM} Press, 2013.
+
+\bibitem{matthews_real_2008}
+R.~Matthews, P.~J. Turner, N.~J. {McDonald}, K.~Ermolaev, T.~Manus, R.~A.
+  Shelby, and M.~Steindorf.
+\newblock Real time workload classification from an ambulatory wireless {EEG}
+  system using hybrid {EEG} electrodes.
+\newblock {\em Conference proceedings: ... Annual International Conference of
+  the {IEEE} Engineering in Medicine and Biology Society. {IEEE} Engineering in
+  Medicine and Biology Society. Conference}, 2008:5871--5875, 2008.
+\newblock {PMID:} 19164053.
+
+\bibitem{mcfarland_brain-computer_2011}
+D.~J. {McFarland} and J.~R. Wolpaw.
+\newblock Brain-computer interfaces for communication and control.
+\newblock {\em Communications of the {ACM}}, 54(5):60, May 2011.
+
+\bibitem{meng_feature_2010}
+Q.~Meng, W.~Zhou, Y.~Chen, and J.~Zhou.
+\newblock Feature analysis of epileptic {EEG} using nonlinear prediction
+  method.
+\newblock {\em Conference proceedings: ... Annual International Conference of
+  the {IEEE} Engineering in Medicine and Biology Society. {IEEE} Engineering in
+  Medicine and Biology Society. Conference}, 2010:3998--4001, 2010.
+\newblock {PMID:} 21097278.
+
+\bibitem{mirgorod_backbone._2013}
+V.~Mirgorod.
+\newblock {\em Backbone. js Cookbook}.
+\newblock Packt Publishing Ltd, 2013.
+
+\bibitem{nayak_instant_2013}
+A.~Nayak.
+\newblock {\em Instant {MongoDB}}.
+\newblock Packt Publishing, 2013.
+
+\bibitem{neurosky_brain_2009}
+{{NeuroSky}}.
+\newblock Brain Wave Signal ( {EEG} ) of {NeuroSky}, Inc.
+\newblock Technical report, {NeuroSky}, Inc., 2009.
+
+\bibitem{neurosky_thinkgear_2012}
+{{NeuroSky}}.
+\newblock {ThinkGear} Development Guide for Android.
+\newblock Technical report, {NeuroSky}, Inc., 2012.
+
+\bibitem{oostenveld_fieldtrip:_2011}
+R.~Oostenveld, P.~Fries, E.~Maris, and J.-M. Schoffelen.
+\newblock {FieldTrip:} Open Source Software for Advanced Analysis of {MEG},
+  {EEG}, and Invasive Electrophysiological Data.
+\newblock {\em Computational Intelligence and Neuroscience}, 2011:1--9, 2011.
+
+\bibitem{petersen_development_2012}
+C.~K. Petersen and Klonovs.
+\newblock {\em Development of a Mobile {EEG-Based} Feature Extraction and
+  Classification System for Biometric Authentication}.
+\newblock PhD thesis, Aalborg University Copenhagen, 2012.
+
+\bibitem{rangaswamy_beta_2002}
+M.~Rangaswamy, B.~Porjesz, D.~B. Chorlian, K.~Wang, K.~A. Jones, L.~O. Bauer,
+  J.~Rohrbaugh, S.~J. {O’Connor}, S.~Kuperman, and T.~Reich.
+\newblock Beta power in the {EEG} of alcoholics.
+\newblock {\em Biological psychiatry}, 52(8):831–842, 2002.
+
+\bibitem{ratabouil_android_2012}
+S.~Ratabouil.
+\newblock {\em Android {NDK} discover the native side of Android and inject the
+  power of {C/C++} in your applications: beginner's guide}.
+\newblock Packt Pub., Birmingham, {U.K.}, 2012.
+
+\bibitem{hutchison_assessing_2009}
+G.~Rebolledo-Mendez, I.~Dunwell, E.~A. Martínez-Mirón, M.~D. Vargas-Cerdán,
+  S.~Freitas, F.~Liarokapis, and A.~R. García-Gaona.
+\newblock Assessing {NeuroSky’s} Usability to Detect Attention Levels in an
+  Assessment Exercise.
+\newblock In D.~Hutchison, T.~Kanade, J.~Kittler, J.~M. Kleinberg, F.~Mattern,
+  J.~C. Mitchell, M.~Naor, O.~Nierstrasz, C.~Pandu~Rangan, B.~Steffen,
+  M.~Sudan, D.~Terzopoulos, D.~Tygar, M.~Y. Vardi, G.~Weikum, and J.~A. Jacko,
+  editors, {\em Human-Computer Interaction. New Trends}, volume 5610, pages
+  149--158. Springer Berlin Heidelberg, Berlin, Heidelberg, 2009.
+
+\bibitem{schmalstieg_gaze-directed_2010}
+D.~Schmalstieg, A.~Bornik, G.~Müller-Putz, and G.~Pfurtscheller.
+\newblock Gaze-directed ubiquitous interaction using a Brain-Computer
+  Interface.
+\newblock pages 1--5. {ACM} Press, 2010.
+
+\bibitem{stam_nonlinear_2005}
+C.~Stam.
+\newblock Nonlinear dynamical analysis of {EEG} and {MEG:} Review of an
+  emerging field.
+\newblock {\em Clinical Neurophysiology}, 116(10):2266--2301, Oct. 2005.
+
+\bibitem{stopczynski_smartphones_2013}
+A.~Stopczynski, C.~Stahlhut, M.~K. Petersen, J.~E. Larsen, C.~F. Jensen, M.~G.
+  Ivanova, T.~S. Andersen, and L.~K. Hansen.
+\newblock Smartphones as pocketable labs: Visions for mobile brain imaging and
+  neurofeedback.
+\newblock {\em International Journal of Psychophysiology}, Aug. 2013.
+
+\bibitem{t2_biozenusersman_1_7_0.pdf_2013}
+T2.
+\newblock {BioZenUsersMan\_1\_7\_0.pdf}.
+\newblock Technical report, Telehealth and Technology (T2) under the {US}
+  Department of Defense, 2013.
+
+\bibitem{tong_quantitative_2009}
+S.~Tong and N.~V. Thakor.
+\newblock Quantitative {EEG} analysis methods and clinical applications.
+\newblock In {\em Quantitative {EEG} analysis methods and clinical
+  applications}, Artech House series engineering in medicine \& biology, pages
+  1--107. Artech House, Boston, 2009.
+
+\bibitem{tufte_envisioning_1990}
+E.~R. Tufte.
+\newblock {\em Envisioning Information}.
+\newblock Graphics Press, Cheshire, {CT}, 1990.
+
+\bibitem{virzi_refining_1992}
+R.~A. Virzi.
+\newblock Refining the test phase of usability evaluation: how many subjects is
+  enough?
+\newblock {\em Human Factors: The Journal of the Human Factors and Ergonomics
+  Society}, 34(4):457–468, 1992.
+
+\bibitem{wei_android_2012}
+J.~Wei.
+\newblock {\em Android database programming exploit the power of data-centric
+  and data-driven Android applications with this practical tutorial}.
+\newblock Packt Pub. Ltd., Birmingham, 2012.
+
+\bibitem{weiser_computer_1991}
+M.~Weiser.
+\newblock The Computer for the 21st Century.
+\newblock {\em Scientific American}, 265(3):66–75, Jan. 1991.
+
+\bibitem{weiser_world_1994}
+M.~Weiser.
+\newblock The world is not a desktop.
+\newblock {\em interactions}, 1(1):7--8, Jan. 1994.
+
+\bibitem{weiser_computer_1999}
+M.~Weiser.
+\newblock Some computer science issues in ubiquitous computing.
+\newblock {\em {ACM} {SIGMOBILE} Mobile Computing and Communications Review},
+  3(3):12, 1999.
+
+\bibitem{welch_use_1967}
+P.~Welch.
+\newblock The use of fast Fourier transform for the estimation of power
+  spectra: A method based on time averaging over short, modified periodograms.
+\newblock {\em {IEEE} Transactions on Audio and Electroacoustics},
+  15(2):70--73, June 1967.
+
+\bibitem{white_alphatheta_2009}
+N.~E. White and L.~Richards.
+\newblock Alpha–theta neurotherapy and the neurobehavioral treatment of
+  addictions, mood disorders and trauma.
+\newblock In {\em Introduction to quantitative {EEG} and neurofeedback advanced
+  theory and applications}. Academic {Press/Elsevier}, Amsterdam [etc.], 2009.
+
+\bibitem{wright_emochat_2010}
+F.~P. Wright.
+\newblock {\em {EMOCHAT} {EMOTIONAL} {INSTANT} {MESSAGING} {WITH} {THE} {EPOC}
+  {HEADSET}}.
+\newblock PhD thesis, University of Maryland, Baltimore County, 2010.
+
+\bibitem{yasui_brainwave_2009}
+Y.~Yasui.
+\newblock A Brainwave Signal Measurement and Data Processing Technique for
+  Daily Life Applications.
+\newblock {\em Journal of {PHYSIOLOGICAL} {ANTHROPOLOGY}}, 28(3):145--150,
+  2009.
+
+\bibitem{yu_flyingbuddy2:_2012}
+Y.~Yu, D.~He, W.~Hua, S.~Li, Y.~Qi, Y.~Wang, and G.~Pan.
+\newblock {FlyingBuddy2:} A Brain-controlled Assistant for the Handicapped.
+\newblock In {\em Proceedings of the 2012 {ACM} Conference on Ubiquitous
+  Computing}, {UbiComp} '12, page 669–670, New York, {NY}, {USA}, 2012.
+  {ACM}.
+
+\bibitem{zoefel_neurofeedback_2011}
+B.~Zoefel, R.~J. Huster, and C.~S. Herrmann.
+\newblock Neurofeedback training of the upper alpha frequency band in {EEG}
+  improves cognitive performance.
+\newblock {\em {NeuroImage}}, 54(2):1427--1431, Jan. 2011.
+
+\end{thebibliography}

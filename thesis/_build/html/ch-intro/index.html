@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1 Introduction &mdash; AlphaTrainer</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="AlphaTrainer" href="../index.html" />
+    <link rel="next" title="2 Background" href="../ch-background/index.html" />
+    <link rel="prev" title="Dedication" href="../dedication.html" />
+
+<link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+<link rel="stylesheet" type="text/css" href="../_static/colorbox/colorbox.css" />
+
+<script type="text/javascript" src="../_static/colorbox/jquery.colorbox-min.js"></script>
+
+<script type="text/javascript">
+	function endsWith(str, suffix) {
+	    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+	}
+
+    $(document).ready(function() {
+    	var im, imsrc;
+    	$('img').each(function() {
+    		im = $(this);
+    		imsrc = im.attr('src');
+    		imalt = im.attr('alt');
+    		if (endsWith(imsrc, 'svg')) {
+    			im.wrap($('<a>').attr({'href': imsrc, 'title': imalt}).addClass('svglink'));
+    		}
+    	});
+
+    	$('a.svglink').colorbox({
+    		'width': '95%',
+    		'height': '95%',
+    		'photo': true});
+    });
+</script>
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../ch-background/index.html" title="2 Background"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="../dedication.html" title="Dedication"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">AlphaTrainer</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1 Introduction</a><ul>
+<li><a class="reference internal" href="#neurofeedback-stress-and-brain-computer-interfaces">1.1 Neurofeedback, stress and brain-computer interfaces</a></li>
+<li><a class="reference internal" href="#hypothesis">1.2 Hypothesis</a></li>
+<li><a class="reference internal" href="#method">1.3 Method</a></li>
+<li><a class="reference internal" href="#thesis-overview">1.4 Thesis overview</a></li>
+<li><a class="reference internal" href="#limitations">1.5 Limitations</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../dedication.html"
+                        title="previous chapter">Dedication</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../ch-background/index.html"
+                        title="next chapter">2 Background</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/ch-intro/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="introduction">
+<span id="ch-intro"></span><h1>1 Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="neurofeedback-stress-and-brain-computer-interfaces">
+<span id="ch-intro-neurofeedback-stress-and-bci"></span><h2>1.1 Neurofeedback, stress and brain-computer interfaces<a class="headerlink" href="#neurofeedback-stress-and-brain-computer-interfaces" title="Permalink to this headline">¶</a></h2>
+<p>Neurofeedback training (or neurofeedback therapy) is based on giving real time
+feedback on brain activity. This feedback enables the brain to navigate towards
+some desired brain state. Certain brain states have been shown to be
+positively correlated with cognitive performance, de-stressing etc. Such brain
+states form the goal for the neurofeedback.</p>
+<p>Stress - a big and growing problem to both society and individuals -
+is one of the conditions neurofeedback therapy is targeting within a
+clinical context. For example, it is used within the US army as treatment
+for veteran soldiers suffering from post-traumatic stress disorder
+(PTSD)&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-white-alphatheta-2009">69</a><span class="citation">]</span></span>. However,
+neurofeedback systems targeting consumers remain rare and expensive
+due to the required specialized hardware - in order to sense brain
+states, a neurofeedback system includes a Brain-Computer Interface
+(BCI). Though most BCIs are expensive and aimed at professionals,
+within recent years a number of BCIs targeting consumers with prices
+starting from $ 50,- have emerged. Interaxon's <em>Muse</em>&nbsp;<a class="footnote-reference" href="#foot-intro-interaxon" id="id1"><sup>1</sup></a> BCI exemplifies the new generation of
+discrete consumer BCIs (Figure&nbsp;<a href="#fig-muse-headband">1.1</a>).</p>
+<div class="figure align-center" id="fig-muse-headband">
+<a class="reference internal image-reference" href="../_images/muse-headband-collage.png"><img alt="Muse consumer BCI" src="../_images/muse-headband-collage.png" style="width: 80%;" /></a>
+<p class="caption"><strong>Figure 1.1:</strong> Muse consumer BCI (Image courtesy of Interaxon).</p>
+</div>
+<p>The combination of the emerging consumer interfaces and the prospects of
+neurofeedback motivates our hypothesis.</p>
+</div>
+<div class="section" id="hypothesis">
+<span id="ch-intro-hypothesis-goals"></span><h2>1.2 Hypothesis<a class="headerlink" href="#hypothesis" title="Permalink to this headline">¶</a></h2>
+<p>We hypothesize that it is feasible to build a neurofeedback system comprising of
+a consumer BCI and a mobile device which will enable neurofeedback training in
+an everyday setting.</p>
+<p>To test our hypothesis, we have set the following goals:</p>
+<p>G1</p>
+<blockquote>
+<div>Evaluate relevant consumer BCI's feasibility for neurofeedback training.</div></blockquote>
+<p>G2</p>
+<blockquote>
+<div>Design, implement and evaluate AlphaTrainer - a system enabling
+neurofeedback training in an everyday setting.</div></blockquote>
+<p>If such a system shows feasible, it would enable wide adoption of
+neurofeedback training in eliminating the obstacle of expensive hardware. This
+could move the neurofeedback practice out of a clinical setting and into the
+homes and workplaces of people motivated to reduce their stress.</p>
+</div>
+<div class="section" id="method">
+<span id="ch-intro-method"></span><h2>1.3 Method<a class="headerlink" href="#method" title="Permalink to this headline">¶</a></h2>
+<p>The vision and goal of AlphaTrainer - to enable neurofeedback training in an everyday
+context - is rooted in the ideas of the early pioneers of ubiquitous computing
+(ubicomp) who envisioned invisible computing, prototypes and the move away
+from desktop computers into devices that &quot;<em>weave themselves into the fabric of
+everyday life</em>&quot;&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-weiser-computer-1991">66</a><span class="citation">]</span></span>&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-weiser-world-1994">65</a><span class="citation">]</span></span>&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-weiser-computer-1999">67</a><span class="citation">]</span></span>.</p>
+<p>In short, our method is to design, implement, deploy and evaluate
+AlphaTrainer. This approach is inspired by later adapters of ubicomp stressing
+the importance of deploying working systems for real usage. For example, Bardram
+and Friday argue that &quot;<em>...  the most valuable lessons to take from looking at
+successful ubicomp systems is the need to mature the system through actual use</em>&quot;&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-bardram-ubiquitous-2010">8</a><span class="citation">]</span></span>. By deploying AlphaTrainer for actual
+use in an everyday context, we are able to learn about the system and
+the usage &quot;<em>in situ</em>&quot; which can not be investigated in a lab or by means of
+lo-fi prototypes.</p>
+<p>The process of building AlphaTrainer involves several activities. Which can be
+mapped and understood through a framework proposed by Mackay and Fayard&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-mackay-hci-1997">41</a><span class="citation">]</span></span>. The framework explains how HCI research can benefit
+from triangulating across science and design disciplines while continuously
+producing artifacts. Figure&nbsp;<a href="#fig-triangulation">1.2</a> outlines the major
+activities of this thesis. The arrows between activities show when output of
+one activity has been fed into another thus mapping how activities have
+benefited from each other across disciplines.</p>
+<div class="figure align-center" id="fig-triangulation">
+<a class="reference internal image-reference" href="../_images/triangulation.png"><img alt="Mapping of activities in the thesis activities and process" src="../_images/triangulation.png" style="width: 100%;" /></a>
+<p class="caption"><strong>Figure 1.2:</strong> Mapping of the thesis activities and process - applying the triangulation
+framework proposed by Mackay and Fayard&nbsp;<span class="citation">[<a class="reference internal" href="../bibliography.html#citation-mackay-hci-1997">41</a><span class="citation">]</span></span>.</p>
+</div>
+</div>
+<div class="section" id="thesis-overview">
+<span id="ch-intro-thesis-overview"></span><h2>1.4 Thesis overview<a class="headerlink" href="#thesis-overview" title="Permalink to this headline">¶</a></h2>
+<p>We outline the structure of this thesis below based on the thesis activities
+mapped in Figure&nbsp;<a href="#fig-triangulation">1.2</a>.</p>
+<p>In Chapter&nbsp;<a class="reference internal" href="../ch-background/index.html#ch-background">2</a> we establish a broad overview of
+BCIs and neurofeedback training. The chapter describes related consumer
+products and related works within the area of consumer BCIs and
+neurofeedback. This is the foundation of our hypothesis and it frames
+<em>Neurofeedback theory</em> and <em>Investigate current neurofeedback systems</em>.</p>
+<p>Chapter&nbsp;<a class="reference internal" href="../ch-experiment/index.html#ch-experiment">3</a> describes the design of the <em>Experimental
+prototype</em> and the <em>Evaluation of consumer BCIs</em> within the designed
+experiment. This evaluation addresses our first goal - <strong>G1</strong> (Section&nbsp;<a class="reference internal" href="#ch-intro-hypothesis-goals">1.2</a>). The gained knowledge of the BCIs
+capabilities leads us to a <em>Revised Hypothesis</em>
+which enables us to develop the system design in the next chapter.</p>
+<p>The <em>Design and implementation of AlphaTrainer</em> is split in two chapters.
+Chapter&nbsp;<a class="reference internal" href="../ch-design/index.html#ch-design">4</a> outlines the design activities, decisions and
+process that lead us to our final design, while Chapter&nbsp;<a class="reference internal" href="../ch-implementation/index.html#ch-implementation">5</a> covers the implementation of the AlphaTrainer system.</p>
+<p>In Chapter&nbsp;<a class="reference internal" href="../ch-evaluation/index.html#ch-evaluation">6</a> we evaluate the system through a
+<em>User Evaluation of AlphaTrainer</em>. The chapter addresses directly our
+second goal - <strong>G2</strong> (Section&nbsp;<a class="reference internal" href="#ch-intro-hypothesis-goals">1.2</a>) and leads
+us to a <em>Verified Hypothesis</em> and a <em>Revised AlphaTrainer design</em>.</p>
+<p>Finally we make out the conclusion and outline future works - Chapter&nbsp;<a class="reference internal" href="../ch-conclusion/index.html#ch-conclusion">7</a>.</p>
+</div>
+<div class="section" id="limitations">
+<span id="ch-intro-limitations"></span><h2>1.5 Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+<p>This thesis does not attempt to make any clinical claims about AlphaTrainer's
+efficacy regarding stress treatment. Nor does it address the security aspects
+of data management which would be required for a system for clinical use.</p>
+<p>Rather, it explores whether a neurofeedback system can actually be build
+using a mobile device and a low-cost consumer BCI. Furthermore, it explores
+through real world deployment of a prototype whether it makes sense for users
+to perform neurofeedback training in an everyday context.</p>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="foot-intro-interaxon" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference external" href="http://www.interaxon.ca">http://www.interaxon.ca</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../ch-background/index.html" title="2 Background"
+             >next</a></li>
+        <li class="right" >
+          <a href="../dedication.html" title="Dedication"
+             >previous</a> |</li>
+        <li><a href="../index.html">AlphaTrainer</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright by Martin Poulsen and Pelle Krøgholt, 2013..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+    </div>
+  </body>
+</html>

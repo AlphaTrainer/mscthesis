@@ -1,0 +1,54 @@
+This is BibTeX, Version 0.99d (TeX Live 2013)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: thesis.aux
+The style file: refstyle.bst
+Database file #1: refs.bib
+Warning--to sort, need author or key in _aap_2013
+Warning--empty author in _aap_2013
+Warning--empty booktitle in campbell_neurophone:_2010
+Warning--empty publisher in iso_iso_2010
+Warning--empty booktitle in kollmann_importance_2009
+Warning--empty booktitle in marchesi_bravo:_2013
+Warning--empty booktitle in schmalstieg_gaze-directed_2010
+You've used 73 entries,
+            2116 wiz_defined-function locations,
+            895 strings with 18082 characters,
+and the built_in function-call counts, 25308 in all, are:
+= -- 2471
+> -- 1246
+< -- 19
++ -- 496
+- -- 414
+* -- 1758
+:= -- 4205
+add.period$ -- 234
+call.type$ -- 73
+change.case$ -- 342
+chr.to.int$ -- 0
+cite$ -- 80
+duplicate$ -- 1027
+empty$ -- 1941
+format.name$ -- 414
+if$ -- 5348
+int.to.chr$ -- 0
+int.to.str$ -- 73
+missing$ -- 83
+newline$ -- 369
+num.names$ -- 151
+pop$ -- 440
+preamble$ -- 1
+purify$ -- 335
+quote$ -- 0
+skip$ -- 726
+stack$ -- 0
+substring$ -- 1401
+swap$ -- 251
+text.length$ -- 19
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 256
+warning$ -- 7
+while$ -- 231
+width$ -- 75
+write$ -- 822
+(There were 7 warnings)
